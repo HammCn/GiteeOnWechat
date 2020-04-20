@@ -10,7 +10,7 @@ Page({
     isGetingData: false,
     list: [],
     type: 'mine',
-    login:""
+    login: ""
 
   },
   /**
@@ -20,15 +20,15 @@ Page({
     if (e.other) {
       this.setData({
         type: 'friends',
-        login:app.userInfo.login
+        login: app.userInfo.login
       });
       wx.setNavigationBarTitle({
         title: '好友动态'
       });
-    }else if (e.login) {
+    } else if (e.login) {
       this.setData({
         type: 'user',
-        login:e.login
+        login: e.login
       });
       wx.setNavigationBarTitle({
         title: '用户动态'
@@ -36,7 +36,7 @@ Page({
     } else {
       this.setData({
         type: 'mine',
-        login:app.userInfo.login
+        login: app.userInfo.login
       });
       wx.setNavigationBarTitle({
         title: '我的动态'
@@ -76,6 +76,36 @@ Page({
       this.getList();
     }
   },
+  itemClick: function (e) {
+    var that = this;
+    var menuList = [];
+    if (that.data.type == 'friends') {
+      menuList = [
+        '进入仓库', '用户信息'
+      ];
+    } else {
+      menuList = ['进入仓库'];
+    }
+    var pathArray = e.mark.repo.split('/');
+    wx.showActionSheet({
+      itemList: menuList,
+      success: function (res) {
+        switch (res.tapIndex) {
+          case 0:
+            wx.navigateTo({
+              url: '../repos/detail?namespace=' + pathArray[0] + "&path=" + pathArray[1],
+            })
+            break;
+          case 1:
+            wx.navigateTo({
+              url: '../user/detail?login=' + e.mark.login,
+            })
+            break;
+          default:
+        }
+      }
+    })
+  },
   /**
    * 获取数据列表
    */
@@ -93,14 +123,14 @@ Page({
     }
     that.isGetingData = true;
     var url = app.config.apiUrl + "api/v5/users/" + that.data.login + "/events";
-    switch(that.data.type){
+    switch (that.data.type) {
       case 'friends':
         url = app.config.apiUrl + "api/v5/users/" + that.data.login + "/received_events";
         break;
       case 'user':
         url = app.config.apiUrl + "api/v5/users/" + that.data.login + "/events/public";
         break;
-        default:
+      default:
     }
     wx.request({
       url: url,
