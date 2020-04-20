@@ -1,0 +1,32 @@
+<wxs src="../../utils/timeHelper.wxs" module="timeHelper" />
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+  <view class="page__bd">
+    <block wx:if="{{list.length>0}}">
+      <block wx:for="{{list}}" wx:key="item">
+        <view class="weui-panel weui-panel_access">
+            <view class="weui-panel__bd">
+                <view class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active" bindtap="itemClick" mark:namespace="{{item.repository.namespace.path}}" mark:path="{{item.repository.path}}" mark:id="{{item.id}}">
+                    <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                        <view class="weui-media-box__title" wx:if="{{item.type=='note_comment'}}">仓库评论通知</view>
+                        <view class="weui-media-box__title" wx:if="{{item.type=='note_reply'}}">仓库评论回复通知</view>
+                        <view class="weui-media-box__title" wx:if="{{item.type=='pull_request_merge'}}">Pull Request合并通知</view>
+                        <view class="weui-media-box__title" wx:if="{{item.type=='project_syn_fork'}}">仓库同步成功通知</view>
+                        <view class="weui-media-box__title" wx:if="{{item.type=='project_push'}}">Watch仓库推送通知</view>
+                        <view class="weui-media-box__title" wx:if="{{item.type=='referer'}}">评论中被@通知</view>
+                        <view class="weui-media-box__title" wx:if="{{item.type=='group_transfer'}}">组织转移被接受通知</view>
+                        <view style="font-size:14px;color:#999;">
+                        <view>发送时间：{{timeHelper.parse(item.updated_at)}}</view>
+                        <view style="margin-top:10px;color:#666;">{{timeHelper.html2Text(item.content)}}</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+      </block>
+    </block>
+    <view wx:if="{{list.length==0}}" style="text-align:center;padding-top:100px;">
+      <image src="../../res/image/alert.png" style="width:100px;height:100px;"></image>
+      <view style="font-size:16px;color:#999;margin-top:20px;">还没有收到私信呢~</view>
+    </view>
+  </view>
+</view>

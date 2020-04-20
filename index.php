@@ -1,5 +1,4 @@
 <?php 
-<?php
 define('APPID', '码云APPID');
 define('SECRET', '码云Secret');
 if (empty($_GET['GiteeAPI'])) {

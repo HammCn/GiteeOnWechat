@@ -11,7 +11,9 @@ Page({
     readme: "",
     branch: "master",
     branchList: [],
-    commitList: []
+    commitList: [],
+    isStarred: true,
+    isWatched: true,
   },
   /**
    * 生命周期函数--监听页面加载
@@ -76,6 +78,7 @@ Page({
             repoInfo: result.data
           });
           that.getBranchs(loading);
+          that.checkStarAndWatch();
         } else {
           wx.stopPullDownRefresh();
           wx.hideLoading();
@@ -85,6 +88,114 @@ Page({
             showCancel: false,
             success(res) {
               wx.navigateBack();
+            }
+          });
+        }
+      }
+    });
+  },
+  checkStarAndWatch: function () {
+    var that = this;
+    wx.request({
+      url: app.config.apiUrl + "api/v5/user/starred/" + that.data.namespace + "/" + that.data.path,
+      method: "POST",
+      data: {
+        access_token: app.access_token,
+        method: 'get'
+      },
+      success: function (result) {
+        var isStarred = false;
+        if (result.data.hasOwnProperty('message')) {
+          isStarred = false;
+        } else {
+          isStarred = true;
+        }
+        that.setData({
+          isStarred: isStarred
+        });
+        wx.request({
+          url: app.config.apiUrl + "api/v5/user/subscriptions/" + that.data.namespace + "/" + that.data.path,
+          method: "POST",
+          data: {
+            access_token: app.access_token,
+            method: 'get'
+          },
+          success: function (result) {
+            var isWatched = false;
+            if (result.data.hasOwnProperty('message')) {
+              isWatched = false;
+            } else {
+              isWatched = true;
+            }
+            that.setData({
+              isWatched: isWatched
+            });
+          }
+        });
+      }
+    });
+  },
+  doStar: function () {
+    var that = this;
+    wx.showLoading({
+      title: '操作中',
+    });
+    wx.request({
+      url: app.config.apiUrl + "api/v5/user/starred/" + that.data.namespace + "/" + that.data.path,
+      method: "POST",
+      data: {
+        access_token: app.access_token,
+        method: 'put'
+      },
+      success: function (result) {
+        wx.hideLoading();
+        if (result.data.hasOwnProperty('message')) {
+          wx.showModal({
+            title: 'Star失败',
+            content: result.data.message,
+            showCancel: false,
+          });
+        } else {
+          wx.showModal({
+            title: 'Star成功',
+            content: "有你的鼓励作者会更加努力完善这个仓库呀~",
+            showCancel: false,
+            success: function (res) {
+              that.checkStarAndWatch();
+            }
+          });
+        }
+      }
+    });
+  },
+  doWatch: function () {
+    var that = this;
+    wx.showLoading({
+      title: '操作中',
+    });
+    wx.request({
+      url: app.config.apiUrl + "api/v5/user/subscriptions/" + that.data.namespace + "/" + that.data.path,
+      method: "POST",
+      data: {
+        access_token: app.access_token,
+        watch_type: 'watching',
+        method: 'put'
+      },
+      success: function (result) {
+        wx.hideLoading();
+        if (result.data.hasOwnProperty('message')) {
+          wx.showModal({
+            title: 'Watch失败',
+            content: result.data.message,
+            showCancel: false,
+          });
+        } else {
+          wx.showModal({
+            title: 'Watch成功',
+            content: "你可以在好友动态里看到这个仓库的更新啦~",
+            showCancel: false,
+            success: function (res) {
+              that.checkStarAndWatch();
             }
           });
         }
@@ -109,7 +220,6 @@ Page({
       success: function (result) {
         if (result.data.hasOwnProperty("content")) {
           var readmeMarkdown = base64Helper.baseDecode(result.data.content);
-          console.log(readmeMarkdown)
           that.setData({
             readme: readmeMarkdown ? readmeMarkdown : "### No Readme File!"
           });
@@ -122,6 +232,7 @@ Page({
             content: result.data.message,
             showCancel: false,
           });
+          that.getComments(false);
         }
       }
     });

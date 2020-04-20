@@ -1,6 +1,8 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/activity/notifications",
+    "pages/activity/mails",
     "pages/user/login",
     "pages/user/followers",
     "pages/user/following",

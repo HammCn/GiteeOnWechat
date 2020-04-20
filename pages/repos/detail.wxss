@@ -3,6 +3,12 @@
   color: #999;
 }
 
+.item {
+  font-size: 24px;
+  color: #666;
+  padding-right: 10px;
+}
+
 .floatRight .iconfont {
   float: right;
   color: #999;

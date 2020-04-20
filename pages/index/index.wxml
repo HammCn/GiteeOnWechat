@@ -15,19 +15,19 @@
 						</navigator>
 					</view>
 					<view class="weui-flex__item">
-						<navigator class="placeholder"  url="../user/following" hover-class="weui-grid_active">
+						<navigator class="placeholder" url="../user/following" hover-class="weui-grid_active">
 							<view class="top_value">{{userInfo.following}}</view>
 							<view class="top_key">关注</view>
 						</navigator>
 					</view>
 					<view class="weui-flex__item">
-						<navigator class="placeholder"  url="../repos/starred" hover-class="weui-grid_active">
+						<navigator class="placeholder" url="../repos/starred" hover-class="weui-grid_active">
 							<view class="top_value">{{userInfo.stared}}</view>
 							<view class="top_key">Star</view>
 						</navigator>
 					</view>
 					<view class="weui-flex__item">
-						<navigator class="placeholder"  url="../repos/watched" hover-class="weui-grid_active">
+						<navigator class="placeholder" url="../repos/watched" hover-class="weui-grid_active">
 							<view class="top_value">{{userInfo.watched}}</view>
 							<view class="top_key">Watch</view>
 						</navigator>

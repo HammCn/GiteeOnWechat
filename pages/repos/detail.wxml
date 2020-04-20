@@ -26,6 +26,24 @@
           </view>
         </view>
       </view>
+		<view class="weui-cells" wx:if="{{!isStared||!isWatched}}">
+			<view class="weui-cell weui-cell_access" hover-class="app_hover" bindtap="doStar" wx:if="{{!isStarred}}">
+				<view class="weui-cell__hd">
+					<i class="item iconfont icon-shoucang2"></i></view>
+				<view class="weui-cell__bd" style="font-size:14px;">
+					Star这个仓库
+				</view>
+				<view class="weui-cell__ft"></view>
+			</view>
+			<view class="weui-cell weui-cell_access" hover-class="app_hover" bindtap="doWatch" wx:if="{{!isWatched}}">
+				<view class="weui-cell__hd">
+					<i class="item iconfont icon-eye"></i></view>
+				<view class="weui-cell__bd" style="font-size:14px;">
+					Watch这个仓库
+				</view>
+				<view class="weui-cell__ft"></view>
+			</view>
+      </view>
       <view class="weui-cells__title">
         当前分支：
         <span style="color:#333;">{{branch}}</span>
