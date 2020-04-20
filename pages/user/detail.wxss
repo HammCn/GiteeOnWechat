@@ -1,5 +1,5 @@
 .item {
-  font-size: 28px;
+  font-size: 24px;
   color: #666;
   padding-right: 10px;
 }

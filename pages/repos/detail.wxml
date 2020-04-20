@@ -54,7 +54,7 @@
               </view>
             </navigator>
           </view>
-          <view class="weui-panel__ft" wx:if="{{commitList.length>=20}}">
+          <view class="weui-panel__ft" wx:if="{{commitList.length>=5}}">
             <navigator class="weui-cell weui-cell_access weui-cell_link"  url="../commits/list?namespace={{namespace}}&path={{path}}">
               <view class="weui-cell__bd" style="font-size:14px;">查看更多Commit记录</view>
               <span class="weui-cell__ft"></span>
@@ -80,7 +80,7 @@
                 </view>
               </block>
             </view>
-            <view class="weui-panel__ft">
+            <view class="weui-panel__ft"  wx:if="{{commentList.length>=5}}">
               <navigator class="weui-cell weui-cell_access weui-cell_link" url="../comments/list?namespace={{namespace}}&path={{path}}">
                 <view class="weui-cell__bd" style="font-size:14px;">查看更多精彩评论</view>
                 <span class="weui-cell__ft"></span>

@@ -9,35 +9,47 @@ Page({
     page: 1,
     isGetingData: false,
     list: [],
-    login: false
+    login: false,
+    type: 'public'
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (e) {
-    var that = this;
+    var that = this
     if (e.login) {
       that.setData({
-        login: e.login
+        login: e.login,
+        type: (e.type ? e.type : 'public')
+      })
+      switch (that.data.type) {
+        case 'watch':
+          wx.setNavigationBarTitle({
+            title: "Ta的Watch仓库"
+          });
+          break;
+        case 'star':
+          wx.setNavigationBarTitle({
+            title: "Ta的Star仓库"
+          });
+          break;
+        default:
+          wx.setNavigationBarTitle({
+            title: "Ta的开源仓库"
+          });
+      }
+      wx.showLoading({
+        title: '数据读取中',
       });
-      wx.setNavigationBarTitle({
-        title: "Ta的粉丝"
-      });
-    } else {
-      wx.setNavigationBarTitle({
-        title: '我的粉丝'
-      });
+      that.getList();
     }
   },
   /**
    * 页面显示事件
    */
   onShow: function () {
-    var that = this;
     app.getUserInfo(function (result) {
-      if (result) {
-        that.getList();
-      } else {
+      if (!result) {
         app.loginFirst();
       }
     });
@@ -78,15 +90,22 @@ Page({
       return;
     }
     that.isGetingData = true;
-    var url = app.config.apiUrl + "api/v5/user/followers";
-    if (that.data.login) {
-      url = app.config.apiUrl + "api/v5/users/" + that.data.login + "/followers";
+    var url = app.config.apiUrl + "api/v5/users/" + that.data.login + "/repos";
+    switch (that.data.type) {
+      case 'star':
+        url = app.config.apiUrl + "api/v5/users/" + that.data.login + "/starred";
+        break;
+      case 'watch':
+        url = app.config.apiUrl + "api/v5/users/" + that.data.login + "/subscriptions";
+        break;
+      default:
     }
     wx.request({
       url: url,
       method: "POST",
       data: {
         access_token: app.access_token,
+        q: that.data.keyword,
         page: that.data.page,
         method: 'get'
       },
@@ -119,13 +138,6 @@ Page({
           }
         }
       }
-    });
-  },
-  showMenu: function (e) {
-    console.log(e);
-    var that = this;
-    wx.navigateTo({
-      url: '../user/detail?login=' + e.mark.login,
     });
   }
 })

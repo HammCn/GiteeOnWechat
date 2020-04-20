@@ -194,6 +194,7 @@ Page({
       data: {
         access_token: app.access_token,
         sha: that.data.branch,
+        per_page: 5,
         method: 'get'
       },
       success: function (result) {
@@ -226,6 +227,7 @@ Page({
       method: "POST",
       data: {
         access_token: app.access_token,
+        per_page: 5,
         method: 'get'
       },
       success: function (result) {

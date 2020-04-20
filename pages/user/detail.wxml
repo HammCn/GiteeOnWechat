@@ -9,29 +9,25 @@
 			<view style="margin:0px 10%;">
 				<view class="weui-flex" style="background-color:transparent;">
 					<view class="weui-flex__item">
-						<navigator class="placeholder"  hover-class="weui-grid_active">
-						<!-- <navigator class="placeholder"  url="../user/following?login={{userInfo.login}}" hover-class="weui-grid_active"> -->
+						<navigator class="placeholder" url="../user/followers?login={{userInfo.login}}" hover-class="weui-grid_active">
 							<view class="top_value">{{userInfo.followers}}</view>
 							<view class="top_key">粉丝</view>
 						</navigator>
 					</view>
 					<view class="weui-flex__item">
-						<navigator class="placeholder"  hover-class="weui-grid_active">
-						<!-- <navigator class="placeholder"  url="../user/following?login={{userInfo.login}}" hover-class="weui-grid_active"> -->
+						<navigator class="placeholder" url="../user/following?login={{userInfo.login}}" hover-class="weui-grid_active">
 							<view class="top_value">{{userInfo.following}}</view>
 							<view class="top_key">关注</view>
 						</navigator>
 					</view>
 					<view class="weui-flex__item">
-						<navigator class="placeholder"  hover-class="weui-grid_active">
-						<!-- <navigator class="placeholder"  url="../repos/starred?login={{userInfo.login}}" hover-class="weui-grid_active"> -->
+						<navigator class="placeholder" url="../repos/others?login={{userInfo.login}}&type=star" hover-class="weui-grid_active">
 							<view class="top_value">{{userInfo.stared}}</view>
 							<view class="top_key">Star</view>
 						</navigator>
 					</view>
 					<view class="weui-flex__item">
-						<navigator class="placeholder"  hover-class="weui-grid_active">
-						<!-- <navigator class="placeholder"  url="../repos/watched?login={{userInfo.login}}" hover-class="weui-grid_active"> -->
+						<navigator class="placeholder" url="../repos/others?login={{userInfo.login}}&type=watch" hover-class="weui-grid_active">
 							<view class="top_value">{{userInfo.watched}}</view>
 							<view class="top_key">Watch</view>
 						</navigator>
@@ -39,7 +35,15 @@
 				</view>
 			</view>
 		</view>
-		
+
+		<view class="weui-cells">
+			<view class="weui-cell weui-cell_access" hover-class="app_hover" bindtap="addFollow" wx:if="{{showFollowBtn}}">
+				<view class="weui-cell__hd">
+					<i class="item iconfont icon-xiangji1"></i></view>
+				<view class="weui-cell__bd">关注这个大佬</view>
+				<view class="weui-cell__ft"></view>
+			</view>
+		</view>
 		<view class="weui-cells">
 			<navigator class="weui-cell weui-cell_access" hover-class="app_hover" url="../activity/events?login={{userInfo.login}}">
 				<view class="weui-cell__hd">
@@ -49,29 +53,29 @@
 			</navigator>
 		</view>
 		<view class="weui-cells">
-			<navigator class="weui-cell weui-cell_access" hover-class="app_hover" url="../repos/search">
+			<navigator class="weui-cell weui-cell_access" hover-class="app_hover" url="../repos/others?login={{userInfo.login}}&type=public">
 				<view class="weui-cell__hd">
 					<i class="item iconfont icon-rili33"></i></view>
 				<view class="weui-cell__bd">
 					Ta的开源仓库
 				</view>
-          		<view class="weui-cell__ft"></view>
+				<view class="weui-cell__ft"></view>
 			</navigator>
-			<navigator class="weui-cell weui-cell_access" hover-class="app_hover" url="../repos/search">
+			<navigator class="weui-cell weui-cell_access" hover-class="app_hover" url="../repos/others?login={{userInfo.login}}&type=star">
 				<view class="weui-cell__hd">
 					<i class="item iconfont icon-shoucang2"></i></view>
 				<view class="weui-cell__bd">
 					Ta的Star仓库
 				</view>
-          		<view class="weui-cell__ft"></view>
+				<view class="weui-cell__ft"></view>
 			</navigator>
-			<navigator class="weui-cell weui-cell_access" hover-class="app_hover" url="../repos/search">
+			<navigator class="weui-cell weui-cell_access" hover-class="app_hover" url="../repos/others?login={{userInfo.login}}&type=watch">
 				<view class="weui-cell__hd">
-					<i class="item iconfont icon-changyongtubiao-mianxing-67"></i></view>
+					<i class="item iconfont icon-eye"></i></view>
 				<view class="weui-cell__bd">
 					Ta的Watch仓库
 				</view>
-          		<view class="weui-cell__ft"></view>
+				<view class="weui-cell__ft"></view>
 			</navigator>
 		</view>
 	</view>

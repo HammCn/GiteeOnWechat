@@ -10,6 +10,7 @@
     "pages/repos/detail",
     "pages/repos/list",
     "pages/repos/search",
+    "pages/repos/others",
     "pages/repos/starred",
     "pages/repos/watched",
     "pages/comments/list",

@@ -1,5 +1,4 @@
 const app = getApp()
-var base64Helper = require('../../utils/Base64.js');
 /**
  * 页面的初始数据
  */
@@ -7,8 +6,15 @@ Page({
   data: {
     userInfo: {},
     login: "",
-    defaultUserInfo: {
-
+    showFollowBtn: false,
+    defaultInfo: {
+      avatar_url: "../../res/image/logo.png",
+      name: "　　",
+      bio: "　　",
+      followers: 0,
+      following: 0,
+      stared: 0,
+      watched: 0
     }
   },
   /**
@@ -77,6 +83,7 @@ Page({
           that.setData({
             userInfo: result.data
           });
+          that.checkFollowed();
         } else {
           wx.stopPullDownRefresh();
           wx.hideLoading();
@@ -92,4 +99,71 @@ Page({
       }
     });
   },
+  addFollow: function () {
+    var that = this;
+    wx.showLoading({
+      title: '关注中',
+    });
+    wx.request({
+      url: app.config.apiUrl + "api/v5/user/following/" + that.data.login,
+      method: "POST",
+      data: {
+        access_token: app.access_token,
+        method: 'put'
+      },
+      success: function (result) {
+        wx.hideLoading();
+        if (result.data.hasOwnProperty("message")) {
+          wx.showModal({
+            title: '关注失败',
+            content: "仔细想想，你是不是已经关注过这位大佬了？",
+            showCancel: false,
+            success(res) {}
+          });
+        } else {
+          wx.showModal({
+            title: '关注成功',
+            content: "现在可以在好友动态中查看这位大佬的骚操作啦~",
+            showCancel: false,
+            success(res) {
+              that.getDetail();
+            }
+          });
+        }
+      }
+    });
+  },
+  checkFollowed: function () {
+    var that = this;
+    wx.request({
+      url: app.config.apiUrl + "api/v5/user/following/" + that.data.login,
+      method: "POST",
+      data: {
+        access_token: app.access_token,
+        method: 'get'
+      },
+      success: function (result) {
+        if (result.data.hasOwnProperty("message")) {
+          that.setData({
+            showFollowBtn: true,
+          });
+        } else {
+          that.setData({
+            showFollowBtn: false,
+          });
+        }
+      }
+    });
+  },
+  onShareAppMessage: function (res) {
+    var that = this;
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+    }
+    return {
+      title: "我在码云上发现一个叫" + that.data.userInfo.name + "的大佬...",
+      path: '/pages/user/detail?login=' + that.data.login
+    }
+  }
 })
