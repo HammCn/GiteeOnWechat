@@ -14,7 +14,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function () {
-    wx.setNavigationBarTitle({ title: "私人令牌授权" });
     var user_name = wx.getStorageSync('user_name');
     var personal_token = wx.getStorageSync('personal_token');
     this.setData({
@@ -27,13 +26,11 @@ Page({
     this.setData({
       tokenFormShow: true
     });
-    wx.setNavigationBarTitle({ title: "私人令牌授权" });
   },
   hideAddForm: function () {
     this.setData({
       tokenFormShow: false
     });
-    wx.setNavigationBarTitle({ title: "　" });
   },
   doTokenFormSubmit: function (e) {
     wx.setStorageSync('access_token', e.detail.value.personal_token);
