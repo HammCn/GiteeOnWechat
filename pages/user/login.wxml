@@ -23,7 +23,7 @@
       </view>
       <view class="weui-btn-area">
         <button form-type="submit" class="weui-btn" type="primary">登录码云</button>
-        <view style="text-align:center;padding:10px 0px;" bindtap="loginWithToken">使用码云私人令牌授权</view>
+        <view style="text-align:center;padding:10px 0px;margin-top:20px;" bindtap="loginWithToken">使用码云私人令牌授权</view>
       </view>
     </form>
     <view class="addTokenBox" wx:if="{{tokenFormShow}}">
@@ -40,7 +40,7 @@
             <button form-type="submit" class="weui-btn weui-btn_primary" type="primary">
               立即授权登录
             </button>
-            <view style="text-align:center;padding:10px 0px;" bindtap="hideAddForm">
+            <view style="text-align:center;padding:10px 0px;margin-top:20px;" bindtap="hideAddForm">
               使用码云帐号密码登录
             </view>
           </view>
