@@ -20,17 +20,37 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function () {
+    var that = this;
     // wx.navigateTo({url:'../user/detail?login=ld'});//拿红薯的帐号做页面测试
-    
-    this.setData({
-      userInfo: this.data.defaultInfo
+    const updateManager = wx.getUpdateManager()
+    updateManager.onCheckForUpdate(function (res) {
+      if (!res.hasUpdate) {
+        that.setData({
+          userInfo: that.data.defaultInfo
+        });
+        wx.setNavigationBarTitle({
+          title: app.product.name,
+        });
+        wx.showLoading({
+          title: '数据加载中',
+        });
+      } else {
+        wx.showLoading({
+          title: '正在更新中',
+        });
+      }
     });
-    wx.setNavigationBarTitle({
-      title: app.product.name,
+    updateManager.onUpdateReady(function () {
+      wx.showModal({
+        title: '版本更新',
+        content: '你已经更新至最新版本，请点击确定重启最新版本',
+        showCancel: false,
+        success: function (res) {
+          updateManager.applyUpdate()
+        }
+      })
     });
-    wx.showLoading({
-      title: '数据加载中',
-    });
+    updateManager.onUpdateFailed(function () {});
   },
   onShow: function () {
     this.getUserInfo();
