@@ -20,6 +20,7 @@
     "pages/commits/detail",
     "pages/user/motify",
     "pages/about/index",
+    "pages/issues/list",
     "pages/webview/index"
   ],
   "window": {

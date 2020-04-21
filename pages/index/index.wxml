@@ -51,17 +51,17 @@
 				</view>
 				<view class="weui-grid__label">我的仓库</view>
 			</navigator>
-			<navigator url="../repos/list" class="weui-grid" hover-class="weui-grid_active">
+			<navigator url="" class="weui-grid" hover-class="weui-grid_active" bindtap="comming">
 				<view>
 					<i class="weui-grid__icon item iconfont icon-changyongtubiao-xianxingdaochu-zhuanqu-1"></i>
 				</view>
 				<view class="weui-grid__label">Pull Requests</view>
 			</navigator>
-			<navigator url="../repos/list" class="weui-grid" hover-class="weui-grid_active">
+			<navigator url="../issues/list" class="weui-grid" hover-class="weui-grid_active">
 				<view>
 					<i class="weui-grid__icon item iconfont icon-naozhong2"></i>
 				</view>
-				<view class="weui-grid__label">待办任务</view>
+				<view class="weui-grid__label">我的Issue</view>
 			</navigator>
 			<view bindtap="showMyActivity" class="weui-grid" hover-class="weui-grid_active">
 				<view>

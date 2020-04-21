@@ -1,0 +1,6 @@
+{
+  "usingComponents": {},
+  "navigationStyle": "default",
+  "navigationBarTitleText": "我的Issue",
+  "enablePullDownRefresh": true
+}
