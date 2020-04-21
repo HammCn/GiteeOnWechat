@@ -168,6 +168,39 @@ Page({
       }
     });
   },
+  doUnStar: function () {
+    var that = this;
+    wx.showLoading({
+      title: '操作中',
+    });
+    wx.request({
+      url: app.config.apiUrl + "api/v5/user/starred/" + that.data.namespace + "/" + that.data.path,
+      method: "POST",
+      data: {
+        access_token: app.access_token,
+        method: 'delete'
+      },
+      success: function (result) {
+        wx.hideLoading();
+        if (result.data.hasOwnProperty('message')) {
+          wx.showModal({
+            title: '取消Star失败',
+            content: result.data.message,
+            showCancel: false,
+          });
+        } else {
+          wx.showModal({
+            title: '取消Star成功',
+            content: "感谢你曾经的鼓励，我们会做得更好~",
+            showCancel: false,
+            success: function (res) {
+              that.checkStarAndWatch();
+            }
+          });
+        }
+      }
+    });
+  },
   doWatch: function () {
     var that = this;
     wx.showLoading({
@@ -200,6 +233,45 @@ Page({
           });
         }
       }
+    });
+  },
+  doUnWatch: function () {
+    var that = this;
+    wx.showLoading({
+      title: '操作中',
+    });
+    wx.request({
+      url: app.config.apiUrl + "api/v5/user/subscriptions/" + that.data.namespace + "/" + that.data.path,
+      method: "POST",
+      data: {
+        access_token: app.access_token,
+        watch_type: 'watching',
+        method: 'delete'
+      },
+      success: function (result) {
+        wx.hideLoading();
+        if (result.data.hasOwnProperty('message')) {
+          wx.showModal({
+            title: '取消Watch失败',
+            content: result.data.message,
+            showCancel: false,
+          });
+        } else {
+          wx.showModal({
+            title: '取消Watch成功',
+            content: "你将不会再看到这个仓库的动态~",
+            showCancel: false,
+            success: function (res) {
+              that.checkStarAndWatch();
+            }
+          });
+        }
+      }
+    });
+  },
+  doFork: function () {
+    wx.showToast({
+      title: "正在开发中"
     });
   },
   getReadme: function (loading = true) {

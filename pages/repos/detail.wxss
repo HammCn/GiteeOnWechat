@@ -24,3 +24,20 @@
   font-size: 12px;
   margin-right: 5px;
 }
+
+
+.top_value .iconfont {
+  font-size: 24px;
+}
+
+.top_key {
+  font-size: 14px;
+}
+
+.isNotActive {
+  color: #666;
+}
+
+.isActive {
+  color: orangered;
+}

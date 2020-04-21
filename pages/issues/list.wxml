@@ -13,7 +13,7 @@
         </view>
       </view> -->
       <view class="weui-flex">
-        <view class="weui-flex__item" bindtap="filterChanged">{{filter_name}}</view>
+        <view class="weui-flex__item" bindtap="filterChanged" wx:if="{{type=='mine'}}">{{filter_name}}</view>
         <view class="weui-flex__item" bindtap="stateChanged">{{state_name}}</view>
         <view class="weui-flex__item" bindtap="sortChanged">{{sort_name}}</view>
         <view class="weui-flex__item" bindtap="orderChanged">{{order_name}}</view>
@@ -42,7 +42,7 @@
     </block>
     <view wx:if="{{list.length==0}}" style="text-align:center;padding-top:100px;">
       <image src="../../res/image/alert.png" style="width:100px;height:100px;"></image>
-      <view style="font-size:16px;color:#999;margin-top:20px;">没有查询到仓库数据</view>
+      <view style="font-size:16px;color:#999;margin-top:20px;">没有查询到数据</view>
     </view>
   </view>
 </view>

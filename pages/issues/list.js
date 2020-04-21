@@ -5,6 +5,8 @@ const app = getApp()
  */
 Page({
   data: {
+    namespace: "",
+    path: "",
     type: 'mine',
     filter_value: "all",
     filter_name: "我全部的",
@@ -69,7 +71,18 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function () {
+  onLoad: function (e) {
+    var that = this;
+    if (e.namespace && e.path) {
+      that.setData({
+        namespace: e.namespace,
+        path: e.path,
+        type: 'repo'
+      });
+      wx.setNavigationBarTitle({
+        title: '仓库的Issue',
+      })
+    }
     wx.showLoading({
       title: '数据加载中',
     });
@@ -110,39 +123,34 @@ Page({
   showMenu: function (e) {
     console.log(e.mark);
     var that = this;
-    switch (that.type) {
-      case 'repo':
-        break;
-      default:
-        //mine
-        wx.showActionSheet({
-          itemList: [
-            '进入仓库',
-            '查看用户',
-            '修改状态',
-            '评论Issue',
-            '删除Issue',
-          ],
-          success: function (res) {
-            switch (res.tapIndex) {
-              case 0:
-                wx.navigateTo({
-                  url: '../repos/detail?namespace=' + e.mark.repo.namespace.path + "&path=" + e.mark.repo.path,
-                })
-                break;
-              case 1:
-                wx.navigateTo({
-                  url: '../user/detail?login=' + e.mark.user.login,
-                })
-                break;
-              default:
-                wx.showToast({
-                  title: '即将上线'
-                });
-            }
-          }
-        })
-    }
+    wx.showActionSheet({
+      itemList: [
+        '查看Issue',
+        '进入仓库',
+        '查看用户',
+        '修改状态',
+        '评论Issue',
+        '删除Issue',
+      ],
+      success: function (res) {
+        switch (res.tapIndex) {
+          case 1:
+            wx.navigateTo({
+              url: '../repos/detail?namespace=' + e.mark.repo.namespace.path + "&path=" + e.mark.repo.path,
+            })
+            break;
+          case 2:
+            wx.navigateTo({
+              url: '../user/detail?login=' + e.mark.user.login,
+            })
+            break;
+          default:
+            wx.showToast({
+              title: '即将上线'
+            });
+        }
+      }
+    });
   },
   /**
    * 获取数据列表
@@ -160,6 +168,12 @@ Page({
       return;
     }
     var url = app.config.apiUrl + "api/v5/user/issues";
+    switch (that.data.type) {
+      case 'repo':
+        url = app.config.apiUrl + "api/v5/repos/" + that.data.namespace + "/" + that.data.path + "/issues";
+        break;
+      default:
+    }
     that.isGetingData = true;
     wx.request({
       url: url,

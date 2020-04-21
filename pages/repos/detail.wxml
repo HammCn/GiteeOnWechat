@@ -26,24 +26,42 @@
           </view>
         </view>
       </view>
-		<view class="weui-cells" wx:if="{{!isStared||!isWatched}}">
-			<view class="weui-cell weui-cell_access" hover-class="app_hover" bindtap="doStar" wx:if="{{!isStarred}}">
-				<view class="weui-cell__hd">
-					<i class="item iconfont icon-shoucang2"></i></view>
-				<view class="weui-cell__bd" style="font-size:14px;">
-					Star这个仓库
+			<view style="margin:0px 10px;">
+				<view class="weui-flex" style="background-color:transparent;">
+					<view class="weui-flex__item">
+						<view class="placeholder isNotActive" hover-class="weui-grid_active" bindtap="doStar" wx:if="{{!isStarred}}">
+							<view class="top_value"><i class="iconfont icon-star"></i></view>
+							<view class="top_key">Star</view>
+						</view>
+						<view class="placeholder isActive" hover-class="weui-grid_active" bindtap="doUnStar" wx:if="{{isStarred}}">
+							<view class="top_value"><i class="iconfont icon-star"></i></view>
+							<view class="top_key">Star</view>
+						</view>
+					</view>
+					<view class="weui-flex__item">
+						<view class="placeholder isNotActive" hover-class="weui-grid_active" bindtap="doWatch" wx:if="{{!isWatched}}">
+							<view class="top_value"><i class="iconfont icon-eye"></i></view>
+							<view class="top_key">Watch</view>
+						</view>
+						<view class="placeholder isActive" hover-class="weui-grid_active" bindtap="doUnWatch" wx:if="{{isWatched}}">
+							<view class="top_value"><i class="iconfont icon-eye"></i></view>
+							<view class="top_key">Watch</view>
+						</view>
+					</view>
+					<view class="weui-flex__item">
+						<view class="placeholder isNotActive" hover-class="weui-grid_active" bindtap="doFork">
+							<view class="top_value"><i class="iconfont icon-changyongtubiao-mianxing-67"></i></view>
+							<view class="top_key">Fork</view>
+						</view>
+					</view>
+					<view class="weui-flex__item">
+						<navigator class="placeholder isNotActive" url="../issues/list?namespace={{namespace}}&path={{path}}" hover-class="weui-grid_active">
+							<view class="top_value"><i class="iconfont icon-naozhong2"></i></view>
+							<view class="top_key">Issue</view>
+						</navigator>
+					</view>
 				</view>
-				<view class="weui-cell__ft"></view>
 			</view>
-			<view class="weui-cell weui-cell_access" hover-class="app_hover" bindtap="doWatch" wx:if="{{!isWatched}}">
-				<view class="weui-cell__hd">
-					<i class="item iconfont icon-eye"></i></view>
-				<view class="weui-cell__bd" style="font-size:14px;">
-					Watch这个仓库
-				</view>
-				<view class="weui-cell__ft"></view>
-			</view>
-      </view>
       <view class="weui-cells__title">
         当前分支：
         <span style="color:#333;">{{branch}}</span>
