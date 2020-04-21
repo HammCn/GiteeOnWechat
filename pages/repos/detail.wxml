@@ -35,7 +35,7 @@
 						</view>
 						<view class="placeholder isActive" hover-class="weui-grid_active" bindtap="doUnStar" wx:if="{{isStarred}}">
 							<view class="top_value"><i class="iconfont icon-star"></i></view>
-							<view class="top_key">Star</view>
+							<view class="top_key">Starred</view>
 						</view>
 					</view>
 					<view class="weui-flex__item">
@@ -45,7 +45,7 @@
 						</view>
 						<view class="placeholder isActive" hover-class="weui-grid_active" bindtap="doUnWatch" wx:if="{{isWatched}}">
 							<view class="top_value"><i class="iconfont icon-eye"></i></view>
-							<view class="top_key">Watch</view>
+							<view class="top_key">Watched</view>
 						</view>
 					</view>
 					<view class="weui-flex__item">
