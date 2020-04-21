@@ -22,25 +22,25 @@ Page({
   onLoad: function () {
     var that = this;
     // wx.navigateTo({url:'../user/detail?login=ld'});//拿红薯的帐号做页面测试
+    wx.showLoading({
+      title: '数据加载中',
+    });
+    that.setData({
+      userInfo: that.data.defaultInfo
+    });
+    wx.setNavigationBarTitle({
+      title: app.product.name,
+    });
     const updateManager = wx.getUpdateManager()
     updateManager.onCheckForUpdate(function (res) {
-      if (!res.hasUpdate) {
-        that.setData({
-          userInfo: that.data.defaultInfo
-        });
-        wx.setNavigationBarTitle({
-          title: app.product.name,
-        });
-        wx.showLoading({
-          title: '数据加载中',
-        });
-      } else {
+      if (res.hasUpdate) {
         wx.showLoading({
           title: '正在更新中',
         });
       }
     });
     updateManager.onUpdateReady(function () {
+      wx.hideLoading();
       wx.showModal({
         title: '版本更新',
         content: '你已经更新至最新版本，请点击确定重启最新版本',
@@ -64,6 +64,8 @@ Page({
     var that = this;
     app.getUserInfo(function (result) {
       wx.hideLoading();
+      console.log(result);
+
       if (result) {
         that.setData({
           userInfo: app.userInfo,

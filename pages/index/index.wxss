@@ -1,6 +1,6 @@
 .item {
   font-size: 28px;
-  color: #999;
+  color: #666;
 }
 
 button {
@@ -16,11 +16,7 @@ button::after {
 .weui-grid__label {
   font-size: 14px;
   margin-top: 20px;
-  color: #999;
-}
-
-.weui-grid {
-  color: #999;
+  color: #666;
 }
 
 .weui-cell {

@@ -66,6 +66,12 @@
                               <view><span style="color:#333">{{item.payload.comment.body}}</span></view>
                             </view>
                         </view>
+                        <view wx:if="{{item.type=='ForkEvent'}}">
+                            <view class="weui-media-box__title" >Fork了一个仓库</view>
+                            <view style="font-size:14px;color:#999;">
+                              <span style="color:#333">{{item.actor.name}}</span> Fork了 <span style="color:#333">{{item.repo.human_name}}</span> 到 <span style="color:#333">{{item.payload.human_name}}</span>
+                            </view>
+                        </view>
                         <view wx:if="{{item.type=='CommitCommentEvent'}}">
                             <view class="weui-media-box__title" >评论了Commit</view>
                             <view style="font-size:14px;color:#999;">
