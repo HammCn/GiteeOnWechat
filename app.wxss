@@ -1,15 +1,6 @@
 @import 'style/weui.wxss';
 @import 'style/font/iconfont.wxss';
 
-view {
-  text-shadow: 1px 1px 1px #fff;
-}
-span {
-  text-shadow: 1px 1px 1px #fff;
-}
-font {
-  text-shadow: 1px 1px 1px #fff;
-}
 
 page {
   background-color: #f5f5f5;
