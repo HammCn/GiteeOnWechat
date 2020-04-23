@@ -55,7 +55,7 @@
 						</view>
 					</view>
 					<view class="weui-flex__item">
-						<navigator class="placeholder isNotActive" url="../issues/list?namespace={{namespace}}&path={{path}}" hover-class="weui-grid_active">
+						<navigator class="placeholder isNotActive" url="../issues/list?namespace={{namespace}}&path={{path}}&public={{repoInfo.public}}" hover-class="weui-grid_active">
 							<view class="top_value"><i class="iconfont icon-naozhong2"></i></view>
 							<view class="top_key">Issue</view>
 						</navigator>

@@ -99,6 +99,7 @@ Page({
       data: {
         access_token: app.access_token,
         page: that.data.page,
+        direction: "desc",
         method: 'get'
       },
       success: function (result) {

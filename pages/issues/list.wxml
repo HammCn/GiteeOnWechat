@@ -13,27 +13,40 @@
         </view>
       </view> -->
       <view class="weui-flex">
-        <view class="weui-flex__item" bindtap="filterChanged" wx:if="{{type=='mine'}}">{{filter_name}}</view>
+        <view class="weui-flex__item" bindtap="filterChanged" wx:if="{{type=='mine'}}">
+          {{filter_name}}
+        </view>
         <view class="weui-flex__item" bindtap="stateChanged">{{state_name}}</view>
         <view class="weui-flex__item" bindtap="sortChanged">{{sort_name}}</view>
         <view class="weui-flex__item" bindtap="orderChanged">{{order_name}}</view>
       </view>
     </view>
+    <view class="weui-panel weui-panel_access" wx:if="{{type!='mine'}}">
+      <view class="weui-panel__ft">
+        <view class="weui-cell weui-cell_access weui-cell_link" bindtap="addComment">
+          <view class="weui-cell__bd">添加Issue</view>
+          <span class="weui-cell__ft"></span>
+        </view>
+      </view>
+    </view>
     <block wx:if="{{list.length>0}}">
-      <view wx:for="{{list}}" wx:key="item" hover-class="navigator-hover" bindtap="showMenu" mark:repo="{{item.repository}}" mark:user="{{item.user}}" mark:id="{{item.id}}">
+      <view wx:for="{{list}}" wx:key="item" hover-class="navigator-hover" bindtap="showMenu" mark:repo="{{item.repository}}" mark:user="{{item.user}}" mark:number="{{item.number}}">
         <view class="weui-panel">
           <view class="weui-panel__bd">
             <view class="weui-media-box weui-media-box_text" style="backround-color:#f5f5f5;">
               <view class="weui-media-box__title weui-media-box__title_in-text">
                 <span class="badge-title badge-orangered" wx:if="{{item.state=='open'}}">已开启</span>
-                <span class="badge-title badge-yellow" wx:if="{{item.state=='progressing'}}">进行中</span>
+                <span class="badge-title badge-yellow" wx:if="{{item.state=='progressing'}}">
+                  进行中
+                </span>
                 <span class="badge-title badge-green" wx:if="{{item.state=='closed'}}">已完成</span>
                 <span class="badge-title badge-title" wx:if="{{item.state=='rejected'}}">已拒绝</span>
-                <span class="badge-title">{{item.issue_type}}</span> {{item.title}} 
+                <span class="badge-title">{{item.issue_type}}</span>
+                {{item.title}}
               </view>
               <view style="margin-bottom:5px;font-size:14px;color:#999;">
-                 {{item.number}} {{timeHelper.parse(item.created_at)}} {{item.user.name}}
-                </view>
+                {{item.number}} {{timeHelper.parse(item.created_at)}} {{item.user.name}}
+              </view>
               <view style="font-size:14px;color:#999;">{{item.body?item.body:"暂无描述"}}</view>
             </view>
           </view>
@@ -43,6 +56,30 @@
     <view wx:if="{{list.length==0}}" style="text-align:center;padding-top:100px;">
       <image src="../../res/image/alert.png" style="width:100px;height:100px;"></image>
       <view style="font-size:16px;color:#999;margin-top:20px;">没有查询到数据</view>
+    </view>
+    <view class="addCommentBox" wx:if="{{issueFormShow}}" bindtap="hideAddForm">
+      <view class="addCommentForm">
+        <view class="weui-cells__title" style="margin-left:10px;font-size:16px;"></view>
+        <form bindsubmit="doCommentFormSubmit" bindreset="formReset">
+          <view class="weui-cells weui-cells_form">
+            <view class="weui-cell">
+              <view class="weui-cell__bd">
+                <input catchtap="nothing" class="weui-input" name="title" type="text" placeholder="请简单描述问题" value="" auto-focus="true"></input>
+              </view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">
+                <textarea catchtap="nothing" name="body" confirm-type="search" class="weui-textarea" placeholder="请尽可能让仓库管理者明确你的需求" rows="2" value=""></textarea>
+              </view>
+            </view>
+          </view>
+          <view class="demos-content-padded" style="padding:0px 10px;">
+            <button form-type="submit" class="weui-btn weui-btn_primary" type="primary">
+              发布Issue
+            </button>
+          </view>
+        </form>
+      </view>
     </view>
   </view>
 </view>

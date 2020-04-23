@@ -21,6 +21,7 @@
     "pages/user/motify",
     "pages/about/index",
     "pages/issues/list",
+    "pages/issues/detail",
     "pages/webview/index"
   ],
   "window": {

@@ -8,20 +8,21 @@ Page({
     namespace: "",
     path: "",
     type: 'mine',
+    public: false,
     filter_value: "all",
     filter_name: "我全部的",
     filterList: [{
-        "filter_name": "我全部的",
-        "filter_value": "all"
-      },
-      {
-        "filter_name": "我创建的",
-        "filter_value": "created"
-      },
-      {
-        "filter_name": "我负责的",
-        "filter_value": "assigned"
-      }
+      "filter_name": "我全部的",
+      "filter_value": "all"
+    },
+    {
+      "filter_name": "我创建的",
+      "filter_value": "created"
+    },
+    {
+      "filter_name": "我负责的",
+      "filter_value": "assigned"
+    }
     ],
     state_value: "all",
     state_name: "所有进程",
@@ -44,29 +45,91 @@ Page({
     order_value: "desc",
     order_name: "倒序排列",
     orderList: [{
-        order_value: "desc",
-        order_name: "倒序排列",
-      },
-      {
-        order_value: "asc",
-        order_name: "升序排列",
-      }
+      order_value: "desc",
+      order_name: "倒序排列",
+    },
+    {
+      order_value: "asc",
+      order_name: "升序排列",
+    }
     ],
     sort_value: "created",
     sort_name: "创建时间",
     sortList: [{
-        sort_value: "created",
-        sort_name: "创建时间",
-      },
-      {
-        sort_value: "updated",
-        sort_name: "更新时间",
-      }
+      sort_value: "created",
+      sort_name: "创建时间",
+    },
+    {
+      sort_value: "updated",
+      sort_name: "更新时间",
+    }
     ],
     //分页开始
     page: 1,
     isGetingData: false,
-    list: []
+    list: [],
+    issueFormShow: false,
+  },
+  addComment: function (e) {
+    this.setData({
+      issueFormShow: true
+    });
+  },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  hideAddForm: function () {
+    this.setData({
+      issueFormShow: false
+    });
+  },
+  doCommentFormSubmit: function (e) {
+    var that = this;
+    if (!e.detail.value.body) {
+      wx.showModal({
+        title: '提交失败',
+        content: '什么都不填的话就没必要发布Issue了吧？',
+        showCancel: false,
+      });
+      return;
+    }
+    wx.showLoading({
+      title: '正在提交',
+    });
+    wx.request({
+      url: app.config.apiUrl + "api/v5/repos/" + that.data.namespace + "/issues",
+      method: "POST",
+      data: {
+        ...{
+          access_token: app.access_token,
+          repo: that.data.path,
+          method: 'post'
+        },
+        ...e.detail.value
+      },
+      success: function (result) {
+        wx.hideLoading();
+        if (result.data.hasOwnProperty("message")) {
+          wx.showModal({
+            title: '提交失败',
+            content: result.data.message,
+            showCancel: false,
+          });
+        } else {
+          wx.showModal({
+            title: '提交Issue成功',
+            content: '你的Issue提交成功，感谢你对这个仓库的关注',
+            showCancel: false,
+            success: function (res) {
+              that.setData({
+                page: 1
+              });
+              that.getList();
+            }
+          });
+        }
+      }
+    });
   },
   /**
    * 生命周期函数--监听页面加载
@@ -77,6 +140,7 @@ Page({
       that.setData({
         namespace: e.namespace,
         path: e.path,
+        public: e.public,
         type: 'repo'
       });
       wx.setNavigationBarTitle({
@@ -121,7 +185,6 @@ Page({
     }
   },
   showMenu: function (e) {
-    console.log(e.mark);
     var that = this;
     wx.showActionSheet({
       itemList: [
@@ -129,20 +192,61 @@ Page({
         '进入仓库',
         '查看用户',
         '修改状态',
-        '评论Issue',
-        '删除Issue',
+        // '删除Issue',
       ],
       success: function (res) {
         switch (res.tapIndex) {
+          case 0:
+            wx.navigateTo({
+              url: '../issues/detail?namespace=' + e.mark.repo.namespace.path + "&path=" + e.mark.repo.path + "&number=" + e.mark.number,
+            });
+            break;
           case 1:
             wx.navigateTo({
               url: '../repos/detail?namespace=' + e.mark.repo.namespace.path + "&path=" + e.mark.repo.path,
-            })
+            });
             break;
           case 2:
             wx.navigateTo({
               url: '../user/detail?login=' + e.mark.user.login,
-            })
+            });
+            break;
+          case 3:
+            wx.showActionSheet({
+              itemList: [
+                '已开启',
+                '进行中',
+                '已完成',
+              ],
+              success: function (res) {
+                var stateList = ['open', 'progressing', 'closed'];
+                wx.showLoading({
+                  title: '更改中',
+                });
+                wx.request({
+                  url: app.config.apiUrl + "api/v5/repos/" + e.mark.repo.namespace.path + "/issues/" + e.mark.number,
+                  method: "POST",
+                  data: {
+                    access_token: app.access_token,
+                    state: stateList[res.tapIndex],
+                    repo: e.mark.repo.path,
+                    method: 'PATCH'
+                  },
+                  success: function (result) {
+                    wx.hideLoading();
+                    if (result.data.hasOwnProperty("message")) {
+                      wx.showModal({
+                        title: '更改失败',
+                        content: "你可能没有权限变更这个Issue的状态",
+                        showCancel: false,
+                      });
+                    } else {
+                      that.getList();
+                    }
+                  }
+                });
+              }
+            });
             break;
           default:
             wx.showToast({
@@ -168,9 +272,36 @@ Page({
       return;
     }
     var url = app.config.apiUrl + "api/v5/user/issues";
+    var postData = {
+      access_token: app.access_token,
+      filter: that.data.filter_value,
+      state: that.data.state_value,
+      sort: that.data.sort_value,
+      direction: that.data.order_value,
+      page: that.data.page,
+      method: 'get'
+    };;
     switch (that.data.type) {
       case 'repo':
         url = app.config.apiUrl + "api/v5/repos/" + that.data.namespace + "/" + that.data.path + "/issues";
+        if (that.data.public == 'true') {
+          postData = {
+            state: that.data.state_value,
+            sort: that.data.sort_value,
+            direction: that.data.order_value,
+            page: that.data.page,
+            method: 'get'
+          };
+        } else {
+          postData = {
+            access_token: app.access_token,
+            state: that.data.state_value,
+            sort: that.data.sort_value,
+            direction: that.data.order_value,
+            page: that.data.page,
+            method: 'get'
+          };
+        }
         break;
       default:
     }
@@ -178,15 +309,7 @@ Page({
     wx.request({
       url: url,
       method: "POST",
-      data: {
-        access_token: app.access_token,
-        filter: that.data.filter_value,
-        state: that.data.state_value,
-        sort: that.data.sort_value,
-        direction: that.data.order_value,
-        page: that.data.page,
-        method: 'get'
-      },
+      data: postData,
       success: function (result) {
         that.isGetingData = false;
         wx.hideLoading();

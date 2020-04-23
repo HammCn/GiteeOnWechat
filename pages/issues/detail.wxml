@@ -1,0 +1,79 @@
+<wxs src="../../utils/timeHelper.wxs" module="timeHelper" />
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+  <view class="page__bd">
+    <block wx:if="{{issue}}">
+      <view class="weui-panel">
+        <view class="weui-panel__bd">
+          <view class="weui-media-box weui-media-box_text" style="backround-color:#f5f5f5;">
+            <view class="weui-media-box__title weui-media-box__title_in-text">
+              <span class="badge-title badge-orangered" wx:if="{{issue.state=='open'}}">已开启</span>
+              <span class="badge-title badge-yellow" wx:if="{{issue.state=='progressing'}}">
+                进行中
+              </span>
+              <span class="badge-title badge-green" wx:if="{{issue.state=='closed'}}">已完成</span>
+              <span class="badge-title badge-title" wx:if="{{issue.state=='rejected'}}">已拒绝</span>
+              <span class="badge-title">{{issue.issue_type}}</span>
+              {{issue.title}}
+            </view>
+            <view style="margin-bottom:5px;font-size:14px;color:#999;">
+              {{issue.number}} {{timeHelper.parse(issue.created_at)}} {{issue.user.name}}
+            </view>
+            <view style="font-size:14px;color:#999;">{{issue.body?issue.body:"暂无描述"}}</view>
+          </view>
+        </view>
+      </view>
+      <view class="weui-panel weui-panel_access">
+        <view class="weui-panel__ft">
+          <view class="weui-cell weui-cell_access weui-cell_link" bindtap="addComment">
+            <view class="weui-cell__bd">发布评论</view>
+            <span class="weui-cell__ft"></span>
+          </view>
+        </view>
+      </view>
+      <block wx:if="{{comments.length>0}}">
+        <view class="weui-cells__title">Issue评论列表</view>
+        <view class="weui-panel weui-panel_access">
+          <view class="weui-panel__bd">
+            <block wx:for="{{comments}}" wx:key="item">
+              <view class="weui-media-box weui-media-box_appmsg">
+                <span style="position:absolute;right:15px;top:15px;color:#999;font-size:14px;">
+                  {{timeHelper.parse(item.created_at)}}
+                </span>
+                <view class="weui-media-box__hd">
+                  <image class="weui-media-box__thumb" style="width:40px;height:40px;margin-right:10px;" src="{{item.user.avatar_url}}" alt=""></image>
+                </view>
+                <view class="weui-media-box__bd">
+                  <h4 class="weui-media-box__title">{{item.user.name}}</h4>
+                  <p class="weui-media-box__desc">{{item.body}}</p>
+                </view>
+              </view>
+            </block>
+          </view>
+        </view>
+      </block>
+      <view wx:if="{{comments.length==0}}" style="text-align:center;padding-top:100px;">
+        <image src="../../res/image/alert.png" style="width:100px;height:100px;"></image>
+        <view style="font-size:16px;color:#999;margin-top:20px;">没有查询到数据</view>
+      </view>
+    </block>
+    <view class="addCommentBox" wx:if="{{issueFormShow}}" bindtap="hideAddForm">
+      <view class="addCommentForm">
+        <view class="weui-cells__title" style="margin-left:10px;font-size:16px;"></view>
+        <form bindsubmit="doCommentFormSubmit" bindreset="formReset">
+          <view class="weui-cells weui-cells_form">
+            <view class="weui-cell">
+              <view class="weui-cell__bd">
+                <textarea catchtap="nothing" name="body" class="weui-textarea" placeholder="请填写对这条Issue的评论" rows="2" value=""></textarea>
+              </view>
+            </view>
+          </view>
+          <view class="demos-content-padded" style="padding:0px 10px;">
+            <button form-type="submit" class="weui-btn weui-btn_primary" type="primary">
+              发布评论
+            </button>
+          </view>
+        </form>
+      </view>
+    </view>
+  </view>
+</view>

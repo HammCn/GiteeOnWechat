@@ -411,6 +411,7 @@ Page({
       data: {
         access_token: app.access_token,
         per_page: 5,
+        direction: "desc",
         method: 'get'
       },
       success: function (result) {
