@@ -1,6 +1,6 @@
 {
   "usingComponents": {},
   "navigationStyle": "default",
-  "navigationBarTitleText": "Issue详情",
+  "navigationBarTitleText": "Pull Requests",
   "enablePullDownRefresh": true
 }

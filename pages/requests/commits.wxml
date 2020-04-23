@@ -1,0 +1,33 @@
+<wxs src="../../utils/timeHelper.wxs" module="timeHelper" />
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+  <view class="page__bd">
+      <block wx:if="{{commitList.length>0}}">
+      <view class="weui-cells__title">
+        该Pull Requests中的Commit记录
+      </view>
+        <view class="weui-panel weui-panel_access">
+          <view class="weui-panel__bd">
+            <navigator wx:for="{{commitList}}" wx:key="item" hover-class="navigator-hover" url="../commits/detail?path={{path}}&namespace={{namespace}}&hash={{item.sha}}">
+              <view class="weui-media-box weui-media-box_appmsg">
+                <view class="weui-media-box__bd">
+                  <h4 class="weui-media-box__title">{{item.commit.message}}</h4>
+                  <p class="weui-media-box__desc">
+                    <view>
+                      <span style="font-size:14px;color:#999;margin-right:5px;">
+                        {{timeHelper.parse(item.commit.committer.date)}}
+                      </span>
+                    </view>
+                    <view> 由 {{item.author.name}} ({{item.commit.committer.email}}) 提交</view>
+                  </p>
+                </view>
+              </view>
+            </navigator>
+          </view>
+        </view>
+      </block>
+    <view wx:if="{{commitList.length==0}}" style="text-align:center;padding-top:100px;">
+      <image src="../../res/image/alert.png" style="width:100px;height:100px;"></image>
+      <view style="font-size:16px;color:#999;margin-top:20px;">正在查询提交记录</view>
+    </view>
+  </view>
+</view>

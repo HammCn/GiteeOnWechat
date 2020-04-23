@@ -1,0 +1,75 @@
+.searchbox {
+  margin: 10px;
+  border-radius: 10px;
+  background-color: white;
+}
+
+.weui-flex {
+  line-height: 1;
+  padding: 10px 0px;
+  margin: 0 !important;
+  border-radius: 0;
+  background-color: transparent;
+  border-top: 1px solid #f5f5f5;
+}
+
+.icon-search {
+  font-size: 30px;
+  margin-right: 5px;
+}
+
+.badge {
+  padding: 1px 3px;
+  border: 1px solid #999;
+  color: #999;
+  border-radius: 3px;
+  font-size: 12px;
+  margin-right: 3px;
+}
+.badge-title {
+  padding: 1px 3px;
+  border: 1px solid #999;
+  color: #999;
+  border-radius: 3px;
+  font-size: 14px;
+  margin-right: 3px;
+}
+.badge-orangered {
+  border: 1px solid orangered;
+  color: orangered;
+}
+.badge-green {
+  border: 1px solid green;
+  color: green;
+}
+.badge-yellow {
+  border: 1px solid orange;
+  color: orange;
+}
+.badge-blue {
+  border: 1px solid blue;
+  color: blue;
+}
+
+.floatRight .iconfont {
+  float: right;
+  color: #999;
+  font-size: 14px;
+  margin-left: 5px;
+}
+.addCommentBox{
+  z-index: 100;
+  position:fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom:0;
+  background-color:#f5f5f5;
+}
+.addCommentForm{
+  position:fixed;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  padding-bottom: calc(env(safe-area-inset-bottom)/2);
+}

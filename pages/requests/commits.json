@@ -1,6 +1,6 @@
 {
   "usingComponents": {},
   "navigationStyle": "default",
-  "navigationBarTitleText": "Issue详情",
+  "navigationBarTitleText": "PR提交记录",
   "enablePullDownRefresh": true
 }

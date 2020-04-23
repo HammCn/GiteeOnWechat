@@ -24,7 +24,7 @@ button::after {
 }
 
 .top {
-  margin-top: 60px;
+  margin-top: 20%;
   margin-bottom: 0px;
 }
 

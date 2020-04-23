@@ -69,8 +69,6 @@ Page({
     var that = this;
     app.getUserInfo(function (result) {
       wx.hideLoading();
-      console.log(result);
-
       if (result) {
         that.setData({
           userInfo: app.userInfo,

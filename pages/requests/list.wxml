@@ -1,0 +1,62 @@
+<wxs src="../../utils/timeHelper.wxs" module="timeHelper" />
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+  <view class="page__bd">
+    <view class="searchbox">
+      <view class="weui-flex">
+        <view class="weui-flex__item" bindtap="stateChanged" mark:state="all">所有的</view>
+        <view class="weui-flex__item" bindtap="stateChanged" mark:state="open">已开启</view>
+        <view class="weui-flex__item" bindtap="stateChanged" mark:state="closed">已关闭</view>
+        <view class="weui-flex__item" bindtap="stateChanged" mark:state="merged">已合并</view>
+      </view>
+    </view>
+    <block wx:if="{{list.length>0}}">
+      <view wx:for="{{list}}" wx:key="item" hover-class="navigator-hover" bindtap="showMenu" mark:repo="{{item.repository}}" mark:user="{{item.user}}" mark:state="{{item.state}}" mark:mergeable="{{item.mergeable}}" mark:number="{{item.number}}">
+        <view class="weui-panel">
+          <view class="weui-panel__bd">
+            <view class="weui-media-box weui-media-box_text" style="backround-color:#f5f5f5;">
+              <view class="weui-media-box__title weui-media-box__title_in-text">
+                <span class="badge-title badge-orangered" wx:if="{{!item.mergeable}}">有冲突</span>
+                <span class="badge-title badge-yellow" wx:if="{{item.mergeable && item.state=='open'}}">已开启</span>
+                <span class="badge-title badge-title" wx:if="{{item.mergeable && item.state=='closed'}}">已关闭</span>
+                <span class="badge-title badge-green" wx:if="{{item.mergeable && item.state=='merged'}}">已合并</span>
+                {{item.title}}
+              </view>
+              <view style="margin-bottom:5px;font-size:14px;color:#999;">
+                {{timeHelper.parse(item.created_at)}}　<span class="badge">{{item.head.label}}</span><span style="font-size: 14px;border: 1px solid #fff;font-size: 12px;display: ;margin-right: 5px;">合并到</span><span class="badge">{{item.base.label}}</span>
+              </view>
+              <view style="font-size:14px;color:#999;">{{item.user.name}}: {{item.body?item.body:"暂无描述"}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+    <view wx:if="{{list.length==0}}" style="text-align:center;padding-top:100px;">
+      <image src="../../res/image/alert.png" style="width:100px;height:100px;"></image>
+      <view style="font-size:16px;color:#999;margin-top:20px;">没有查询到数据</view>
+    </view>
+    <view class="addCommentBox" wx:if="{{issueFormShow}}" bindtap="hideAddForm">
+      <view class="addCommentForm">
+        <view class="weui-cells__title" style="margin-left:10px;font-size:16px;"></view>
+        <form bindsubmit="doCommentFormSubmit" bindreset="formReset">
+          <view class="weui-cells weui-cells_form">
+            <view class="weui-cell">
+              <view class="weui-cell__bd">
+                <input catchtap="nothing" class="weui-input" name="title" type="text" placeholder="请简单描述问题" value="" auto-focus="true"></input>
+              </view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">
+                <textarea catchtap="nothing" name="body" confirm-type="search" class="weui-textarea" placeholder="请尽可能让仓库管理者明确你的需求" rows="2" value=""></textarea>
+              </view>
+            </view>
+          </view>
+          <view class="demos-content-padded" style="padding:0px 10px;">
+            <button form-type="submit" class="weui-btn weui-btn_primary" type="primary">
+              发布Issue
+            </button>
+          </view>
+        </form>
+      </view>
+    </view>
+  </view>
+</view>

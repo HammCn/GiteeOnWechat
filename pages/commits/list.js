@@ -29,7 +29,7 @@ Page({
     } else {
       wx.showModal({
         title: '参数错误',
-        content: '系统发生错误，无法为你读取评论',
+        content: '系统发生错误，无法为你读取数据',
         showCancel: false,
         success(res) {
           wx.navigateBack();

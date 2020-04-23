@@ -35,7 +35,7 @@
 				</view>
 			</view>
 		</view>
-		<view class="weui-cells">
+		<!-- <view class="weui-cells">
 			<navigator class="weui-cell weui-cell_access" hover-class="app_hover" url="../repos/search">
 				<view class="weui-cell__bd">
 					<view style="color:#999;">输入关键词搜索开源仓库</view>
@@ -43,19 +43,13 @@
 				<view class="weui-cell__ft">
 					<i class="item iconfont icon-sousuo5"></i></view>
 			</navigator>
-		</view>
-		<view class="weui-grids">
+		</view> -->
+		<view class="weui-grids" style="margin-top:30px;">
 			<navigator url="../repos/list" class="weui-grid" hover-class="weui-grid_active">
 				<view>
 					<i class="weui-grid__icon item iconfont icon-rili33"></i>
 				</view>
 				<view class="weui-grid__label">我的仓库</view>
-			</navigator>
-			<navigator url="" class="weui-grid" hover-class="weui-grid_active" bindtap="comming">
-				<view>
-					<i class="weui-grid__icon item iconfont icon-changyongtubiao-xianxingdaochu-zhuanqu-1"></i>
-				</view>
-				<view class="weui-grid__label">Pull Requests</view>
 			</navigator>
 			<navigator url="../issues/list" class="weui-grid" hover-class="weui-grid_active">
 				<view>
@@ -75,6 +69,12 @@
 				</view>
 				<view class="weui-grid__label">关注仓库</view>
 			</view>
+			<navigator url="../repos/search" class="weui-grid" hover-class="weui-grid_active">
+				<view>
+					<i class="weui-grid__icon item iconfont icon-sousuo5"></i>
+				</view>
+				<view class="weui-grid__label">搜索开源</view>
+			</navigator>
 			<view bindtap="showMyFriends" class="weui-grid" hover-class="weui-grid_active">
 				<view>
 					<i class="weui-grid__icon item iconfont icon-icon_group"></i>
@@ -101,6 +101,9 @@
 				</view>
 				<view class="weui-grid__label">系统设置</view>
 			</view>
+		</view>
+		<view class="weui-footer" style="z-index:9999">
+			<view class="weui-footer__text">本服务由Hamm提供 非码云官方服务</view>
 		</view>
 	</view>
 </view>
