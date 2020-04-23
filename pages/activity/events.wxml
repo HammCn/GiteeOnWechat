@@ -34,6 +34,13 @@
                                   <view><span style="color:#333">{{item.payload.title}}</span></view>
                                 </view>
                             </block>
+                            <block wx:if="{{item.payload.action=='opened'}}">
+                                <view class="weui-media-box__title">创建了Pull Request</view>
+                                <view style="font-size:14px;color:#999;">
+                                  <view><span style="color:#333;">{{item.actor.name}}</span> 创建了 <span style="color:#333">{{item.repo.human_name}}</span> 的Pull Request</view>
+                                  <view><span style="color:#333">{{item.payload.title}}</span></view>
+                                </view>
+                            </block>
                         </view>
                         
                         <view wx:if="{{item.type=='IssueEvent'}}">
@@ -89,15 +96,21 @@
                         </view>
                         <view wx:if="{{item.type=='MemberEvent'}}">
                             <block wx:if="{{item.payload.action=='be deleted'}}">
-                                <view class="weui-media-box__title" >被团队抛弃</view>
+                                <view class="weui-media-box__title" >离开仓库</view>
                                 <view style="font-size:14px;color:#999;">
                                 <view><span style="color:#333">{{item.payload.name}}</span> 将 <span style="color:#333">{{item.actor.name}}</span> 从 <span style="color:#333">{{item.repo.human_name}}</span> 移除</view>
                                 </view>
                             </block>
                             <block wx:if="{{item.payload.action=='deleted'}}">
-                                <view class="weui-media-box__title" >移除团队成员</view>
+                                <view class="weui-media-box__title" >移除仓库成员</view>
                                 <view style="font-size:14px;color:#999;">
                                 <view><span style="color:#333">{{item.actor.name}}</span> 将 <span style="color:#333">{{item.payload.name}}</span> 从 <span style="color:#333">{{item.repo.human_name}}</span> 移除</view>
+                                </view>
+                            </block>
+                            <block wx:if="{{item.payload.action=='added'}}">
+                                <view class="weui-media-box__title" >加入了仓库</view>
+                                <view style="font-size:14px;color:#999;">
+                                <view><span style="color:#333">{{item.actor.name}}</span> 加入了仓库 <span style="color:#333">{{item.repo.human_name}}</span></view>
                                 </view>
                             </block>
                         </view>
