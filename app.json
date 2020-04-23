@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/activity/events",
     "pages/activity/notifications",
     "pages/activity/mails",
     "pages/user/login",
@@ -8,7 +9,6 @@
     "pages/user/following",
     "pages/user/key",
     "pages/user/detail",
-    "pages/activity/events",
     "pages/repos/list",
     "pages/repos/detail",
     "pages/repos/search",

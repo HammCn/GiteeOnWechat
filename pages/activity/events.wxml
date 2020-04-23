@@ -5,9 +5,8 @@
       <block wx:for="{{list}}" wx:key="item">
         <view class="weui-panel weui-panel_access"  wx:if="{{item.type && item.payload}}">
             <view class="weui-panel__bd">
-                <view class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active" mark:repo="{{item.repo.full_name}}"  mark:login="{{item.actor.login}}" bindtap="itemClick">
+                <view class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active" mark:repo="{{item.repo.full_name}}"  mark:login="{{item.actor.login}}" bindtap="itemClick" mark:type="{{item.type}}" mark:payload="{{item.payload}}">
                 <view style="position:absolute;right:15px;top:15px;color:#999;font-size:14px;">
-
                     {{timeHelper.parse(item.created_at)}}</view>
                     <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
                         <view  wx:if="{{item.type=='PushEvent'}}">

@@ -11,7 +11,6 @@ Page({
     list: [],
     type: 'mine',
     login: ""
-
   },
   /**
    * 生命周期函数--监听页面加载
@@ -86,19 +85,56 @@ Page({
     } else {
       menuList = ['进入仓库'];
     }
+    // console.log(e.mark.type);
+    // console.log(e.mark.payload);
+    switch (e.mark.type) {
+      case 'PushEvent':
+        menuList.push('查看提交');
+        break;
+      case 'IssueCommentEvent':
+        menuList.push('查看Issue评论');
+        break;
+      case 'IssueEvent':
+        menuList.push('查看Issue');
+        break;
+      case 'PullRequestEvent':
+        menuList.push('查看PullRequest');
+        break;
+      default:
+    }
     var pathArray = e.mark.repo.split('/');
     wx.showActionSheet({
       itemList: menuList,
       success: function (res) {
-        switch (res.tapIndex) {
-          case 0:
+        switch (menuList[res.tapIndex]) {
+          case "进入仓库":
             wx.navigateTo({
               url: '../repos/detail?namespace=' + pathArray[0] + "&path=" + pathArray[1],
             })
             break;
-          case 1:
+          case "用户信息":
             wx.navigateTo({
               url: '../user/detail?login=' + e.mark.login,
+            })
+            break;
+          case "查看提交":
+            wx.navigateTo({
+              url: '../commits/detail?hash=' + e.mark.payload.before + '&namespace=' + pathArray[0] + "&path=" + pathArray[1],
+            })
+            break;
+          case "查看Issue评论":
+            wx.navigateTo({
+              url: '../issues/detail?number=' + e.mark.payload.issue.number + '&namespace=' + pathArray[0] + "&path=" + pathArray[1],
+            })
+            break;
+          case "查看Issue":
+            wx.navigateTo({
+              url: '../issues/detail?number=' + e.mark.payload.number + '&namespace=' + pathArray[0] + "&path=" + pathArray[1],
+            })
+            break;
+          case "查看PullRequest":
+            wx.navigateTo({
+              url: '../requests/commits?number=' + e.mark.payload.number + '&namespace=' + pathArray[0] + "&path=" + pathArray[1],
             })
             break;
           default:
