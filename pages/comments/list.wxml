@@ -9,7 +9,7 @@
                             <span style="position:absolute;right:15px;top:15px;color:#999;font-size:14px;">
                                 {{timeHelper.parse(item.created_at)}}
                             </span>
-                            <view class="weui-media-box__hd">f
+                            <view class="weui-media-box__hd">
                                 <image class="weui-media-box__thumb" style="width:40px;height:40px;margin-right:10px;" src="{{item.user.avatar_url}}" alt=""></image>
                             </view>
                             <view class="weui-media-box__bd">
