@@ -177,9 +177,19 @@ Page({
         that.isGetingData = false;
         wx.hideLoading();
         wx.stopPullDownRefresh();
-        that.setData({
-          comments: result.data
-        });
+        if (that.data.page == 1) {
+          that.setData({
+            comments: result.data
+          });
+        } else {
+          var _list = that.data.comments;
+          for (var i = 0; i < result.data.length; i++) {
+            _list.push(result.data[i]);
+          }
+          that.setData({
+            comments: _list
+          });
+        }
       }
     });
   },

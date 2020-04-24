@@ -111,7 +111,7 @@
                   </view>
                   <view class="weui-media-box__bd">
                     <h4 class="weui-media-box__title">{{item.user.name}}</h4>
-                    <p class="weui-media-box__desc">{{item.body}}</p>
+                    <p style="font-size:14px;color:#999;">{{item.body}}</p>
                   </view>
                 </view>
               </block>
