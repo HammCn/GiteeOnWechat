@@ -75,7 +75,7 @@ Page({
       url: app.config.apiUrl + "api/v5/search/repositories",
       method: "POST",
       data: {
-        access_token: app.access_token,
+        // access_token: app.access_token,
         q: that.data.keyword,
         page: that.data.page,
         method: 'get'
@@ -84,6 +84,7 @@ Page({
         that.isGetingData = false;
         wx.hideLoading();
         wx.stopPullDownRefresh();
+        console.log(result)
         if (result.data.hasOwnProperty("message")) {
           wx.showModal({
             title: '获取失败',
