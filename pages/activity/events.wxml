@@ -57,6 +57,13 @@
                                 <view><span style="color:#333">{{item.payload.title}}</span></view>
                                 </view>
                             </block>
+                            <block wx:if="{{item.payload.action=='progressing'}}">
+                                <view class="weui-media-box__title" >更改Issue为进行中</view>
+                                <view style="font-size:14px;color:#999;">
+                                <view ><span style="color:#333">{{item.actor.name}}</span> 更改了Issue <span style="color:#333">{{item.repo.human_name}}</span> 为进行中</view>
+                                <view><span style="color:#333">{{item.payload.title}}</span></view>
+                                </view>
+                            </block>
                             <block wx:if="{{item.payload.action=='rejected'}}">
                                 <view class="weui-media-box__title" >拒绝了Issue</view>
                                 <view style="font-size:14px;color:#999;">
