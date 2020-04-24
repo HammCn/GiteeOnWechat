@@ -37,15 +37,7 @@ Page({
       title: app.product.name,
     });
     const updateManager = wx.getUpdateManager()
-    updateManager.onCheckForUpdate(function (res) {
-      if (res.hasUpdate) {
-        wx.showLoading({
-          title: '正在更新中',
-        });
-      }
-    });
     updateManager.onUpdateReady(function () {
-      wx.hideLoading();
       wx.showModal({
         title: '版本更新',
         content: '你已经更新至最新版本，请点击确定重启最新版本',

@@ -30,7 +30,7 @@
           <view class="weui-cells weui-cells_form">
             <view class="weui-cell">
               <view class="weui-cell__bd">
-                <textarea auto-focus="true" catchtap="nothing" name="key" maxlength="1000" class="weui-textarea" placeholder="请粘贴你的公钥到这里" rows="2" value=""></textarea>
+                <textarea focus="true" catchtap="nothing" name="key" maxlength="1000" class="weui-textarea" placeholder="请粘贴你的公钥到这里" rows="2" value=""></textarea>
               </view>
             </view>
           </view>

@@ -16,26 +16,24 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function () {},
-  searchTimer: null,
   search: function (e) {
-    var that = this;
     this.setData({
       keyword: e.detail.value,
     });
-    clearTimeout(this.searchTimer);
-    this.searchTimer = setTimeout(function () {
-      that.getList(false);
-    }, 1000);
+    this.getList();
   },
   /**
    * 页面显示事件
    */
   onShow: function () {
-    app.getUserInfo(function (result) {
-      if (!result) {
-        app.loginFirst();
-      }
-    });
+    // app.getUserInfo(function (result) {
+    //   if (!result) {
+    //     app.loginFirst();
+    //   }
+    // });
+    if (this.data.keyword) {
+      this.getList(false);
+    }
   },
   /**
    * 下拉刷新事件

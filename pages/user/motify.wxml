@@ -9,7 +9,7 @@
 						<view class="weui-label">昵称</view>
 					</view>
 					<view class="weui-cell__bd">
-						<input class="weui-input" type="text" placeholder="你为自己起的牛逼昵称" value="{{userInfo.name}}" name="name" auto-focus />
+						<input class="weui-input" type="text" placeholder="你为自己起的牛逼昵称" value="{{userInfo.name}}" name="name" focus />
 					</view>
 				</view>
 				<view class="weui-cell weui-cell_input">

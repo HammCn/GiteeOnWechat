@@ -119,7 +119,7 @@ Page({
             break;
           case "查看提交":
             wx.navigateTo({
-              url: '../commits/detail?hash=' + e.mark.payload.before + '&namespace=' + pathArray[0] + "&path=" + pathArray[1],
+              url: '../commits/detail?hash=' + e.mark.payload.after + '&namespace=' + pathArray[0] + "&path=" + pathArray[1],
             })
             break;
           case "查看Issue评论":

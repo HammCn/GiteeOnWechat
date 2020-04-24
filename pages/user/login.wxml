@@ -9,7 +9,7 @@
             <view class="weui-label">帐号</view>
           </view>
           <view class="weui-cell__bd">
-            <input class="weui-input" placeholder="码云帐号邮箱/手机" type="email" value="{{user_name}}" name="username" auto-focus />
+            <input class="weui-input" placeholder="码云帐号邮箱/手机" type="email" value="{{user_name}}" name="username" focus />
           </view>
         </view>
         <view class="weui-cell weui-cell_input">
@@ -32,7 +32,7 @@
           <view class="weui-cells weui-cells_after-title">
             <view class="weui-cell">
               <view class="weui-cell__bd">
-                <textarea style="height:80px" catchtap="nothing" name="personal_token" class="weui-textarea" placeholder="请粘贴你在码云后台的私人令牌，请选择所有的权限" rows="2" value="{{personal_token}}"></textarea>
+                <textarea style="height:80px" catchtap="nothing" name="personal_token" class="weui-textarea" placeholder="请粘贴你在码云后台的私人令牌，尽可能选择你需要使用的权限，我们更推荐使用此方式登录" rows="2" value="{{personal_token}}"></textarea>
               </view>
             </view>
           </view>
