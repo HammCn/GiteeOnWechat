@@ -21,14 +21,12 @@ App({
    */
   getUserInfo: function (callback) {
     var that = this;
-    var access_token = wx.getStorageSync("access_token");
-    if (access_token) {
-      that.access_token = access_token;
+    if (that.access_token) {
       wx.request({
         url: that.config.apiUrl + "api/v5/user",
         method: "POST",
         data: {
-          access_token: access_token,
+          access_token: that.access_token,
           method: 'get'
         },
         success: function (result) {
@@ -41,8 +39,12 @@ App({
         }
       });
     } else {
-      this.access_token = null;
-      callback(false);
+      that.access_token = wx.getStorageSync("access_token");
+      if (that.access_token) {
+        that.getUserInfo(callback);
+      } else {
+        callback(false);
+      }
     }
   },
   /**
