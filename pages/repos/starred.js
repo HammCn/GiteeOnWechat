@@ -75,10 +75,12 @@ Page({
                   var url = app.config.apiUrl + "api/v5/user/starred/" + e.mark.namespace + "/" + e.mark.path;
                   wx.request({
                     url: url,
-                    method: "POST",
+                    method: "DELETE",
+                    header: {
+                      "content-type": "application/x-www-form-urlencoded"
+                    },
                     data: {
-                      access_token: app.access_token,
-                      method: 'delete'
+                      access_token: app.access_token
                     },
                     success: function (result) {
                       wx.hideLoading();
@@ -119,11 +121,10 @@ Page({
     that.isGetingData = true;
     wx.request({
       url: app.config.apiUrl + "api/v5/user/starred",
-      method: "POST",
+      method: "GET",
       data: {
         access_token: app.access_token,
         page: that.data.page,
-        method: 'get'
       },
       success: function (result) {
         that.isGetingData = false;

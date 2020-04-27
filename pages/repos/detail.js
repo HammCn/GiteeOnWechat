@@ -67,10 +67,9 @@ Page({
     }
     wx.request({
       url: app.config.apiUrl + "api/v5/repos/" + that.data.namespace + "/" + that.data.path,
-      method: "POST",
+      method: "GET",
       data: {
         access_token: app.access_token,
-        method: 'get'
       },
       success: function (result) {
         if (result.data.hasOwnProperty("id")) {
@@ -98,10 +97,9 @@ Page({
     var that = this;
     wx.request({
       url: app.config.apiUrl + "api/v5/user/starred/" + that.data.namespace + "/" + that.data.path,
-      method: "POST",
+      method: "GET",
       data: {
         access_token: app.access_token,
-        method: 'get'
       },
       success: function (result) {
         var isStarred = false;
@@ -115,10 +113,9 @@ Page({
         });
         wx.request({
           url: app.config.apiUrl + "api/v5/user/subscriptions/" + that.data.namespace + "/" + that.data.path,
-          method: "POST",
+          method: "GET",
           data: {
             access_token: app.access_token,
-            method: 'get'
           },
           success: function (result) {
             var isWatched = false;
@@ -142,10 +139,12 @@ Page({
     });
     wx.request({
       url: app.config.apiUrl + "api/v5/user/starred/" + that.data.namespace + "/" + that.data.path,
-      method: "POST",
+      method: "PUT",
+      header: {
+        "content-type": "application/x-www-form-urlencoded"
+      },
       data: {
         access_token: app.access_token,
-        method: 'put'
       },
       success: function (result) {
         wx.hideLoading();
@@ -175,10 +174,12 @@ Page({
     });
     wx.request({
       url: app.config.apiUrl + "api/v5/user/starred/" + that.data.namespace + "/" + that.data.path,
-      method: "POST",
+      method: "DELETE",
+      header: {
+        "content-type": "application/x-www-form-urlencoded"
+      },
       data: {
         access_token: app.access_token,
-        method: 'delete'
       },
       success: function (result) {
         wx.hideLoading();
@@ -208,11 +209,13 @@ Page({
     });
     wx.request({
       url: app.config.apiUrl + "api/v5/user/subscriptions/" + that.data.namespace + "/" + that.data.path,
-      method: "POST",
+      method: "PUT",
+      header: {
+        "content-type": "application/x-www-form-urlencoded"
+      },
       data: {
         access_token: app.access_token,
         watch_type: 'watching',
-        method: 'put'
       },
       success: function (result) {
         wx.hideLoading();
@@ -242,11 +245,13 @@ Page({
     });
     wx.request({
       url: app.config.apiUrl + "api/v5/user/subscriptions/" + that.data.namespace + "/" + that.data.path,
-      method: "POST",
+      method: "DELETE",
+      header: {
+        "content-type": "application/x-www-form-urlencoded"
+      },
       data: {
         access_token: app.access_token,
         watch_type: 'watching',
-        method: 'delete'
       },
       success: function (result) {
         wx.hideLoading();
@@ -283,11 +288,10 @@ Page({
     }
     wx.request({
       url: app.config.apiUrl + "api/v5/repos/" + that.data.namespace + "/" + that.data.path + "/readme",
-      method: "POST",
+      method: "GET",
       data: {
         access_token: app.access_token,
         extend: "readme",
-        method: 'get'
       },
       success: function (result) {
         if (result.data.hasOwnProperty("content")) {
@@ -340,11 +344,10 @@ Page({
     }
     wx.request({
       url: app.config.apiUrl + "api/v5/repos/" + that.data.namespace + "/" + that.data.path + "/branches",
-      method: "POST",
+      method: "GET",
       data: {
         access_token: app.access_token,
         ref: that.data.branch,
-        method: 'get'
       },
       success: function (result) {
         if (!result.data.hasOwnProperty("message")) {
@@ -373,12 +376,11 @@ Page({
     }
     wx.request({
       url: app.config.apiUrl + "api/v5/repos/" + that.data.namespace + "/" + that.data.path + "/commits",
-      method: "POST",
+      method: "GET",
       data: {
         access_token: app.access_token,
         sha: that.data.branch,
         per_page: 5,
-        method: 'get'
       },
       success: function (result) {
         if (!result.data.hasOwnProperty("message")) {
@@ -407,12 +409,11 @@ Page({
     }
     wx.request({
       url: app.config.apiUrl + "api/v5/repos/" + that.data.namespace + "/" + that.data.path + "/comments",
-      method: "POST",
+      method: "GET",
       data: {
         access_token: app.access_token,
         per_page: 5,
         direction: "desc",
-        method: 'get'
       },
       success: function (result) {
         if (!result.data.hasOwnProperty("message")) {

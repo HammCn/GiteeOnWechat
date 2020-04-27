@@ -8,8 +8,10 @@ App({
     iPhoneX: 0
   },
   config: {
-    apiUrl: "https://gitee.hamm.cn/", //通用API地址
+    apiUrl: "https://gitee.com/", //通用API地址
     codeForLogin: 401,
+    client_id: "76acfc92debd9a2ddf8e8f224aa2be8e2b799b95d6200026447ac955c906042d",
+    client_secret: "1f94a7102a01bae7774a8ee3a00f54b9c4e33f5b5c51f34aee5847e6d57f8823",
     codeForSuccess: 200
   },
   access_token: null,
@@ -24,10 +26,9 @@ App({
     if (that.access_token) {
       wx.request({
         url: that.config.apiUrl + "api/v5/user",
-        method: "POST",
+        method: "GET",
         data: {
           access_token: that.access_token,
-          method: 'get'
         },
         success: function (result) {
           if (result.data.hasOwnProperty('id')) {

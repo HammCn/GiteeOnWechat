@@ -12,17 +12,17 @@ Page({
     filter_value: "all",
     filter_name: "我全部的",
     filterList: [{
-      "filter_name": "我全部的",
-      "filter_value": "all"
-    },
-    {
-      "filter_name": "我创建的",
-      "filter_value": "created"
-    },
-    {
-      "filter_name": "我负责的",
-      "filter_value": "assigned"
-    }
+        "filter_name": "我全部的",
+        "filter_value": "all"
+      },
+      {
+        "filter_name": "我创建的",
+        "filter_value": "created"
+      },
+      {
+        "filter_name": "我负责的",
+        "filter_value": "assigned"
+      }
     ],
     state_value: "all",
     state_name: "所有进程",
@@ -45,24 +45,24 @@ Page({
     order_value: "desc",
     order_name: "倒序排列",
     orderList: [{
-      order_value: "desc",
-      order_name: "倒序排列",
-    },
-    {
-      order_value: "asc",
-      order_name: "升序排列",
-    }
+        order_value: "desc",
+        order_name: "倒序排列",
+      },
+      {
+        order_value: "asc",
+        order_name: "升序排列",
+      }
     ],
     sort_value: "created",
     sort_name: "创建时间",
     sortList: [{
-      sort_value: "created",
-      sort_name: "创建时间",
-    },
-    {
-      sort_value: "updated",
-      sort_name: "更新时间",
-    }
+        sort_value: "created",
+        sort_name: "创建时间",
+      },
+      {
+        sort_value: "updated",
+        sort_name: "更新时间",
+      }
     ],
     //分页开始
     page: 1,
@@ -99,11 +99,13 @@ Page({
     wx.request({
       url: app.config.apiUrl + "api/v5/repos/" + that.data.namespace + "/issues",
       method: "POST",
+      header: {
+        "content-type": "application/x-www-form-urlencoded"
+      },
       data: {
         ...{
           access_token: app.access_token,
           repo: that.data.path,
-          method: 'post'
         },
         ...e.detail.value
       },
@@ -226,11 +228,14 @@ Page({
                 wx.request({
                   url: app.config.apiUrl + "api/v5/repos/" + e.mark.repo.namespace.path + "/issues/" + e.mark.number,
                   method: "POST",
+                  header: {
+                    "content-type": "application/x-www-form-urlencoded"
+                  },
                   data: {
                     access_token: app.access_token,
                     state: stateList[res.tapIndex],
                     repo: e.mark.repo.path,
-                    method: 'PATCH'
+                    _method: 'PATCH'
                   },
                   success: function (result) {
                     wx.hideLoading();
@@ -245,6 +250,31 @@ Page({
                     }
                   }
                 });
+              }
+            });
+            break;
+          case 4:
+            wx.request({
+              url: app.config.apiUrl + "api/v5/repos/" + e.mark.repo.namespace.path + "/issues/" + e.mark.number,
+              method: "DELETE",
+              header: {
+                "content-type": "application/x-www-form-urlencoded"
+              },
+              data: {
+                access_token: app.access_token,
+                repo: e.mark.repo.path,
+              },
+              success: function (result) {
+                wx.hideLoading();
+                if (result.data.hasOwnProperty("message")) {
+                  wx.showModal({
+                    title: '更改失败',
+                    content: "你可能没有权限变更这个Issue的状态",
+                    showCancel: false,
+                  });
+                } else {
+                  that.getList();
+                }
               }
             });
             break;
@@ -279,7 +309,6 @@ Page({
       sort: that.data.sort_value,
       direction: that.data.order_value,
       page: that.data.page,
-      method: 'get'
     };;
     switch (that.data.type) {
       case 'repo':
@@ -290,7 +319,6 @@ Page({
             sort: that.data.sort_value,
             direction: that.data.order_value,
             page: that.data.page,
-            method: 'get'
           };
         } else {
           postData = {
@@ -299,7 +327,6 @@ Page({
             sort: that.data.sort_value,
             direction: that.data.order_value,
             page: that.data.page,
-            method: 'get'
           };
         }
         break;
@@ -308,7 +335,7 @@ Page({
     that.isGetingData = true;
     wx.request({
       url: url,
-      method: "POST",
+      method: "GET",
       data: postData,
       success: function (result) {
         that.isGetingData = false;

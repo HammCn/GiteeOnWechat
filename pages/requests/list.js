@@ -115,10 +115,12 @@ Page({
                   });
                   wx.request({
                     url: app.config.apiUrl + "api/v5/repos/" + that.data.namespace + "/" + that.data.path + "/pulls/" + e.mark.number + "/merge",
-                    method: "POST",
+                    method: "PUT",
+                    header: {
+                      "content-type": "application/x-www-form-urlencoded"
+                    },
                     data: {
                       access_token: app.access_token,
-                      method: 'put'
                     },
                     success: function (result) {
                       wx.hideLoading();
@@ -174,12 +176,11 @@ Page({
       access_token: app.access_token,
       state: that.data.state_value,
       page: that.data.page,
-      method: 'get'
     };
     that.isGetingData = true;
     wx.request({
       url: url,
-      method: "POST",
+      method: "GET",
       data: postData,
       success: function (result) {
         that.isGetingData = false;

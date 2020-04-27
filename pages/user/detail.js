@@ -71,11 +71,7 @@ Page({
     }
     wx.request({
       url: app.config.apiUrl + "api/v5/users/" + that.data.login,
-      method: "POST",
-      data: {
-        access_token: app.access_token,
-        method: 'get'
-      },
+      method: "GET",
       success: function (result) {
         wx.hideLoading();
         wx.stopPullDownRefresh();
@@ -106,10 +102,12 @@ Page({
     });
     wx.request({
       url: app.config.apiUrl + "api/v5/user/following/" + that.data.login,
-      method: "POST",
+      method: "PUT",
+      header: {
+        "content-type": "application/x-www-form-urlencoded"
+      },
       data: {
         access_token: app.access_token,
-        method: 'put'
       },
       success: function (result) {
         wx.hideLoading();
@@ -137,10 +135,9 @@ Page({
     var that = this;
     wx.request({
       url: app.config.apiUrl + "api/v5/user/following/" + that.data.login,
-      method: "POST",
+      method: "GET",
       data: {
-        access_token: app.access_token,
-        method: 'get'
+        access_token: app.access_token
       },
       success: function (result) {
         if (result.data.hasOwnProperty("message")) {

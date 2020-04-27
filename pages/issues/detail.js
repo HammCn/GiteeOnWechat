@@ -41,10 +41,12 @@ Page({
     wx.request({
       url: app.config.apiUrl + "api/v5/repos/" + that.data.namespace + "/" + that.data.path + "/issues/" + that.data.number + "/comments",
       method: "POST",
+      header: {
+        "content-type": "application/x-www-form-urlencoded"
+      },
       data: {
         ...{
           access_token: app.access_token,
-          method: 'post'
         },
         ...e.detail.value
       },
@@ -128,10 +130,9 @@ Page({
     });
     wx.request({
       url: app.config.apiUrl + "api/v5/repos/" + that.data.namespace + "/" + that.data.path + "/issues/" + that.data.number,
-      method: "POST",
+      method: "GET",
       data: {
         access_token: app.access_token,
-        method: 'get'
       },
       success: function (result) {
         if (result.data.hasOwnProperty("number")) {
@@ -166,12 +167,11 @@ Page({
     }
     wx.request({
       url: app.config.apiUrl + "api/v5/repos/" + that.data.namespace + "/" + that.data.path + "/issues/" + that.data.number + "/comments",
-      method: "POST",
+      method: "GET",
       data: {
         access_token: app.access_token,
         page: that.data.page,
         direction: "desc",
-        method: 'get'
       },
       success: function (result) {
         that.isGetingData = false;

@@ -67,11 +67,10 @@ Page({
     var url = app.config.apiUrl + "api/v5/notifications/threads";
     wx.request({
       url: url,
-      method: "POST",
+      method: "GET",
       data: {
         access_token: app.access_token,
         page: that.data.page,
-        method: 'get'
       },
       success: function (result) {
         that.isGetingData = false;
@@ -109,10 +108,12 @@ Page({
     var url = app.config.apiUrl + "api/v5/notifications/threads";
     wx.request({
       url: url,
-      method: "POST",
+      method: "PUT",
+      header: {
+        "content-type": "application/x-www-form-urlencoded"
+      },
       data: {
         access_token: app.access_token,
-        method: 'put'
       }
     });
   },
@@ -137,9 +138,12 @@ Page({
             wx.request({
               url: url,
               method: "POST",
+              header: {
+                "content-type": "application/x-www-form-urlencoded"
+              },
               data: {
                 access_token: app.access_token,
-                method: 'patch'
+                _method: 'patch'
               },
               success: function (result) {
                 wx.hideLoading();

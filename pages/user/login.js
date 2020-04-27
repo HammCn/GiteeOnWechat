@@ -63,6 +63,8 @@ Page({
     var user_name = postData.username;
     wx.setStorageSync('user_name', user_name);
     postData.grant_type = 'password';
+    postData.client_id = app.config.client_id;
+    postData.client_secret = app.config.client_secret;
     postData.scope = 'user_info projects pull_requests issues notes keys hook groups gists enterprises';
     wx.request({
       url: app.config.apiUrl + 'oauth/token',

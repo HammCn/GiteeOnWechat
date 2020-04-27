@@ -87,11 +87,10 @@ Page({
     }
     wx.request({
       url: app.config.apiUrl + "api/v5/repos/" + that.data.namespace + "/" + that.data.path + "/branches",
-      method: "POST",
+      method: "GET",
       data: {
         access_token: app.access_token,
         ref: that.data.branch,
-        method: 'get'
       },
       success: function (result) {
         if (!result.data.hasOwnProperty("message")) {
@@ -134,13 +133,12 @@ Page({
     }
     wx.request({
       url: app.config.apiUrl + "api/v5/repos/" + that.data.namespace + "/" + that.data.path + "/commits",
-      method: "POST",
+      method: "GET",
       data: {
         access_token: app.access_token,
         sha: that.data.branch,
         page: that.data.page,
         per_page: 8,
-        method: 'get'
       },
       success: function (result) {
         wx.stopPullDownRefresh();

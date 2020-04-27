@@ -84,11 +84,10 @@ Page({
     }
     wx.request({
       url: url,
-      method: "POST",
+      method: "GET",
       data: {
         access_token: app.access_token,
-        page: that.data.page,
-        method: 'get'
+        page: that.data.page
       },
       success: function (result) {
         that.isGetingData = false;
@@ -154,10 +153,12 @@ Page({
                     var url = app.config.apiUrl + "api/v5/user/following/" + e.mark.login;
                     wx.request({
                       url: url,
-                      method: "POST",
+                      method: "DELETE",
+                      header: {
+                        "content-type": "application/x-www-form-urlencoded"
+                      },
                       data: {
                         access_token: app.access_token,
-                        method: 'delete'
                       },
                       success: function (result) {
                         wx.hideLoading();

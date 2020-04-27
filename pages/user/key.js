@@ -73,10 +73,12 @@ Page({
                   var url = app.config.apiUrl + "api/v5/user/keys/" + e.mark.id;
                   wx.request({
                     url: url,
-                    method: "POST",
+                    method: "DELETE",
+                    header: {
+                      "content-type": "application/x-www-form-urlencoded"
+                    },
                     data: {
-                      access_token: app.access_token,
-                      method: 'delete'
+                      access_token: app.access_token
                     },
                     success: function (result) {
                       wx.hideLoading();
@@ -117,10 +119,12 @@ Page({
     wx.request({
       url: app.config.apiUrl + "api/v5/user/keys",
       method: "POST",
+      header: {
+        "content-type": "application/x-www-form-urlencoded"
+      },
       data: {
         ...{
           access_token: app.access_token,
-          method: 'post'
         },
         ...{
           key: key,
@@ -173,10 +177,9 @@ Page({
     var url = app.config.apiUrl + "api/v5/user/keys";
     wx.request({
       url: url,
-      method: "POST",
+      method: "GET",
       data: {
         access_token: app.access_token,
-        method: 'get'
       },
       success: function (result) {
         that.isGetingData = false;

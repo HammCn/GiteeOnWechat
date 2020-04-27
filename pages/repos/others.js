@@ -102,12 +102,11 @@ Page({
     }
     wx.request({
       url: url,
-      method: "POST",
+      method: "GET",
       data: {
         access_token: app.access_token,
         q: that.data.keyword,
         page: that.data.page,
-        method: 'get'
       },
       success: function (result) {
         that.isGetingData = false;

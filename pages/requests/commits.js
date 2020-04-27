@@ -69,10 +69,9 @@ Page({
     }
     wx.request({
       url: app.config.apiUrl + "api/v5/repos/" + that.data.namespace + "/" + that.data.path + "/pulls/" + that.data.number + "/commits",
-      method: "POST",
+      method: "GET",
       data: {
         access_token: app.access_token,
-        method: 'get'
       },
       success: function (result) {
         wx.stopPullDownRefresh();

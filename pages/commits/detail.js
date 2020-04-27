@@ -42,10 +42,12 @@ Page({
     wx.request({
       url: app.config.apiUrl + "api/v5/repos/" + that.data.namespace + "/" + that.data.path + "/commits/" + that.data.hash + "/comments",
       method: "POST",
+      header: {
+        "content-type": "application/x-www-form-urlencoded"
+      },
       data: {
         ...{
           access_token: app.access_token,
-          method: 'post'
         },
         ...e.detail.value
       },
@@ -115,10 +117,9 @@ Page({
     });
     wx.request({
       url: app.config.apiUrl + "api/v5/repos/" + that.data.namespace + "/" + that.data.path + "/commits/" + that.data.hash,
-      method: "POST",
+      method: "GET",
       data: {
         access_token: app.access_token,
-        method: 'get'
       },
       success: function (result) {
         wx.hideLoading();

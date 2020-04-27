@@ -133,14 +133,13 @@ Page({
     that.isGetingData = true;
     wx.request({
       url: app.config.apiUrl + "api/v5/user/repos",
-      method: "POST",
+      method: "GET",
       data: {
         access_token: app.access_token,
         type: that.data.type_value,
         sort: that.data.sort_value,
         direction: that.data.order_value,
         page: that.data.page,
-        method: 'get'
       },
       success: function (result) {
         that.isGetingData = false;

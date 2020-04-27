@@ -39,11 +39,13 @@ Page({
     wx.request({
       url: app.config.apiUrl + "api/v5/user",
       method: "POST",
+      header: {
+        "content-type": "application/x-www-form-urlencoded"
+      },
       data: {
         ...{
           access_token: app.access_token,
-          extend: 'motify',
-          method: 'patch'
+          _method: 'patch'
         },
         ...e.detail.value
       },
