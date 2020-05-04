@@ -455,5 +455,6 @@ Page({
         that.getList();
       }
     });
-  }
+  },
+  onShareAppMessage: function (res) {}
 })

@@ -84,11 +84,11 @@ Page({
               url: '../user/motify',
             });
             break;
-            case 1:
-              wx.navigateTo({
-                url: '../about/index',
-              });
-              break;
+          case 1:
+            wx.navigateTo({
+              url: '../about/index',
+            });
+            break;
           case 2:
             var that = this;
             wx.showModal({
@@ -113,20 +113,15 @@ Page({
   },
   showMyActivity: function () {
     wx.showActionSheet({
-      itemList: ['我的动态', '我的通知', '我的私信'],
+      itemList: ['我的通知', '我的私信'],
       success: function (ret) {
         switch (ret.tapIndex) {
           case 0:
             wx.navigateTo({
-              url: '../activity/events',
-            });
-            break;
-          case 1:
-            wx.navigateTo({
               url: '../activity/notifications',
             });
             break;
-          case 2:
+          case 1:
             wx.navigateTo({
               url: '../activity/mails',
             });
@@ -144,7 +139,7 @@ Page({
     }
     return {
       title: "我在码云上发现一个叫" + that.data.userInfo.name + "的大佬...",
-      path: '/pages/user/detail?login=' + that.data.login
+      path: '/pages/user/detail?login=' + that.data.userInfo.login
     }
   }
 })

@@ -193,5 +193,12 @@ Page({
       }
     });
   },
+  onShareAppMessage: function (res) {
+    var that = this;
+    return {
+      title: "Issue:" + that.data.issue.title,
+      path: '/pages/issues/detail?namespace=' + that.data.namespace + '&path=' + that.data.path + '&number=' + that.data.issue.number
+    }
+  }
 
 })

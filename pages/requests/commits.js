@@ -90,4 +90,5 @@ Page({
       }
     });
   },
+  onShareAppMessage: function (res) {}
 })

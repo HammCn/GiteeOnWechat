@@ -141,4 +141,5 @@ Page({
       }
     });
   },
+  onShareAppMessage: function (res) {}
 })

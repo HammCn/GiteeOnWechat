@@ -212,5 +212,6 @@ Page({
         }
       }
     });
-  }
+  },
+  onShareAppMessage: function (res) {}
 })

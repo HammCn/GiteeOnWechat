@@ -129,4 +129,5 @@ Page({
       }
     });
   },
+  onShareAppMessage: function (res) {}
 })

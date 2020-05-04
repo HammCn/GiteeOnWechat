@@ -167,4 +167,5 @@ Page({
       }
     });
   },
+  onShareAppMessage: function (res) {}
 })
