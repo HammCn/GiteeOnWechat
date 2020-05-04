@@ -2,7 +2,7 @@
 	<view class="page__bd">
 		<view class="top">
 			<view class="headimg">
-				<image src="{{userInfo.avatar_url}}"></image>
+				<image src="{{userInfo.avatar_url}}" bindtap="openHeadimg"></image>
 			</view>
 			<view class="username">{{userInfo.name}}</view>
 			<view class="desc">{{userInfo.bio}}</view>

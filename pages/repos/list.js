@@ -43,8 +43,8 @@ Page({
         order_name: "升序排列",
       }
     ],
-    sort_value: "created",
-    sort_name: "创建时间",
+    sort_value: "pushed",
+    sort_name: "推送时间",
     sortList: [{
         sort_value: "created",
         sort_name: "创建时间",

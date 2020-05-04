@@ -9,7 +9,10 @@ Page({
     page: 1,
     isGetingData: false,
     list: [],
-    keyword: ""
+    keyword: "",
+    randKeywords: [
+      'GiteeOnWechat', 'StartAdmin', 'Svg_badge_tool', 'Tester', 'Douyin_helper'
+    ]
 
   },
   /**
@@ -26,14 +29,7 @@ Page({
    * 页面显示事件
    */
   onShow: function () {
-    // app.getUserInfo(function (result) {
-    //   if (!result) {
-    //     app.loginFirst();
-    //   }
-    // });
-    if (this.data.keyword) {
-      this.getList(false);
-    }
+    this.getList(false);
   },
   /**
    * 下拉刷新事件
@@ -75,8 +71,7 @@ Page({
       url: app.config.apiUrl + "api/v5/search/repositories",
       method: "GET",
       data: {
-        // access_token: app.access_token,
-        q: that.data.keyword,
+        q: that.data.keyword ? that.data.keyword : that.data.randKeywords[parseInt(Math.random() * that.data.randKeywords.length)],
         page: that.data.page,
       },
       success: function (result) {

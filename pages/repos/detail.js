@@ -294,6 +294,7 @@ Page({
         extend: "readme",
       },
       success: function (result) {
+        that.getCommits(loading);
         if (result.data.hasOwnProperty("content")) {
           var readmeMarkdown = base64Helper.baseDecode(result.data.content); 
           //TODO 码云图片不允许盗链 先搭个图片代理站用着
@@ -301,7 +302,6 @@ Page({
           that.setData({
             readme: readmeMarkdown ? readmeMarkdown : "### No Readme File!"
           });
-          that.getCommits(loading);
         } else {
           wx.stopPullDownRefresh();
           wx.hideLoading();
@@ -310,7 +310,6 @@ Page({
             content: result.data.message,
             showCancel: false,
           });
-          that.getComments(false);
         }
       }
     });
@@ -352,11 +351,11 @@ Page({
         ref: that.data.branch,
       },
       success: function (result) {
+        that.getReadme(loading);
         if (!result.data.hasOwnProperty("message")) {
           that.setData({
             branchList: result.data
           });
-          that.getReadme(loading);
         } else {
           wx.stopPullDownRefresh();
           wx.hideLoading();
@@ -385,11 +384,11 @@ Page({
         per_page: 5,
       },
       success: function (result) {
+        that.getComments();
         if (!result.data.hasOwnProperty("message")) {
           that.setData({
             commitList: result.data
           });
-          that.getComments();
         } else {
           wx.stopPullDownRefresh();
           wx.hideLoading();

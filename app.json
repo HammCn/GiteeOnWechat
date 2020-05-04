@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/about/index",
     "pages/activity/events",
     "pages/activity/notifications",
     "pages/activity/mails",
@@ -21,7 +22,6 @@
     "pages/commits/list",
     "pages/commits/detail",
     "pages/user/motify",
-    "pages/about/index",
     "pages/issues/list",
     "pages/issues/detail",
     "pages/webview/index"

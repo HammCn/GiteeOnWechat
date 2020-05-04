@@ -12,7 +12,7 @@
                         <view  wx:if="{{item.type=='PushEvent'}}">
                             <view class="weui-media-box__title">代码推送</view>
                             <view style="font-size:14px;color:#999;">
-                            <block wx:for="{{item.payload.commits}}" wx:for-item="commit">
+                            <block wx:for="{{item.payload.commits}}" wx:for-item="commit" wx:key="commit">
                             <view>推送到 <span style="color:#333">{{item.repo.human_name}}</span> 的 <span style="color:#333">{{timeHelper.replace(item.payload.ref,'refs/heads/','')}}</span> 分支</view>
                             <view>{{commit.author.name}}: <span style="color:#333">{{commit.message}}</span></view>
                             </block>

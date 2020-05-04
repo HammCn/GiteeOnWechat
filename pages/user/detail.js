@@ -152,6 +152,12 @@ Page({
       }
     });
   },
+  openHeadimg: function () {
+    var that = this;
+    wx.previewImage({
+      urls: [that.data.userInfo.avatar_url],
+    })
+  },
   onShareAppMessage: function (res) {
     var that = this;
     if (res.from === 'button') {

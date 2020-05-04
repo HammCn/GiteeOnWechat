@@ -124,7 +124,7 @@ Page({
                     },
                     success: function (result) {
                       wx.hideLoading();
-                      if (result.data.hasOwnProperty("message")) {
+                      if (!result.data.hasOwnProperty("sha")) {
                         wx.showModal({
                           title: '合并失败',
                           content: result.data.message,

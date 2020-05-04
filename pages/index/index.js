@@ -76,15 +76,20 @@ Page({
   },
   openSetting: function () {
     wx.showActionSheet({
-      itemList: ['关于我们', '退出登录'],
+      itemList: ['修改资料', '关于我们', '退出登录'],
       success: function (ret) {
         switch (ret.tapIndex) {
           case 0:
             wx.navigateTo({
-              url: '../about/index',
+              url: '../user/motify',
             });
             break;
-          case 1:
+            case 1:
+              wx.navigateTo({
+                url: '../about/index',
+              });
+              break;
+          case 2:
             var that = this;
             wx.showModal({
               title: '退出提醒',
@@ -105,31 +110,6 @@ Page({
         }
       }
     });
-  },
-  showMyFriends: function () {
-    wx.showActionSheet({
-      itemList: ['好友动态', '我关注的', '关注我的'],
-      success: function (ret) {
-        switch (ret.tapIndex) {
-          case 0:
-            wx.navigateTo({
-              url: '../activity/events?other=yes',
-            });
-            break;
-          case 1:
-            wx.navigateTo({
-              url: '../user/following',
-            });
-            break;
-          case 2:
-            wx.navigateTo({
-              url: '../user/followers',
-            });
-            break;
-          default:
-        }
-      }
-    })
   },
   showMyActivity: function () {
     wx.showActionSheet({
@@ -156,44 +136,15 @@ Page({
       }
     });
   },
-  showMyFavRepo: function () {
-    wx.showActionSheet({
-      itemList: ['我Watch的仓库', '我Star的仓库'],
-      success: function (ret) {
-        switch (ret.tapIndex) {
-          case 0:
-            wx.navigateTo({
-              url: '../repos/watched',
-            });
-            break;
-          case 1:
-            wx.navigateTo({
-              url: '../repos/starred',
-            });
-            break;
-          default:
-        }
-      }
-    });
-  },
-  openAccount: function () {
-    wx.showActionSheet({
-      itemList: ['修改资料', '公钥管理'],
-      success: function (ret) {
-        switch (ret.tapIndex) {
-          case 0:
-            wx.navigateTo({
-              url: '../user/motify',
-            });
-            break;
-          case 1:
-            wx.navigateTo({
-              url: '../user/key',
-            });
-            break;
-          default:
-        }
-      }
-    })
+  onShareAppMessage: function (res) {
+    var that = this;
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+    }
+    return {
+      title: "我在码云上发现一个叫" + that.data.userInfo.name + "的大佬...",
+      path: '/pages/user/detail?login=' + that.data.login
+    }
   }
 })
