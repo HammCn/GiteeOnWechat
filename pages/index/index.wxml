@@ -73,7 +73,7 @@
 				<view>
 					<i class="weui-grid__icon item iconfont icon-sousuo5"></i>
 				</view>
-				<view class="weui-grid__label">搜索开源</view>
+				<view class="weui-grid__label">码云搜索</view>
 			</navigator>
 			<navigator class="weui-grid" hover-class="weui-grid_active" url="../user/key">
 				<view>

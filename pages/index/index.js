@@ -55,6 +55,10 @@ Page({
   ifNeedLogin: function () {
     if (!this.data.isLogin) {
       app.login();
+    }else{
+      wx.navigateTo({
+        url: '../user/motify',
+      })
     }
   },
   getUserInfo: function () {

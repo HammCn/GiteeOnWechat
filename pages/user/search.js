@@ -11,7 +11,7 @@ Page({
     list: [],
     keyword: "",
     randKeywords: [
-      'hamm/GiteeOnWechat', 'hamm/StartAdmin', 'hamm/Svg_badge_tool', 'hamm/Tester', 'hamm/Douyin_helper'
+      'hamm'
     ]
 
   },
@@ -69,7 +69,7 @@ Page({
     }
     that.isGetingData = true;
     wx.request({
-      url: app.config.apiUrl + "api/v5/search/repositories",
+      url: app.config.apiUrl + "api/v5/search/users",
       method: "GET",
       data: {
         q: that.data.keyword ? that.data.keyword : that.data.randKeywords[parseInt(Math.random() * that.data.randKeywords.length)],

@@ -45,5 +45,10 @@
       <image src="../../res/image/alert.png" style="width:100px;height:100px;"></image>
       <view style="font-size:16px;color:#999;margin-top:20px;">没有查询到仓库数据</view>
     </view>
+    <view class="weui-footer weui-footer_fixed-bottom" style="z-index:9999" wx:if="{{!keyword}}">
+        <view class="weui-footer__links">
+            <navigator url="../user/search" class="weui-footer__link" style="font-size:16px;">搜索码云上的大神</navigator>
+        </view>
+    </view>
   </view>
 </view>

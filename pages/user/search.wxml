@@ -1,0 +1,49 @@
+<wxs src="../../utils/timeHelper.wxs" module="timeHelper" />
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+  <view class="page__bd">
+    <view class="searchbox">
+      <view class="weui-cells weui-cells_form" style="margin:0;border-radius:0;background-color:transparent;padding:8px;">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <input class="weui-input" type="text" confirm-type="search" placeholder="输入大神昵称快速查找" value="{{keyword}}" bindconfirm="search" confirm-hold="true" focus="true"></input>
+          </view>
+          <view class="weui-cell__ft">
+            <i class="iconfont icon-search"></i>
+          </view>
+        </view>
+      </view>
+    </view>
+    <block wx:if="{{list.length>0}}">
+      <navigator wx:for="{{list}}" wx:key="item" hover-class="navigator-hover" url="../user/detail?login={{item.login}}">
+              <view class="weui-panel weui-panel_access">
+                  <view class="weui-panel__bd">
+                      <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+                          <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                              <image  class="weui-media-box__thumb" src="{{item.avatar_url}}" />
+                          </view>
+                          <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                              <view class="weui-media-box__title">{{item.name}}
+                                <span class="floatRight">
+                                @{{item.login}}
+                                  </span></view>
+                              <view class="icons" style="color:#999;font-size:12px;">
+                                <i class="iconfont icon-rili33">{{item.public_repos}}</i>
+                                  <i class="iconfont icon-icon_group">{{item.followers}}</i>
+                                  <i class="iconfont icon-icon_boss">{{item.following}}</i>
+                                <i class="iconfont icon-eye">{{item.watched}}</i>
+                                <i class="iconfont icon-star">{{item.stared}}</i>
+                                </view>
+                              <view class="weui-media-box__desc">
+                              {{item.bio ? item.bio : "这个人懒得签名的没写..."}}</view>
+                          </view>
+                      </navigator>
+                  </view>
+            </view>
+      </navigator>
+    </block>
+    <view wx:if="{{list.length==0}}" style="text-align:center;padding-top:100px;">
+      <image src="../../res/image/alert.png" style="width:100px;height:100px;"></image>
+      <view style="font-size:16px;color:#999;margin-top:20px;">没有查询到仓库数据</view>
+    </view>
+  </view>
+</view>

@@ -9,6 +9,7 @@
     "pages/user/followers",
     "pages/user/following",
     "pages/user/key",
+    "pages/user/search",
     "pages/user/detail",
     "pages/repos/list",
     "pages/repos/detail",

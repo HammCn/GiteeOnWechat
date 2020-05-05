@@ -4,6 +4,7 @@
     <block wx:if="{{commit}}">
       <view class="weui-panel weui-panel_access">
         <view class="weui-panel__bd">
+      <navigator url="../user/detail?login={{commit.author.login}}">
           <view class="weui-media-box weui-media-box_appmsg">
             <view class="weui-media-box__bd">
               <h4 class="weui-media-box__title">{{commit.commit.message}}</h4>
@@ -19,6 +20,7 @@
               </p>
             </view>
           </view>
+          </navigator>
         </view>
         <view class="weui-panel__ft">
           <navigator class="weui-cell weui-cell_access weui-cell_link" url="../comments/list?namespace={{namespace}}&path={{path}}&hash={{hash}}">
