@@ -296,9 +296,9 @@ Page({
       success: function (result) {
         that.getCommits(loading);
         if (result.data.hasOwnProperty("content")) {
-          var readmeMarkdown = base64Helper.baseDecode(result.data.content); 
+          var readmeMarkdown = base64Helper.baseDecode(result.data.content);
           //TODO 码云图片不允许盗链 先搭个图片代理站用着
-          readmeMarkdown = readmeMarkdown.replace(/images.gitee.com/g,'gitee.hamm.cn');
+          readmeMarkdown = readmeMarkdown.replace(/images.gitee.com/g, 'gitee.hamm.cn');
           that.setData({
             readme: readmeMarkdown ? readmeMarkdown : "### No Readme File!"
           });
@@ -415,6 +415,7 @@ Page({
         access_token: app.access_token,
         per_page: 5,
         direction: "desc",
+        order: "desc"
       },
       success: function (result) {
         if (!result.data.hasOwnProperty("message")) {

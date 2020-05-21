@@ -100,6 +100,7 @@ Page({
         access_token: app.access_token,
         page: that.data.page,
         direction: "desc",
+        order: "desc"
       },
       success: function (result) {
         that.isGetingData = false;
