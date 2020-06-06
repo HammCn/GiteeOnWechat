@@ -85,13 +85,16 @@ Page({
   },
   doCommentFormSubmit: function (e) {
     var that = this;
-    if (!e.detail.value.body) {
+    if (!e.detail.value.title) {
       wx.showModal({
         title: '提交失败',
         content: '什么都不填的话就没必要发布Issue了吧？',
         showCancel: false,
       });
       return;
+    }
+    if (!e.detail.value.body) {
+      e.detail.value.body = e.detail.value.title;
     }
     wx.showLoading({
       title: '正在提交',
