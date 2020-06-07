@@ -14,6 +14,14 @@
                         <view class="weui-media-box__title" wx:if="{{item.type=='project_push'}}">Watch仓库推送通知</view>
                         <view class="weui-media-box__title" wx:if="{{item.type=='referer'}}">评论中被@通知</view>
                         <view class="weui-media-box__title" wx:if="{{item.type=='group_transfer'}}">组织转移被接受通知</view>
+                        <view class="weui-media-box__title" wx:if="{{item.type=='project_enable_donation'}}">捐赠功能开启通知</view>
+                        <view class="weui-media-box__title" wx:if="{{item.type=='project_recommend'}}">项目获得推荐通知</view>
+                        <view class="weui-media-box__title" wx:if="{{item.type=='pull_request_test'}}">测试Pull Request通知</view>
+                        <view class="weui-media-box__title" wx:if="{{item.type=='pull_request_assign'}}">审查Pull Request通知</view>
+                        <view class="weui-media-box__title" wx:if="{{item.type=='note_commit'}}">Commit 评论通知</view>
+                        <view class="weui-media-box__title" wx:if="{{item.type=='issue_state_change'}}">Issue状态变更通知</view>
+                        <view class="weui-media-box__title" wx:if="{{item.type=='pull_request_close'}}">Pull Request关闭通知</view>
+                        <view class="weui-media-box__title" wx:if="{{item.type=='pull_request_new'}}">Pull Request创建通知</view>
                         <view style="font-size:14px;color:#999;">
                         <view>发送时间：{{timeHelper.parse(item.updated_at)}}</view>
                         <view style="margin-top:10px;color:#666;">{{timeHelper.html2Text(item.content)}}</view>
