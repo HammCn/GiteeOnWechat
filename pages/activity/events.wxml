@@ -20,9 +20,9 @@
                         </view>
                         <view wx:if="{{item.type=='PullRequestEvent'}}">
                             <block wx:if="{{item.payload.action=='merged'}}">
-                                <view class="weui-media-box__title">接受了Pull Request</view>
+                                <view class="weui-media-box__title">创建了Pull Request</view>
                                 <view style="font-size:14px;color:#999;">
-                                  <view><span style="color:#333;">{{item.actor.name}}</span> 接受了 <span style="color:#333">{{item.repo.human_name}}</span> 的Pull Request</view>
+                                  <view><span style="color:#333;">{{item.actor.name}}</span> 创建了到 <span style="color:#333">{{item.repo.human_name}}</span> 的Pull Request</view>
                                   <view><span style="color:#333">{{item.payload.title}}</span></view>
                                 </view>
                             </block>
@@ -92,7 +92,7 @@
                             <view><span style="color:#333">{{item.payload.comment.body}}</span></view>
                             </view>
                         </view>
-                        <view wx:if="{{item.type=='WatchEvent'}}">
+                        <view wx:if="{{item.type=='StarEvent'}}">
                             <block wx:if="{{item.payload.action=='starred'}}">
                                 <view class="weui-media-box__title" >Star了仓库</view>
                                 <view style="font-size:14px;color:#999;">
