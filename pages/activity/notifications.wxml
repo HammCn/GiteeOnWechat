@@ -19,6 +19,7 @@
                         <view class="weui-media-box__title" wx:if="{{item.type=='pull_request_test'}}">测试Pull Request通知</view>
                         <view class="weui-media-box__title" wx:if="{{item.type=='pull_request_assign'}}">审查Pull Request通知</view>
                         <view class="weui-media-box__title" wx:if="{{item.type=='note_commit'}}">Commit 评论通知</view>
+                        <view class="weui-media-box__title" wx:if="{{item.type=='note_issue'}}">Issue 评论通知</view>
                         <view class="weui-media-box__title" wx:if="{{item.type=='issue_state_change'}}">Issue状态变更通知</view>
                         <view class="weui-media-box__title" wx:if="{{item.type=='pull_request_close'}}">Pull Request关闭通知</view>
                         <view class="weui-media-box__title" wx:if="{{item.type=='pull_request_new'}}">Pull Request创建通知</view>
