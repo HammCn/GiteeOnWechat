@@ -1,0 +1,10 @@
+.weui-cell {
+  padding: 12px 16px;
+}
+
+.weui-cell__bd {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  margin-right: 20px;
+}

@@ -21,6 +21,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (e) {
+    wx.showLoading({
+      title: '数据加载中',
+    });
+    app.loadFont();
     var that = this;
     that.setData({
       userInfo: that.data.defaultUserInfo,
@@ -28,9 +32,6 @@ Page({
     if (e.login) {
       that.setData({
         login: e.login,
-      });
-      wx.showLoading({
-        title: '用户读取中',
       });
     } else {
       wx.showModal({
@@ -50,7 +51,7 @@ Page({
     var that = this;
     app.getUserInfo(function (result) {
       if (result) {
-        that.getDetail(false);
+        that.getDetail();
       } else {
         app.loginFirst();
       }
@@ -62,13 +63,8 @@ Page({
   onPullDownRefresh() {
     this.getDetail();
   },
-  getDetail: function (loading = true) {
+  getDetail: function () {
     var that = this;
-    if (loading) {
-      wx.showLoading({
-        title: '用户读取中',
-      });
-    }
     wx.request({
       url: app.config.apiUrl + "api/v5/users/" + that.data.login,
       method: "GET",

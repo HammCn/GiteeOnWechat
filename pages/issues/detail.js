@@ -72,6 +72,10 @@ Page({
     });
   },
   onLoad: function (e) {
+    wx.showLoading({
+      title: '数据加载中',
+    });
+    app.loadFont();
     var that = this;
     if (e.number && e.path && e.namespace) {
       that.setData({
@@ -125,9 +129,6 @@ Page({
   },
   getDetail: function () {
     var that = this;
-    wx.showLoading({
-      title: 'Issue读取中',
-    });
     wx.request({
       url: app.config.apiUrl + "api/v5/repos/" + that.data.namespace + "/" + that.data.path + "/issues/" + that.data.number,
       method: "GET",

@@ -8,7 +8,12 @@ Page({
     keyList: [],
     KeyFormShow: false
   },
-  onLoad: function (e) {},
+  onLoad: function (e) {
+    wx.showLoading({
+      title: '数据加载中',
+    });
+    app.loadFont();
+  },
   /**
    * 页面显示事件
    */
@@ -17,7 +22,7 @@ Page({
     app.getUserInfo(function (result) {
       if (result) {
         that.getKeys();
-      }else{
+      } else {
         app.loginFirst();
       }
     });
@@ -162,17 +167,12 @@ Page({
       KeyFormShow: true
     });
   },
-  getKeys: function (loading = true) {
+  getKeys: function () {
     var that = this;
     if (that.isGetingData) {
       wx.hideLoading();
       wx.stopPullDownRefresh();
       return;
-    }
-    if (loading) {
-      wx.showLoading({
-        title: '公钥读取中',
-      });
     }
     var url = app.config.apiUrl + "api/v5/user/keys";
     wx.request({

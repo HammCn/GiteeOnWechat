@@ -74,6 +74,7 @@ Page({
     wx.showLoading({
       title: '数据加载中',
     });
+    app.loadFont();
   },
   /**
    * 页面显示事件
@@ -82,7 +83,7 @@ Page({
     var that = this;
     app.getUserInfo(function (result) {
       if (result) {
-        that.getList(false);
+        that.getList();
       } else {
         app.loginFirst();
       }
@@ -118,13 +119,8 @@ Page({
   /**
    * 获取数据列表
    */
-  getList: function (loading = true) {
+  getList: function () {
     var that = this;
-    if (loading) {
-      wx.showLoading({
-        title: '数据加载中',
-      });
-    }
     if (that.isGetingData) {
       wx.hideLoading();
       wx.stopPullDownRefresh();

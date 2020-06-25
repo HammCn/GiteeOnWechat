@@ -24,14 +24,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (e) {
+    wx.showLoading({
+      title: '数据加载中',
+    });
+    app.loadFont();
     var that = this;
     if (e.namespace && e.path) {
       that.setData({
         namespace: e.namespace,
         path: e.path,
-      });
-      wx.showLoading({
-        title: '数据加载中',
       });
     } else {
       wx.showModal({
@@ -51,7 +52,7 @@ Page({
     var that = this;
     app.getUserInfo(function (result) {
       if (result) {
-        that.getList(false);
+        that.getList();
       } else {
         app.loginFirst();
       }
@@ -159,13 +160,8 @@ Page({
   /**
    * 获取数据列表
    */
-  getList: function (loading = true) {
+  getList: function () {
     var that = this;
-    if (loading) {
-      wx.showLoading({
-        title: '数据加载中',
-      });
-    }
     if (that.isGetingData) {
       wx.hideLoading();
       wx.stopPullDownRefresh();

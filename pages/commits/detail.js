@@ -70,15 +70,16 @@ Page({
     });
   },
   onLoad: function (e) {
+    wx.showLoading({
+      title: '数据加载中',
+    });
+    app.loadFont();
     var that = this;
     if (e.hash && e.path && e.namespace) {
       that.setData({
         hash: e.hash,
         namespace: e.namespace,
         path: e.path,
-      });
-      wx.showLoading({
-        title: '数据读取中',
       });
     } else {
       wx.showModal({

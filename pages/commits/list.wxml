@@ -12,7 +12,7 @@
             <navigator wx:for="{{commitList}}" wx:key="item" hover-class="navigator-hover" url="../commits/detail?path={{path}}&namespace={{namespace}}&hash={{item.sha}}">
               <view class="weui-media-box weui-media-box_appmsg">
                 <view class="weui-media-box__bd">
-                  <h4 class="weui-media-box__title">{{item.commit.message}}</h4>
+                  <h4 style="word-wrap: break-word;word-break: break-all;">{{item.commit.message}}</h4>
                   <p class="weui-media-box__desc">
                     <view>
                       <span style="font-size:14px;color:#999;margin-right:5px;">

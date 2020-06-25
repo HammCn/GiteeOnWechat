@@ -1,0 +1,31 @@
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+	<view class="page__bd">
+		<block wx:if="{{enterprises.length>0}}">
+			<div class="weui-cells__title">我的企业</div>
+			<view class="weui-cells">
+				<navigator wx:for="{{enterprises}}" wx:key="item" class="weui-cell weui-cell_access" url="">
+					<view class="weui-cell__bd">
+						<view>{{item.name}}</view>
+					</view>
+					<view class="weui-cell__ft"><i class="iconfont icon-xiangyoujiantou"></i></view>
+				</navigator>
+			</view>
+		</block>
+		<block wx:if="{{orgs.length>0}}">
+			<div class="weui-cells__title">我的组织</div>
+			<view class="weui-cells">
+				<navigator wx:for="{{orgs}}" wx:key="item" class="weui-cell weui-cell_access" url="">
+					<view class="weui-cell__bd">
+						<view>{{item.login}}</view>
+						<!-- //TODO 缺少字段 -->
+					</view>
+					<view class="weui-cell__ft"><i class="iconfont icon-xiangyoujiantou"></i></view>
+				</navigator>
+			</view>
+		</block>
+		<view wx:if="{{enterprises.length==0 && orgs.length==0}}" class="tips">
+			<image src="../../res/image/alert.png"></image>
+			<view>貌似你还没有加入任何企业或组织</view>
+		</view>
+	</view>
+</view>

@@ -1,109 +1,41 @@
 <view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
-	<view class="page__bd">
-		<view class="top" bindtap="ifNeedLogin">
-			<view class="headimg">
-				<image src="{{userInfo.avatar_url}}"></image>
-			</view>
-			<view class="username">{{userInfo.name}}</view>
-			<view class="desc">{{userInfo.bio}}</view>
-			<view style="margin:0px 10%;">
-				<view class="weui-flex" style="background-color:transparent;">
-					<view class="weui-flex__item">
-						<navigator class="placeholder" url="../user/followers" hover-class="weui-grid_active">
-							<view class="top_value">{{userInfo.followers}}</view>
-							<view class="top_key">粉丝</view>
-						</navigator>
-					</view>
-					<view class="weui-flex__item">
-						<navigator class="placeholder" url="../user/following" hover-class="weui-grid_active">
-							<view class="top_value">{{userInfo.following}}</view>
-							<view class="top_key">关注</view>
-						</navigator>
-					</view>
-					<view class="weui-flex__item">
-						<navigator class="placeholder" url="../repos/starred" hover-class="weui-grid_active">
-							<view class="top_value">{{userInfo.stared}}</view>
-							<view class="top_key">Star</view>
-						</navigator>
-					</view>
-					<view class="weui-flex__item">
-						<navigator class="placeholder" url="../repos/watched" hover-class="weui-grid_active">
-							<view class="top_value">{{userInfo.watched}}</view>
-							<view class="top_key">Watch</view>
-						</navigator>
-					</view>
-				</view>
-			</view>
-		</view>
-		<!-- <view class="weui-cells">
-			<navigator class="weui-cell weui-cell_access" hover-class="app_hover" url="../repos/search">
-				<view class="weui-cell__bd">
-					<view style="color:#999;">输入关键词搜索开源仓库</view>
-				</view>
-				<view class="weui-cell__ft">
-					<i class="item iconfont icon-sousuo5"></i></view>
-			</navigator>
-		</view> -->
-		<view class="weui-grids" style="margin-top:30px;">
-			<navigator url="../repos/list" class="weui-grid" hover-class="weui-grid_active">
-				<view>
-					<i class="weui-grid__icon item iconfont icon-rili33"></i>
-				</view>
-				<view class="weui-grid__label">我的仓库</view>
-			</navigator>
-			<navigator url="../issues/list" class="weui-grid" hover-class="weui-grid_active">
-				<view>
-					<i class="weui-grid__icon item iconfont icon-naozhong2"></i>
-				</view>
-				<view class="weui-grid__label">我的Issue</view>
-			</navigator>
-			<view bindtap="showMyActivity" class="weui-grid" hover-class="weui-grid_active">
-				<view>
-					<i class="weui-grid__icon item iconfont icon-comment"></i>
-				</view>
-				<view class="weui-grid__label">我的消息</view>
-			</view>
-			<navigator class="weui-grid" hover-class="weui-grid_active" url="../activity/events">
-				<view>
-					<i class="weui-grid__icon item iconfont icon-icon_boss"></i>
-				</view>
-				<view class="weui-grid__label">我的动态</view>
-			</navigator>
-			<navigator url="../repos/search" class="weui-grid" hover-class="weui-grid_active">
-				<view>
-					<i class="weui-grid__icon item iconfont icon-sousuo5"></i>
-				</view>
-				<view class="weui-grid__label">码云搜索</view>
-			</navigator>
-			<navigator class="weui-grid" hover-class="weui-grid_active" url="../user/key">
-				<view>
-					<i class="weui-grid__icon item iconfont icon-key"></i>
-				</view>
-				<view class="weui-grid__label">公钥管理</view>
-			</navigator>
-			<navigator url="../activity/events?other=friends" class="weui-grid" hover-class="weui-grid_active">
-				<view>
-					<i class="weui-grid__icon item iconfont icon-icon_group"></i>
-				</view>
-				<view class="weui-grid__label">好友动态</view>
-			</navigator>
-			<navigator class="weui-grid" hover-class="weui-grid_active" url="../repos/detail?namespace=hamm&path=GiteeOnWechat">
-				<view>
-					<i class="weui-grid__icon item iconfont icon-icon_service"></i>
-				</view>
-				<view class="weui-grid__label">反馈建议</view>
-				<!-- <button open-type="contact" style="opacity:0;position:absolute;left:0;right:0;top:0;bottom:0;">
-				</button> -->
-			</navigator>
-			<view class="weui-grid" hover-class="weui-grid_active" bindtap="openSetting">
-				<view>
-					<i class="weui-grid__icon item iconfont icon-changyongtubiao-xianxingdaochu-zhuanqu-32"></i>
-				</view>
-				<view class="weui-grid__label">个人设置</view>
-			</view>
-		</view>
-		<view class="weui-footer" style="z-index:9999">
-			<view class="weui-footer__text">本服务由Hamm提供 非码云官方服务</view>
-		</view>
-	</view>
+  <view class="page__bd">
+    <view class="weui-cells">
+      <navigator class="weui-cell weui-cell_access" hover-class="app_hover" url="../repos/search">
+        <view class="weui-cell__bd">
+          <view style="color:#999;">码云搜索</view>
+        </view>
+        <view class="weui-cell__ft">
+          <i class="item iconfont icon-sousuo5"></i></view>
+      </navigator>
+    </view>
+  </view>
+  <view class="tabbar">
+    <view class="weui-flex">
+      <navigator class="weui-flex__item" url="../repos/list">
+        <view class="menu-icon">
+          <i class="iconfont icon-changyongtubiao-xianxingdaochu-zhuanqu-43"></i>
+        </view>
+        <view class="menu-title">仓库</view>
+      </navigator>
+      <navigator class="weui-flex__item" url="../issues/list">
+        <view class="menu-icon">
+          <i class="iconfont icon-changyongtubiao-xianxingdaochu-zhuanqu-18"></i>
+        </view>
+        <view class="menu-title">待办</view>
+      </navigator>
+      <navigator class="weui-flex__item" url="../user/cooperation">
+        <view class="menu-icon">
+          <i class="iconfont icon-changyongtubiao-xianxingdaochu-zhuanqu-24"></i>
+        </view>
+        <view class="menu-title">协作</view>
+      </navigator>
+      <navigator class="weui-flex__item" url="../user/index">
+        <view class="menu-icon">
+          <i class="iconfont icon-changyongtubiao-xianxingdaochu-zhuanqu-34"></i>
+        </view>
+        <view class="menu-title">我的</view>
+      </navigator>
+    </view>
+  </view>
 </view>

@@ -4,7 +4,7 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
 		"enhance": true,
 		"postcss": true,
@@ -28,7 +28,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "2.8.3",
 	"appid": "wx6fabdcda9c791ce1",
-	"projectname": "Gitee%20on%20wechat",
+	"projectname": "GiteeMiniApp",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},

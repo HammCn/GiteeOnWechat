@@ -18,11 +18,16 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function () {},
+  onLoad: function () {
+    wx.showLoading({
+      title: '数据加载中',
+    });
+    app.loadFont();
+  },
   search: function (e) {
     this.setData({
       keyword: e.detail.value,
-      page:1,
+      page: 1,
     });
     this.getList();
   },
@@ -30,7 +35,7 @@ Page({
    * 页面显示事件
    */
   onShow: function () {
-    this.getList(false);
+    this.getList();
   },
   /**
    * 下拉刷新事件
@@ -55,13 +60,8 @@ Page({
   /**
    * 获取数据列表
    */
-  getList: function (loading = true) {
+  getList: function () {
     var that = this;
-    if (loading) {
-      wx.showLoading({
-        title: '数据加载中',
-      });
-    }
     if (that.isGetingData) {
       wx.hideLoading();
       wx.stopPullDownRefresh();

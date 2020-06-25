@@ -16,6 +16,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (e) {
+    wx.showLoading({
+      title: '数据加载中',
+    });
+    app.loadFont();
     var that = this
     if (e.login) {
       that.setData({
@@ -38,19 +42,18 @@ Page({
             title: "Ta的开源仓库"
           });
       }
-      wx.showLoading({
-        title: '数据读取中',
-      });
-      that.getList();
     }
   },
   /**
    * 页面显示事件
    */
   onShow: function () {
+    var that = this;
     app.getUserInfo(function (result) {
       if (!result) {
         app.loginFirst();
+      } else {
+        that.getList();
       }
     });
   },
@@ -77,13 +80,8 @@ Page({
   /**
    * 获取数据列表
    */
-  getList: function (loading = true) {
+  getList: function () {
     var that = this;
-    if (loading) {
-      wx.showLoading({
-        title: '数据加载中',
-      });
-    }
     if (that.isGetingData) {
       wx.hideLoading();
       wx.stopPullDownRefresh();

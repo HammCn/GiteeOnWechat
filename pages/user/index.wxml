@@ -1,0 +1,115 @@
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+	<view class="page__bd">
+		<view class="top" bindtap="ifNeedLogin">
+			<view class="headimg">
+				<image src="{{userInfo.avatar_url}}"></image>
+			</view>
+			<view class="username">{{userInfo.name}}</view>
+			<view class="desc">{{userInfo.bio}}</view>
+			<view style="margin:0px 10%;">
+				<view class="weui-flex" style="background-color:transparent;">
+					<view class="weui-flex__item">
+						<navigator class="placeholder" url="../user/followers" hover-class="weui-grid_active">
+							<view class="top_value">{{userInfo.followers}}</view>
+							<view class="top_key">粉丝</view>
+						</navigator>
+					</view>
+					<view class="weui-flex__item">
+						<navigator class="placeholder" url="../user/following" hover-class="weui-grid_active">
+							<view class="top_value">{{userInfo.following}}</view>
+							<view class="top_key">关注</view>
+						</navigator>
+					</view>
+					<view class="weui-flex__item">
+						<navigator class="placeholder" url="../repos/starred" hover-class="weui-grid_active">
+							<view class="top_value">{{userInfo.stared}}</view>
+							<view class="top_key">Star</view>
+						</navigator>
+					</view>
+					<view class="weui-flex__item">
+						<navigator class="placeholder" url="../repos/watched" hover-class="weui-grid_active">
+							<view class="top_value">{{userInfo.watched}}</view>
+							<view class="top_key">Watch</view>
+						</navigator>
+					</view>
+				</view>
+			</view>
+		</view>
+		<!-- <view class="weui-cells">
+			<navigator class="weui-cell weui-cell_access" hover-class="app_hover" url="../repos/search">
+				<view class="weui-cell__bd">
+					<view style="color:#999;">输入关键词搜索开源仓库</view>
+				</view>
+				<view class="weui-cell__ft">
+					<i class="item iconfont icon-sousuo5"></i></view>
+			</navigator>
+		</view> -->
+		<view class="weui-cells">
+			<navigator class="weui-cell weui-cell_access" url="../activity/mails">
+				<view class="weui-cell__bd">
+					<view>
+						<i class="item iconfont icon-icon_message"></i>我的私信</view>
+				</view>
+				<view class="weui-cell__ft"><i class="iconfont icon-xiangyoujiantou"></i></view>
+			</navigator>
+			<navigator class="weui-cell weui-cell_access" url="../activity/notifications">
+				<view class="weui-cell__bd">
+					<view>
+						<i class="item iconfont icon-bell"></i>我的通知</view>
+				</view>
+				<view class="weui-cell__ft"><i class="iconfont icon-xiangyoujiantou"></i></view>
+			</navigator>
+		</view>
+		<view class="weui-cells">
+			<navigator class="weui-cell weui-cell_access" url="../activity/events">
+				<view class="weui-cell__bd">
+					<view>
+						<i class="item iconfont icon-icon_boss"></i>我的动态</view>
+				</view>
+				<view class="weui-cell__ft"><i class="iconfont icon-xiangyoujiantou"></i></view>
+			</navigator>
+			<navigator class="weui-cell weui-cell_access" url="../activity/events?other=friends">
+				<view class="weui-cell__bd">
+					<view>
+						<i class="item iconfont icon-icon_group"></i>好友动态</view>
+				</view>
+				<view class="weui-cell__ft"><i class="iconfont icon-xiangyoujiantou"></i></view>
+			</navigator>
+		</view>
+		<view class="weui-cells">
+			<navigator class="weui-cell weui-cell_access" url="../user/key">
+				<view class="weui-cell__bd">
+					<view>
+						<i class="item iconfont icon-key"></i>公钥管理</view>
+				</view>
+				<view class="weui-cell__ft"><i class="iconfont icon-xiangyoujiantou"></i></view>
+			</navigator>
+		</view>
+		<view class="weui-cells">
+			<navigator class="weui-cell weui-cell_access" url="../repos/detail?namespace=hamm&path=GiteeOnWechat">
+				<view class="weui-cell__bd">
+					<view>
+						<i class="item iconfont icon-icon_service"></i>反馈建议</view>
+				</view>
+				<view class="weui-cell__ft"><i class="iconfont icon-xiangyoujiantou"></i></view>
+			</navigator>
+			<navigator class="weui-cell weui-cell_access" url="../about/index">
+				<view class="weui-cell__bd">
+					<view>
+						<i class="item iconfont icon-warning-circle"></i>关于我们</view>
+				</view>
+				<view class="weui-cell__ft"><i class="iconfont icon-xiangyoujiantou"></i></view>
+			</navigator>
+			<view class="weui-cell weui-cell_access" bindtap="logout" wx:if="{{isLogin}}">
+				<view class="weui-cell__bd">
+					<view>
+						<i class="item iconfont icon-poweroff"></i>退出登录</view>
+				</view>
+				<view class="weui-cell__ft"><i class="iconfont icon-xiangyoujiantou"></i></view>
+			</view>
+		</view>
+		<view class="weui-footer" style="z-index:9999">
+			<view class="weui-footer__text">本服务由Hamm提供 非码云官方服务</view>
+		</view>
+	</view>
+</view>

@@ -30,18 +30,17 @@
       </view>
     </view>
     <block wx:if="{{list.length>0}}">
-      <view wx:for="{{list}}" wx:key="item" hover-class="navigator-hover" bindtap="showMenu" mark:repo="{{item.repository}}" mark:user="{{item.user}}" mark:number="{{item.number}}">
+      <view wx:for="{{list}}" wx:key="item" hover-class="navigator-hover" bindtap="showMenu"
+        mark:repo="{{item.repository}}" mark:user="{{item.user}}" mark:number="{{item.number}}">
         <view class="weui-panel">
           <view class="weui-panel__bd">
-            <view class="weui-media-box weui-media-box_text" style="backround-color:#f5f5f5;">
-              <view class="weui-media-box__title weui-media-box__title_in-text">
+            <view class="weui-media-box weui-media-box_text">
+              <view>
                 <span class="badge-title badge-orangered" wx:if="{{item.state=='open'}}">已开启</span>
-                <span class="badge-title badge-yellow" wx:if="{{item.state=='progressing'}}">
-                  进行中
-                </span>
+                <span class="badge-title badge-yellow" wx:if="{{item.state=='progressing'}}">进行中</span>
                 <span class="badge-title badge-green" wx:if="{{item.state=='closed'}}">已完成</span>
                 <span class="badge-title badge-title" wx:if="{{item.state=='rejected'}}">已拒绝</span>
-                <span class="badge-title">{{item.issue_type}}</span>
+                <!-- <span class="badge-title">{{item.issue_type}}</span> -->
                 {{item.title}}
               </view>
               <view style="margin-bottom:5px;font-size:14px;color:#999;">
@@ -64,12 +63,14 @@
           <view class="weui-cells weui-cells_form">
             <view class="weui-cell">
               <view class="weui-cell__bd">
-                <input catchtap="nothing" class="weui-input" name="title" type="text" placeholder="请简单描述问题" value="" focus="true"></input>
+                <input catchtap="nothing" class="weui-input" name="title" type="text" placeholder="请简单描述问题" value=""
+                  focus="true"></input>
               </view>
             </view>
             <view class="weui-cell">
               <view class="weui-cell__bd">
-                <textarea catchtap="nothing" name="body" confirm-type="search" class="weui-textarea" placeholder="请尽可能让仓库管理者明确你的需求" rows="2" value=""></textarea>
+                <textarea catchtap="nothing" name="body" confirm-type="search" class="weui-textarea"
+                  placeholder="请尽可能让仓库管理者明确你的需求" rows="2" value=""></textarea>
               </view>
             </view>
           </view>

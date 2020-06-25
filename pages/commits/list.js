@@ -17,6 +17,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (e) {
+    wx.showLoading({
+      title: '数据加载中',
+    });
+    app.loadFont();
     var that = this;
     if (e.namespace && e.path) {
       that.setData({
@@ -44,7 +48,8 @@ Page({
     var that = this;
     app.getUserInfo(function (result) {
       if (result) {
-        that.getCommits(false);
+        that.getCommits();
+        that.getBranchs();
       } else {
         app.loginFirst();
       }
@@ -55,6 +60,7 @@ Page({
    */
   onPullDownRefresh() {
     this.getCommits();
+    this.getBranchs();
   },
   changeBranch() {
     var that = this;
@@ -74,7 +80,7 @@ Page({
         wx.showLoading({
           title: '切换分支中',
         });
-        that.getCommits(false);
+        that.getCommits();
       }
     });
   },
@@ -97,7 +103,7 @@ Page({
           that.setData({
             branchList: result.data
           });
-          that.getCommits(loading);
+          that.getCommits();
         } else {
           wx.showModal({
             title: '读取分支失败',
@@ -119,17 +125,12 @@ Page({
       this.getCommits();
     }
   },
-  getCommits: function (loading = true) {
+  getCommits: function () {
     var that = this;
     if (that.isGetingData) {
       wx.hideLoading();
       wx.stopPullDownRefresh();
       return;
-    }
-    if (loading) {
-      wx.showLoading({
-        title: '提交记录读取中',
-      });
     }
     wx.request({
       url: app.config.apiUrl + "api/v5/repos/" + that.data.namespace + "/" + that.data.path + "/commits",

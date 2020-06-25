@@ -12,6 +12,10 @@ Page({
     commentList: []
   },
   onLoad: function (e) {
+    wx.showLoading({
+      title: '数据加载中',
+    });
+    app.loadFont();
     var that = this;
     if (e.path && e.namespace) {
       that.setData({
@@ -49,7 +53,7 @@ Page({
     var that = this;
     app.getUserInfo(function (result) {
       if (result) {
-        that.getComments(false);
+        that.getComments();
       } else {
         app.loginFirst();
       }
@@ -75,19 +79,12 @@ Page({
       this.getComments();
     }
   },
-  getComments: function (loading = true) {
+  getComments: function () {
     var that = this;
-    console.log(that.data.hash);
-
     if (that.isGetingData) {
       wx.hideLoading();
       wx.stopPullDownRefresh();
       return;
-    }
-    if (loading) {
-      wx.showLoading({
-        title: '评论读取中',
-      });
     }
     var url = app.config.apiUrl + "api/v5/repos/" + that.data.namespace + "/" + that.data.path + "/comments";
     if (that.data.hash) {

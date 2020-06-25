@@ -14,6 +14,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function () {
+    app.loadFont();
     var user_name = wx.getStorageSync('user_name');
     var personal_token = wx.getStorageSync('personal_token');
     this.setData({

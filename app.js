@@ -16,6 +16,12 @@ App({
   },
   access_token: null,
   userInfo: null,
+  loadFont() {
+    wx.loadFontFace({
+      family: 'Roboto',
+      source: 'url(https://static.hamm.cn/font/Roboto.ttf)',
+    });
+  },
   onLaunch: function () {},
   /**
    * 校验AccessToken获取用户信息

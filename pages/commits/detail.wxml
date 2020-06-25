@@ -7,7 +7,7 @@
       <navigator url="../user/detail?login={{commit.author.login}}">
           <view class="weui-media-box weui-media-box_appmsg">
             <view class="weui-media-box__bd">
-              <h4 class="weui-media-box__title">{{commit.commit.message}}</h4>
+              <h4 style="word-wrap: break-word;word-break: break-all;">{{commit.commit.message}}</h4>
               <p class="weui-media-box__desc">
                 <view>
                   <span style="font-size:14px;color:#999;margin-right:5px;">

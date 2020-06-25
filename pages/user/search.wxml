@@ -41,9 +41,9 @@
             </view>
       </navigator>
     </block>
-    <view wx:if="{{list.length==0}}" style="text-align:center;padding-top:100px;">
-      <image src="../../res/image/alert.png" style="width:100px;height:100px;"></image>
-      <view style="font-size:16px;color:#999;margin-top:20px;">没有查询到仓库数据</view>
+    <view wx:if="{{list.length==0}}" class="tips">
+      <image src="../../res/image/alert.png"></image>
+      <view>没有查询到用户</view>
     </view>
   </view>
 </view>
