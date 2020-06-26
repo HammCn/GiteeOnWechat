@@ -14,10 +14,9 @@
 		<block wx:if="{{orgs.length>0}}">
 			<div class="weui-cells__title">我的组织</div>
 			<view class="weui-cells">
-				<navigator wx:for="{{orgs}}" wx:key="item" class="weui-cell weui-cell_access" url="">
+				<navigator wx:for="{{orgs}}" wx:key="item" class="weui-cell weui-cell_access" url="../orgs/index?path={{item.path}}">
 					<view class="weui-cell__bd">
-						<view>{{item.login}}</view>
-						<!-- //TODO 缺少字段 -->
+						<view>{{item.name}}</view>
 					</view>
 					<view class="weui-cell__ft"><i class="iconfont icon-xiangyoujiantou"></i></view>
 				</navigator>

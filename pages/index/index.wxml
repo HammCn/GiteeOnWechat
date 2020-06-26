@@ -28,7 +28,7 @@
         <view class="menu-icon">
           <i class="iconfont icon-changyongtubiao-xianxingdaochu-zhuanqu-24"></i>
         </view>
-        <view class="menu-title">协作</view>
+        <view class="menu-title">团队</view>
       </navigator>
       <navigator class="weui-flex__item" url="../user/index">
         <view class="menu-icon">

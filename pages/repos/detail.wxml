@@ -3,9 +3,8 @@
   <view class="page__bd">
     <view wx:if="{{repoInfo!=null}}">
       <view class="weui-panel">
-        <navigator url="../user/detail?login={{repoInfo.owner.login}}">
+        <view bindtap="openProfilePage">
           <view class="weui-panel__bd">
-
             <view class="weui-media-box weui-media-box_text repo">
               <view class="open">
                 <i class="icon-CodeSandbox iconfont public" wx:if="{{repoInfo.public}}"></i>
@@ -30,7 +29,7 @@
               </view>
             </view>
           </view>
-        </navigator>
+        </view>
       </view>
       <view style="margin:0px 10px;">
         <view class="weui-flex" style="background-color:transparent;">

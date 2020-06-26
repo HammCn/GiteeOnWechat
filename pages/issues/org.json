@@ -1,0 +1,6 @@
+{
+  "usingComponents": {},
+  "navigationStyle": "default",
+  "navigationBarTitleText": "组织Issues",
+  "enablePullDownRefresh": true
+}

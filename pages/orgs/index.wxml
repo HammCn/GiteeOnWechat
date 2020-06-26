@@ -1,0 +1,83 @@
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+	<view class="page__bd">
+		<view class="top" bindtap="motifyOrg">
+			<view class="headimg">
+				<image src="{{orgInfo.avatar_url}}"></image>
+			</view>
+			<view class="username">{{orgInfo.name}}</view>
+			<view class="desc">{{orgInfo.description}}</view>
+			<view style="margin:0px 10%;">
+				<view class="weui-flex" style="background-color:transparent;">
+					<view class="weui-flex__item">
+						<navigator class="placeholder" url="../repos/org?path={{path}}&type=public" hover-class="weui-grid_active">
+							<view class="top_value">{{orgInfo.public_repos}}</view>
+							<view class="top_key">公开仓库</view>
+						</navigator>
+					</view>
+					<view class="weui-flex__item">
+						<navigator class="placeholder" url="../repos/org?path={{path}}&type=private" hover-class="weui-grid_active">
+							<view class="top_value">{{orgInfo.private_repos}}</view>
+							<view class="top_key">私有仓库</view>
+						</navigator>
+					</view>
+					<view class="weui-flex__item">
+						<navigator class="placeholder" url="../orgs/members?path={{path}}" hover-class="weui-grid_active">
+							<view class="top_value">{{orgInfo.members}}</view>
+							<view class="top_key">组织成员</view>
+						</navigator>
+					</view>
+				</view>
+			</view>
+		</view>
+		<view class="weui-cells">
+			<navigator class="weui-cell weui-cell_access" url="../repos/org?path={{path}}">
+				<view class="weui-cell__bd">
+					<view>
+						<i class="item iconfont icon-changyongtubiao-xianxingdaochu-zhuanqu-43"></i>代码仓库</view>
+				</view>
+				<view class="weui-cell__ft"><i class="iconfont icon-xiangyoujiantou"></i></view>
+			</navigator>
+			<navigator class="weui-cell weui-cell_access" url="../issues/org?path={{path}}&org=1">
+				<view class="weui-cell__bd">
+					<view>
+						<i class="item iconfont icon-changyongtubiao-xianxingdaochu-zhuanqu-18"></i>Issues</view>
+				</view>
+				<view class="weui-cell__ft"><i class="iconfont icon-xiangyoujiantou"></i></view>
+			</navigator>
+			<!-- <navigator class="weui-cell weui-cell_access" url="../requests/org?path={{path}}">
+				<view class="weui-cell__bd">
+					<view>
+						<i class="item iconfont icon-changyongtubiao-xianxingdaochu-zhuanqu-1"></i>Pull Requests</view>
+				</view>
+				<view class="weui-cell__ft"><i class="iconfont icon-xiangyoujiantou"></i></view>
+			</navigator> -->
+		</view>
+		<view class="weui-cells">
+			<navigator class="weui-cell weui-cell_access" url="../orgs/members?path={{path}}&isMaster={{isMaster}}">
+				<view class="weui-cell__bd">
+					<view>
+						<i class="item iconfont icon-icon_group"></i>成员列表</view>
+				</view>
+				<view class="weui-cell__ft"><i class="iconfont icon-xiangyoujiantou"></i></view>
+			</navigator>
+		</view>
+		<view class="weui-cells" wx:if="{{isMaster}}">
+			<navigator class="weui-cell weui-cell_access" url="../orgs/setting?path={{path}}">
+				<view class="weui-cell__bd">
+					<view>
+						<i class="item iconfont icon-changyongtubiao-xianxingdaochu-zhuanqu-32"></i>组织设置</view>
+				</view>
+				<view class="weui-cell__ft"><i class="iconfont icon-xiangyoujiantou"></i></view>
+			</navigator>
+		</view>
+		<view class="weui-cells" bindtap="exitOrg">
+			<view class="weui-cell weui-cell_access" style="color:orangered">
+				<view class="weui-cell__bd">
+					<view>
+						<i class="item iconfont icon-poweroff"></i>退出组织</view>
+				</view>
+				<view class="weui-cell__ft"><i class="iconfont icon-xiangyoujiantou"></i></view>
+			</view>
+		</view>
+	</view>
+</view>

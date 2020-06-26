@@ -26,7 +26,10 @@ Page({
    */
   onLoad: function () {
     var that = this;
-    // wx.navigateTo({url:'../user/detail?login=ld'});//拿红薯的帐号做页面测试
+    wx.navigateTo({
+      url: '../orgs/index?path=bbbug_com'
+    });
+    return;
     wx.showLoading({
       title: '数据加载中',
     });
@@ -55,7 +58,7 @@ Page({
   ifNeedLogin: function () {
     if (!this.data.isLogin) {
       app.login();
-    }else{
+    } else {
       wx.navigateTo({
         url: '../user/motify',
       })

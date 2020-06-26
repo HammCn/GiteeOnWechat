@@ -1,0 +1,6 @@
+{
+  "usingComponents": {},
+  "navigationStyle": "default",
+  "navigationBarTitleText": "组织代码仓库",
+  "enablePullDownRefresh": true
+}

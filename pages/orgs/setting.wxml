@@ -1,0 +1,53 @@
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+	<view class="page__bd">
+		<form bindsubmit="formSubmit" bindreset="formReset">
+			<view class="weui-cells weui-cells_after-title">
+				<view class="weui-cell weui-cell_input">
+					<view class="weui-cell__hd">
+						<view class="weui-label">名称</view>
+					</view>
+					<view class="weui-cell__bd">
+						<input class="weui-input" type="text" placeholder="组织的名称" value="{{orgInfo.name}}" name="name" />
+					</view>
+				</view>
+				<view class="weui-cell weui-cell_input">
+					<view class="weui-cell__hd">
+						<view class="weui-label">邮箱</view>
+					</view>
+					<view class="weui-cell__bd">
+						<input class="weui-input" type="email" placeholder="填写组织公开的邮箱" value="{{orgInfo.email}}" name="email"
+							focus />
+					</view>
+				</view>
+				<view class="weui-cell weui-cell_input">
+					<view class="weui-cell__hd">
+						<view class="weui-label">地址</view>
+					</view>
+					<view class="weui-cell__bd">
+						<input class="weui-input" type="text" placeholder="组织所在地的地址" value="{{orgInfo.location}}" name="location" />
+					</view>
+				</view>
+				<view class="weui-cell weui-cell_input">
+					<view class="weui-cell__hd">
+						<view class="weui-label">官网</view>
+					</view>
+					<view class="weui-cell__bd">
+						<input class="weui-input" type="text " placeholder="组织的官方网站" value="{{orgInfo.html_url}}" name="html_url" />
+					</view>
+				</view>
+				<view class="weui-cell weui-cell_input">
+					<view class="weui-cell__hd">
+						<view class="weui-label">简介</view>
+					</view>
+					<view class="weui-cell__bd">
+						<input class="weui-input" type="text " placeholder="不好好为组织吹一次牛逼吗" value="{{orgInfo.description}}"
+							name="description" />
+					</view>
+				</view>
+			</view>
+			<view class="demos-content-padded" style="padding:0px 20px;margin-top:20px;">
+				<button form-type="submit" class="weui-btn weui-btn_primary" type="primary">更新资料</button>
+			</view>
+		</form>
+	</view>
+</view>

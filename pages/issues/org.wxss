@@ -75,7 +75,3 @@
   right: 10px;
   padding-bottom: calc(env(safe-area-inset-bottom)/2);
 }
-
-.addComment:before {
-  border-top: none !important;
-}

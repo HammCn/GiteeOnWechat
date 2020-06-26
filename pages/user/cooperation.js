@@ -22,7 +22,6 @@ Page({
     app.getUserInfo(function (result) {
       if (result) {
         that.getMyCops();
-        that.getMyOrgs();
       } else {
         app.loginFirst();
       }
@@ -30,18 +29,15 @@ Page({
   },
   onPullDownRefresh() {
     this.getMyCops();
-    this.getMyOrgs();
   },
   getMyCops: function () {
     var that = this;
-    var url = app.config.apiUrl + "api/v5/user/enterprises";
+    var url = app.config.apiUrl + "api/v5/user/namespaces";
     wx.request({
       url: url,
       method: "GET",
       data: {
         access_token: app.access_token,
-        page: 1,
-        per_page: 100
       },
       success: function (result) {
         wx.hideLoading();
@@ -56,41 +52,24 @@ Page({
             }
           });
         } else {
-          that.setData({
-            enterprises: result.data
-          });
-        }
-      }
-    });
-  },
-  getMyOrgs: function () {
-    var that = this;
-    var url = app.config.apiUrl + "api/v5/user/orgs";
-    wx.request({
-      url: url,
-      method: "GET",
-      data: {
-        access_token: app.access_token,
-        page: 1,
-        per_page: 100,
-        admin: false
-      },
-      success: function (result) {
-        wx.hideLoading();
-        wx.stopPullDownRefresh();
-        if (result.data.hasOwnProperty("message")) {
-          wx.showModal({
-            title: '获取失败',
-            content: "你可以尝试重新登录或稍后再试",
-            showCancel: false,
-            success(res) {
-              wx.navigateBack();
+          var enterprises = [];
+          var orgs = [];
+          for (var index in result.data) {
+            console.log(result.data[index]);
+            switch (result.data[index].type) {
+              case 'group':
+                orgs.push(result.data[index]);
+                break;
+              case 'enterprise':
+                enterprises.push(result.data[index]);
+                break;
+              default:
             }
-          });
-        } else {
+          }
           that.setData({
-            orgs: result.data
-          });
+            enterprises: enterprises,
+            orgs: orgs
+          })
         }
       }
     });

@@ -1,0 +1,46 @@
+<wxs src="../../utils/timeHelper.wxs" module="timeHelper" />
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+  <view class="page__bd">
+    <!-- <view class="searchbox">
+      <view class="weui-flex">
+        <view class="weui-flex__item" bindtap="typeChanged">{{type_name}}</view>
+      </view>
+    </view> -->
+    <block wx:if="{{list.length>0}}">
+      <navigator wx:for="{{list}}" wx:key="item" hover-class="navigator-hover"
+        url="../repos/detail?namespace={{item.namespace.path}}&path={{item.path}}">
+        <view class="weui-panel">
+          <view class="weui-panel__bd">
+            <view class="weui-media-box weui-media-box_text repo">
+              <view class="open">
+                <i class="icon-CodeSandbox iconfont public" wx:if="{{item.public}}"></i>
+                <i class="icon-changyongtubiao-mianxing-7 iconfont private" wx:if="{{!item.public}}"></i>
+              </view>
+              <view class="weui-media-box__title weui-media-box__title_in-text title">
+                {{item.name}}
+              </view>
+              <view class="time">
+                {{timeHelper.parse(item.pushed_at)}} {{item.namespace.name}}
+              </view>
+              <view class="weui-media-box__desc desc">{{item.description?item.description:"暂无描述"}}</view>
+              <view>
+              </view>
+              <view class="project_badges">
+                <span class="badge" wx:if="{{item.language}}">{{item.language?item.language:'JavaScript'}}</span>
+                <span class="badge" wx:if="{{item.public}}">{{item.license?item.license:'MulanPSL-2.0'}}</span></view>
+              <view class="project_counts">
+                <i class="iconfont icon-eye">{{item.watchers_count}}</i>
+                <i class="iconfont icon-star">{{item.stargazers_count}}</i>
+                <i class="iconfont icon-changyongtubiao-mianxing-67">{{item.forks_count}}</i>
+              </view>
+            </view>
+          </view>
+        </view>
+      </navigator>
+    </block>
+    <view wx:if="{{list.length==0}}" class="tips">
+      <image src="../../res/image/alert.png"></image>
+      <view>没有查询到{{type_name}}数据</view>
+    </view>
+  </view>
+</view>

@@ -59,6 +59,29 @@ Page({
   onPullDownRefresh() {
     this.getDetail();
   },
+  openProfilePage() {
+    if (this.data.repoInfo) {
+      var repoInfo = this.data.repoInfo;
+      switch (repoInfo.namespace.type) {
+        case 'group':
+          wx.navigateTo({
+            url: '../orgs/index?path=' + repoInfo.namespace.path,
+          })
+          break;
+        case 'personal':
+          wx.navigateTo({
+            url: '../user/detail?login=' + repoInfo.namespace.path,
+          })
+          break;
+        case 'enterprise':
+          wx.navigateTo({
+            url: '../enterprises/index?path=' + repoInfo.namespace.path,
+          })
+          break;
+        default:
+      }
+    }
+  },
   getDetail: function (loading = true) {
     var that = this;
     if (loading) {
