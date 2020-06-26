@@ -1,14 +1,471 @@
 <view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
   <view class="page__bd">
-    <view class="weui-cells">
-      <navigator class="weui-cell weui-cell_access" hover-class="app_hover" url="../repos/search">
-        <view class="weui-cell__bd">
-          <view style="color:#999;">码云搜索</view>
-        </view>
-        <view class="weui-cell__ft">
-          <i class="item iconfont icon-sousuo5"></i></view>
-      </navigator>
+    <view class="searchbox">
+      <view class="weui-cells ">
+        <navigator class="weui-cell weui-cell_access" hover-class="app_hover" url="../repos/search">
+          <view class="weui-cell__bd">
+            <view style="color:#999;">码云搜索</view>
+          </view>
+          <view class="weui-cell__ft">
+            <i class="item iconfont icon-sousuo5"></i></view>
+        </navigator>
+      </view>
     </view>
+    <view style="height:60px"></view>
+    <block wx:if="{{friendList.length>0}}">
+      <view class="weui-cells__title" style="margin-left:10px;font-size:16px;">好友动态</view>
+      <block wx:for="{{friendList}}" wx:key="item">
+        <view class="weui-panel weui-panel_access" wx:if="{{item.type && item.payload}}">
+          <view class="weui-panel__bd">
+            <view class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active"
+              mark:repo="{{item.repo.full_name}}" mark:login="{{item.actor.login}}" bindtap="itemClick"
+              mark:type="{{item.type}}" mark:payload="{{item.payload}}">
+              <view style="position:absolute;right:15px;top:15px;color:#999;font-size:14px;">
+                {{timeHelper.parse(item.created_at)}}</view>
+              <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                <view wx:if="{{item.type=='PushEvent'}}">
+                  <view class="weui-media-box__title">代码推送</view>
+                  <view style="font-size:14px;color:#999;">
+                    <block wx:for="{{item.payload.commits}}" wx:for-item="commit" wx:key="commit">
+                      <view>推送到 <span style="color:#333">{{item.repo.human_name}}</span> 的 <span
+                          style="color:#333">{{timeHelper.replace(item.payload.ref,'refs/heads/','')}}</span> 分支</view>
+                      <view>{{commit.author.name}}: <span style="color:#333">{{commit.message}}</span></view>
+                    </block>
+                  </view>
+                </view>
+                <view wx:if="{{item.type=='PullRequestEvent'}}">
+                  <block wx:if="{{item.payload.action=='merged'}}">
+                    <view class="weui-media-box__title">创建了Pull Request</view>
+                    <view style="font-size:14px;color:#999;">
+                      <view><span style="color:#333;">{{item.actor.name}}</span> 创建了到 <span
+                          style="color:#333">{{item.repo.human_name}}</span> 的Pull Request</view>
+                      <view><span style="color:#333">{{item.payload.title}}</span></view>
+                    </view>
+                  </block>
+                  <block wx:if="{{item.payload.action=='closed'}}">
+                    <view class="weui-media-box__title">关闭了Pull Request</view>
+                    <view style="font-size:14px;color:#999;">
+                      <view><span style="color:#333;">{{item.actor.name}}</span> 关闭了 <span
+                          style="color:#333">{{item.repo.human_name}}</span> 的Pull Request</view>
+                      <view><span style="color:#333">{{item.payload.title}}</span></view>
+                    </view>
+                  </block>
+                  <block wx:if="{{item.payload.action=='opened'}}">
+                    <view class="weui-media-box__title">创建了Pull Request</view>
+                    <view style="font-size:14px;color:#999;">
+                      <view><span style="color:#333;">{{item.actor.name}}</span> 创建了 <span
+                          style="color:#333">{{item.repo.human_name}}</span> 的Pull Request</view>
+                      <view><span style="color:#333">{{item.payload.title}}</span></view>
+                    </view>
+                  </block>
+                </view>
+
+                <view wx:if="{{item.type=='IssueEvent'}}">
+                  <block wx:if="{{item.payload.action=='open'}}">
+                    <view class="weui-media-box__title">创建了Issue</view>
+                    <view style="font-size:14px;color:#999;">
+                      <view><span style="color:#333">{{item.actor.name}}</span> 创建了 <span
+                          style="color:#333">{{item.repo.human_name}}</span> 的Issue</view>
+                      <view><span style="color:#333">{{item.payload.title}}</span></view>
+                    </view>
+                  </block>
+                  <block wx:if="{{item.payload.action=='closed'}}">
+                    <view class="weui-media-box__title">关闭了Issue</view>
+                    <view style="font-size:14px;color:#999;">
+                      <view><span style="color:#333">{{item.actor.name}}</span> 关闭了 <span
+                          style="color:#333">{{item.repo.human_name}}</span> 的Issue</view>
+                      <view><span style="color:#333">{{item.payload.title}}</span></view>
+                    </view>
+                  </block>
+                  <block wx:if="{{item.payload.action=='progressing'}}">
+                    <view class="weui-media-box__title">更改Issue为进行中</view>
+                    <view style="font-size:14px;color:#999;">
+                      <view><span style="color:#333">{{item.actor.name}}</span> 更改了Issue <span
+                          style="color:#333">{{item.repo.human_name}}</span> 为进行中</view>
+                      <view><span style="color:#333">{{item.payload.title}}</span></view>
+                    </view>
+                  </block>
+                  <block wx:if="{{item.payload.action=='rejected'}}">
+                    <view class="weui-media-box__title">拒绝了Issue</view>
+                    <view style="font-size:14px;color:#999;">
+                      <view><span style="color:#333">{{item.actor.name}}</span> 拒绝了 <span
+                          style="color:#333">{{item.repo.human_name}}</span> 的Issue</view>
+                      <view><span style="color:#333">{{item.payload.title}}</span></view>
+                    </view>
+                  </block>
+                </view>
+                <view wx:if="{{item.type=='IssueCommentEvent'}}">
+                  <view class="weui-media-box__title">评论了Issue</view>
+                  <view style="font-size:14px;color:#999;">
+                    <view><span style="color:#333">{{item.actor.name}}</span> 评论了 <span
+                        style="color:#333">{{item.repo.human_name}}</span> Issue</view>
+                    <view><span style="color:#333">{{item.payload.comment.body}}</span></view>
+                  </view>
+                </view>
+                <view wx:if="{{item.type=='ForkEvent'}}">
+                  <view class="weui-media-box__title">Fork了一个仓库</view>
+                  <view style="font-size:14px;color:#999;">
+                    <span style="color:#333">{{item.actor.name}}</span> Fork了 <span
+                      style="color:#333">{{item.repo.human_name}}</span> 到 <span
+                      style="color:#333">{{item.payload.human_name}}</span>
+                  </view>
+                </view>
+                <view wx:if="{{item.type=='CommitCommentEvent'}}">
+                  <view class="weui-media-box__title">评论了Commit</view>
+                  <view style="font-size:14px;color:#999;">
+                    <view><span style="color:#333">{{item.actor.name}}</span> 评论了 <span
+                        style="color:#333">{{item.repo.human_name}}</span> 的Commit</view>
+                    <view><span style="color:#333">{{item.payload.comment.body}}</span></view>
+                  </view>
+                </view>
+                <view wx:if="{{item.type=='StarEvent'}}">
+                  <block wx:if="{{item.payload.action=='starred'}}">
+                    <view class="weui-media-box__title">Star了仓库</view>
+                    <view style="font-size:14px;color:#999;">
+                      <view><span style="color:#333">{{item.actor.name}}</span> Star了 <span
+                          style="color:#333">{{item.repo.human_name}}</span></view>
+                    </view>
+                  </block>
+                </view>
+                <view wx:if="{{item.type=='MemberEvent'}}">
+                  <block wx:if="{{item.payload.action=='be deleted'}}">
+                    <view class="weui-media-box__title">离开仓库</view>
+                    <view style="font-size:14px;color:#999;">
+                      <view><span style="color:#333">{{item.payload.name}}</span> 将 <span
+                          style="color:#333">{{item.actor.name}}</span> 从 <span
+                          style="color:#333">{{item.repo.human_name}}</span> 移除</view>
+                    </view>
+                  </block>
+                  <block wx:if="{{item.payload.action=='deleted'}}">
+                    <view class="weui-media-box__title">移除仓库成员</view>
+                    <view style="font-size:14px;color:#999;">
+                      <view><span style="color:#333">{{item.actor.name}}</span> 将 <span
+                          style="color:#333">{{item.payload.name}}</span> 从 <span
+                          style="color:#333">{{item.repo.human_name}}</span> 移除</view>
+                    </view>
+                  </block>
+                  <block wx:if="{{item.payload.action=='added'}}">
+                    <view class="weui-media-box__title">加入了仓库</view>
+                    <view style="font-size:14px;color:#999;">
+                      <view><span style="color:#333">{{item.actor.name}}</span> 加入了仓库 <span
+                          style="color:#333">{{item.repo.human_name}}</span></view>
+                    </view>
+                  </block>
+                </view>
+                <view wx:if="{{item.type=='ProjectCommentEvent'}}">
+                  <view class="weui-media-box__title">评论了仓库</view>
+                  <view style="font-size:14px;color:#999;">
+                    <view><span style="color:#333">{{item.actor.name}}</span> 评论了仓库 <span
+                        style="color:#333">{{item.repo.human_name}}</span></view>
+                    <view><span style="color:#333">{{item.payload.comment.body}}</span></view>
+                  </view>
+                </view>
+                <view wx:if="{{item.type=='PullRequestCommentEvent'}}">
+                  <view class="weui-media-box__title">评论了Pull Request</view>
+                  <view style="font-size:14px;color:#999;">
+                    <view><span style="color:#333">{{item.actor.name}}</span> 评论了PullRequest <span
+                        style="color:#333">{{item.repo.human_name}}</span></view>
+                    <view><span style="color:#333">{{item.payload.comment.body}}</span></view>
+                  </view>
+                </view>
+
+                <view wx:if="{{item.type=='CreateEvent'}}">
+                  <block wx:if="{{item.payload.ref_type=='branch'}}">
+                    <view class="weui-media-box__title">创建了仓库分支</view>
+                    <view style="font-size:14px;color:#999;">
+                      <view><span style="color:#333">{{item.actor.name}}</span> 创建了 <span
+                          style="color:#333">{{item.payload.ref}}</span> 分支到 <span
+                          style="color:#333">{{item.repo.human_name}}</span></view>
+                    </view>
+                  </block>
+                  <block wx:if="{{item.payload.ref_type=='repository'}}">
+                    <view class="weui-media-box__title">创建了仓库</view>
+                    <view style="font-size:14px;color:#999;">
+                      <view><span style="color:#333">{{item.actor.name}}</span> 创建了仓库 <span
+                          style="color:#333">{{item.repo.human_name}}</span></view>
+                    </view>
+                  </block>
+                  <block wx:if="{{item.payload.ref_type=='tag'}}">
+                    <view class="weui-media-box__title">创建了标签</view>
+                    <view style="font-size:14px;color:#999;">
+                      <view>仓库 <span style="color:#333">{{item.repo.human_name}}</span></view>
+                      <view><span style="color:#333">{{item.actor.name}}</span> 创建了 <span
+                          style="color:#333">{{item.payload.ref}}</span> 标签 </view>
+                    </view>
+                  </block>
+                </view>
+                <view wx:if="{{item.type=='DeleteEvent'}}">
+                  <block wx:if="{{item.payload.ref_type=='branch'}}">
+                    <view class="weui-media-box__title">删除了仓库分支</view>
+                    <view style="font-size:14px;color:#999;">
+                      <view><span style="color:#333">{{item.actor.name}}</span> 删除了 <span
+                          style="color:#333">{{item.repo.human_name}}</span> 的 <span
+                          style="color:#333">{{item.payload.ref}}</span> 分支</view>
+                    </view>
+                  </block>
+                  <block wx:if="{{item.payload.ref_type=='repository'}}">
+                    <view class="weui-media-box__title">删除了仓库</view>
+                    <view style="font-size:14px;color:#999;">
+                      <view><span style="color:#333">{{item.actor.name}}</span> 删除了仓库 <span
+                          style="color:#333">{{item.repo.human_name}}</span></view>
+                    </view>
+                  </block>
+                  <block wx:if="{{item.payload.ref_type=='tag'}}">
+                    <view class="weui-media-box__title">删除了标签</view>
+                    <view style="font-size:14px;color:#999;">
+                      <view>仓库 <span style="color:#333">{{item.repo.human_name}}</span></view>
+                      <view><span style="color:#333">{{item.actor.name}}</span> 删除了 <span
+                          style="color:#333">{{item.payload.ref}}</span> 标签 </view>
+                    </view>
+                  </block>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </block>
+      <view class="weui-panel weui-panel_access">
+        <view class="weui-panel__ft">
+          <navigator class="weui-cell weui-cell_access weui-cell_link more" url="../activity/events?other=friends">
+            <view class="weui-cell__bd">查看更多好友动态</view>
+            <view class="weui-cell__ft"><i class="iconfont icon-xiangyoujiantou"></i></view>
+          </navigator>
+        </view>
+      </view>
+    </block>
+    <block wx:if="{{myList.length>0}}">
+      <view class="weui-cells__title" style="margin-left:10px;font-size:16px;">我的动态</view>
+      <block wx:for="{{myList}}" wx:key="item">
+        <view class="weui-panel weui-panel_access" wx:if="{{item.type && item.payload}}">
+          <view class="weui-panel__bd">
+            <view class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active"
+              mark:repo="{{item.repo.full_name}}" mark:login="{{item.actor.login}}" bindtap="itemClick"
+              mark:type="{{item.type}}" mark:payload="{{item.payload}}">
+              <view style="position:absolute;right:15px;top:15px;color:#999;font-size:14px;">
+                {{timeHelper.parse(item.created_at)}}</view>
+              <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                <view wx:if="{{item.type=='PushEvent'}}">
+                  <view class="weui-media-box__title">代码推送</view>
+                  <view style="font-size:14px;color:#999;">
+                    <block wx:for="{{item.payload.commits}}" wx:for-item="commit" wx:key="commit">
+                      <view>推送到 <span style="color:#333">{{item.repo.human_name}}</span> 的 <span
+                          style="color:#333">{{timeHelper.replace(item.payload.ref,'refs/heads/','')}}</span> 分支</view>
+                      <view>{{commit.author.name}}: <span style="color:#333">{{commit.message}}</span></view>
+                    </block>
+                  </view>
+                </view>
+                <view wx:if="{{item.type=='PullRequestEvent'}}">
+                  <block wx:if="{{item.payload.action=='merged'}}">
+                    <view class="weui-media-box__title">创建了Pull Request</view>
+                    <view style="font-size:14px;color:#999;">
+                      <view><span style="color:#333;">{{item.actor.name}}</span> 创建了到 <span
+                          style="color:#333">{{item.repo.human_name}}</span> 的Pull Request</view>
+                      <view><span style="color:#333">{{item.payload.title}}</span></view>
+                    </view>
+                  </block>
+                  <block wx:if="{{item.payload.action=='closed'}}">
+                    <view class="weui-media-box__title">关闭了Pull Request</view>
+                    <view style="font-size:14px;color:#999;">
+                      <view><span style="color:#333;">{{item.actor.name}}</span> 关闭了 <span
+                          style="color:#333">{{item.repo.human_name}}</span> 的Pull Request</view>
+                      <view><span style="color:#333">{{item.payload.title}}</span></view>
+                    </view>
+                  </block>
+                  <block wx:if="{{item.payload.action=='opened'}}">
+                    <view class="weui-media-box__title">创建了Pull Request</view>
+                    <view style="font-size:14px;color:#999;">
+                      <view><span style="color:#333;">{{item.actor.name}}</span> 创建了 <span
+                          style="color:#333">{{item.repo.human_name}}</span> 的Pull Request</view>
+                      <view><span style="color:#333">{{item.payload.title}}</span></view>
+                    </view>
+                  </block>
+                </view>
+
+                <view wx:if="{{item.type=='IssueEvent'}}">
+                  <block wx:if="{{item.payload.action=='open'}}">
+                    <view class="weui-media-box__title">创建了Issue</view>
+                    <view style="font-size:14px;color:#999;">
+                      <view><span style="color:#333">{{item.actor.name}}</span> 创建了 <span
+                          style="color:#333">{{item.repo.human_name}}</span> 的Issue</view>
+                      <view><span style="color:#333">{{item.payload.title}}</span></view>
+                    </view>
+                  </block>
+                  <block wx:if="{{item.payload.action=='closed'}}">
+                    <view class="weui-media-box__title">关闭了Issue</view>
+                    <view style="font-size:14px;color:#999;">
+                      <view><span style="color:#333">{{item.actor.name}}</span> 关闭了 <span
+                          style="color:#333">{{item.repo.human_name}}</span> 的Issue</view>
+                      <view><span style="color:#333">{{item.payload.title}}</span></view>
+                    </view>
+                  </block>
+                  <block wx:if="{{item.payload.action=='progressing'}}">
+                    <view class="weui-media-box__title">更改Issue为进行中</view>
+                    <view style="font-size:14px;color:#999;">
+                      <view><span style="color:#333">{{item.actor.name}}</span> 更改了Issue <span
+                          style="color:#333">{{item.repo.human_name}}</span> 为进行中</view>
+                      <view><span style="color:#333">{{item.payload.title}}</span></view>
+                    </view>
+                  </block>
+                  <block wx:if="{{item.payload.action=='rejected'}}">
+                    <view class="weui-media-box__title">拒绝了Issue</view>
+                    <view style="font-size:14px;color:#999;">
+                      <view><span style="color:#333">{{item.actor.name}}</span> 拒绝了 <span
+                          style="color:#333">{{item.repo.human_name}}</span> 的Issue</view>
+                      <view><span style="color:#333">{{item.payload.title}}</span></view>
+                    </view>
+                  </block>
+                </view>
+                <view wx:if="{{item.type=='IssueCommentEvent'}}">
+                  <view class="weui-media-box__title">评论了Issue</view>
+                  <view style="font-size:14px;color:#999;">
+                    <view><span style="color:#333">{{item.actor.name}}</span> 评论了 <span
+                        style="color:#333">{{item.repo.human_name}}</span> Issue</view>
+                    <view><span style="color:#333">{{item.payload.comment.body}}</span></view>
+                  </view>
+                </view>
+                <view wx:if="{{item.type=='ForkEvent'}}">
+                  <view class="weui-media-box__title">Fork了一个仓库</view>
+                  <view style="font-size:14px;color:#999;">
+                    <span style="color:#333">{{item.actor.name}}</span> Fork了 <span
+                      style="color:#333">{{item.repo.human_name}}</span> 到 <span
+                      style="color:#333">{{item.payload.human_name}}</span>
+                  </view>
+                </view>
+                <view wx:if="{{item.type=='CommitCommentEvent'}}">
+                  <view class="weui-media-box__title">评论了Commit</view>
+                  <view style="font-size:14px;color:#999;">
+                    <view><span style="color:#333">{{item.actor.name}}</span> 评论了 <span
+                        style="color:#333">{{item.repo.human_name}}</span> 的Commit</view>
+                    <view><span style="color:#333">{{item.payload.comment.body}}</span></view>
+                  </view>
+                </view>
+                <view wx:if="{{item.type=='StarEvent'}}">
+                  <block wx:if="{{item.payload.action=='starred'}}">
+                    <view class="weui-media-box__title">Star了仓库</view>
+                    <view style="font-size:14px;color:#999;">
+                      <view><span style="color:#333">{{item.actor.name}}</span> Star了 <span
+                          style="color:#333">{{item.repo.human_name}}</span></view>
+                    </view>
+                  </block>
+                </view>
+                <view wx:if="{{item.type=='MemberEvent'}}">
+                  <block wx:if="{{item.payload.action=='be deleted'}}">
+                    <view class="weui-media-box__title">离开仓库</view>
+                    <view style="font-size:14px;color:#999;">
+                      <view><span style="color:#333">{{item.payload.name}}</span> 将 <span
+                          style="color:#333">{{item.actor.name}}</span> 从 <span
+                          style="color:#333">{{item.repo.human_name}}</span> 移除</view>
+                    </view>
+                  </block>
+                  <block wx:if="{{item.payload.action=='deleted'}}">
+                    <view class="weui-media-box__title">移除仓库成员</view>
+                    <view style="font-size:14px;color:#999;">
+                      <view><span style="color:#333">{{item.actor.name}}</span> 将 <span
+                          style="color:#333">{{item.payload.name}}</span> 从 <span
+                          style="color:#333">{{item.repo.human_name}}</span> 移除</view>
+                    </view>
+                  </block>
+                  <block wx:if="{{item.payload.action=='added'}}">
+                    <view class="weui-media-box__title">加入了仓库</view>
+                    <view style="font-size:14px;color:#999;">
+                      <view><span style="color:#333">{{item.actor.name}}</span> 加入了仓库 <span
+                          style="color:#333">{{item.repo.human_name}}</span></view>
+                    </view>
+                  </block>
+                </view>
+                <view wx:if="{{item.type=='ProjectCommentEvent'}}">
+                  <view class="weui-media-box__title">评论了仓库</view>
+                  <view style="font-size:14px;color:#999;">
+                    <view><span style="color:#333">{{item.actor.name}}</span> 评论了仓库 <span
+                        style="color:#333">{{item.repo.human_name}}</span></view>
+                    <view><span style="color:#333">{{item.payload.comment.body}}</span></view>
+                  </view>
+                </view>
+                <view wx:if="{{item.type=='PullRequestCommentEvent'}}">
+                  <view class="weui-media-box__title">评论了Pull Request</view>
+                  <view style="font-size:14px;color:#999;">
+                    <view><span style="color:#333">{{item.actor.name}}</span> 评论了PullRequest <span
+                        style="color:#333">{{item.repo.human_name}}</span></view>
+                    <view><span style="color:#333">{{item.payload.comment.body}}</span></view>
+                  </view>
+                </view>
+
+                <view wx:if="{{item.type=='CreateEvent'}}">
+                  <block wx:if="{{item.payload.ref_type=='branch'}}">
+                    <view class="weui-media-box__title">创建了仓库分支</view>
+                    <view style="font-size:14px;color:#999;">
+                      <view><span style="color:#333">{{item.actor.name}}</span> 创建了 <span
+                          style="color:#333">{{item.payload.ref}}</span> 分支到 <span
+                          style="color:#333">{{item.repo.human_name}}</span></view>
+                    </view>
+                  </block>
+                  <block wx:if="{{item.payload.ref_type=='repository'}}">
+                    <view class="weui-media-box__title">创建了仓库</view>
+                    <view style="font-size:14px;color:#999;">
+                      <view><span style="color:#333">{{item.actor.name}}</span> 创建了仓库 <span
+                          style="color:#333">{{item.repo.human_name}}</span></view>
+                    </view>
+                  </block>
+                  <block wx:if="{{item.payload.ref_type=='tag'}}">
+                    <view class="weui-media-box__title">创建了标签</view>
+                    <view style="font-size:14px;color:#999;">
+                      <view>仓库 <span style="color:#333">{{item.repo.human_name}}</span></view>
+                      <view><span style="color:#333">{{item.actor.name}}</span> 创建了 <span
+                          style="color:#333">{{item.payload.ref}}</span> 标签 </view>
+                    </view>
+                  </block>
+                </view>
+                <view wx:if="{{item.type=='DeleteEvent'}}">
+                  <block wx:if="{{item.payload.ref_type=='branch'}}">
+                    <view class="weui-media-box__title">删除了仓库分支</view>
+                    <view style="font-size:14px;color:#999;">
+                      <view><span style="color:#333">{{item.actor.name}}</span> 删除了 <span
+                          style="color:#333">{{item.repo.human_name}}</span> 的 <span
+                          style="color:#333">{{item.payload.ref}}</span> 分支</view>
+                    </view>
+                  </block>
+                  <block wx:if="{{item.payload.ref_type=='repository'}}">
+                    <view class="weui-media-box__title">删除了仓库</view>
+                    <view style="font-size:14px;color:#999;">
+                      <view><span style="color:#333">{{item.actor.name}}</span> 删除了仓库 <span
+                          style="color:#333">{{item.repo.human_name}}</span></view>
+                    </view>
+                  </block>
+                  <block wx:if="{{item.payload.ref_type=='tag'}}">
+                    <view class="weui-media-box__title">删除了标签</view>
+                    <view style="font-size:14px;color:#999;">
+                      <view>仓库 <span style="color:#333">{{item.repo.human_name}}</span></view>
+                      <view><span style="color:#333">{{item.actor.name}}</span> 删除了 <span
+                          style="color:#333">{{item.payload.ref}}</span> 标签 </view>
+                    </view>
+                  </block>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </block>
+      <view class="weui-panel weui-panel_access">
+        <view class="weui-panel__ft">
+          <navigator class="weui-cell weui-cell_access weui-cell_link more" url="../activity/events">
+            <view class="weui-cell__bd">查看更多我的动态</view>
+            <view class="weui-cell__ft"><i class="iconfont icon-xiangyoujiantou"></i></view>
+          </navigator>
+        </view>
+      </view>
+    </block>
+    <block wx:if="{{isLogin}}">
+      <view wx:if="{{friendList.length==0 || friendList.length==0}}" class="tips">
+        <image src="../../res/image/alert.png"></image>
+        <view>还没有任何动态呢</view>
+      </view>
+    </block>
+    <block wx:if="{{!isLogin}}">
+      <view class="tips" bindtap="login">
+        <image src="../../res/image/alert.png"></image>
+        <view>请登录后查看动态吧</view>
+      </view>
+    </block>
   </view>
   <view class="tabbar">
     <view class="weui-flex">

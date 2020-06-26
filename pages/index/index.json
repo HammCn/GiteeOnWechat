@@ -2,5 +2,5 @@
   "usingComponents": {},
   "navigationStyle": "default",
   "navigationBarTitleText": "码云仓库",
-  "enablePullDownRefresh": false
+  "enablePullDownRefresh": true
 }
