@@ -69,15 +69,13 @@ Page({
   itemClick: function (e) {
     var that = this;
     var menuList = [];
-    if (that.data.type == 'friends') {
+    if (e.mark.listType == "friends") {
       menuList = [
         '进入仓库', '用户信息'
       ];
     } else {
       menuList = ['进入仓库'];
     }
-    // console.log(e.mark.type);
-    // console.log(e.mark.payload);
     switch (e.mark.type) {
       case 'PushEvent':
         menuList.push('查看提交');
@@ -153,7 +151,8 @@ Page({
       method: "GET",
       data: {
         access_token: app.access_token,
-        per_page: that.data.per_page
+        // per_page: that.data.per_page,
+        // page: 1
       },
       success: function (result) {
         that.isGetingData = false;

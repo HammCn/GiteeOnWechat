@@ -4,17 +4,24 @@
     <block wx:if="{{list.length>0}}">
       <block wx:for="{{list}}" wx:key="item">
         <view class="weui-panel weui-panel_access">
-            <view class="weui-panel__bd">
-                <view class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
-                    <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-                        <view class="weui-media-box__title">{{item.sender.name}} (@{{item.sender.login}})</view>
-                        <view style="font-size:14px;color:#999;">
-                        <view>发送时间：{{timeHelper.parse(item.updated_at)}}</view>
-                        <view style="margin-top:10px;color:#666;">{{timeHelper.html2Text(item.content)}}</view>
-                        </view>
-                    </view>
+          <view class="weui-panel__bd">
+            <view class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+              <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                <view class="weui-media-box__title">{{item.sender.name}} (@{{item.sender.login}})</view>
+                <view style="font-size:14px;color:#999;">
+                  <view>发送时间：{{timeHelper.parse(item.updated_at)}}</view>
+                  <view style="margin-top:10px;color:#666;">{{timeHelper.html2Text(item.content)}}</view>
                 </view>
+              </view>
             </view>
+          </view>
+          <view class="weui-panel__ft">
+            <navigator class="weui-cell weui-cell_access weui-cell_link more"
+              url="../activity/send?login={{item.sender.login}}&name={{item.sender.name}}">
+              <view class="weui-cell__bd">回复这条消息</view>
+              <view class="weui-cell__ft"><i class="iconfont icon-xiangyoujiantou"></i></view>
+            </navigator>
+          </view>
         </view>
       </block>
     </block>

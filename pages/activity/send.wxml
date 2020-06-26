@@ -1,0 +1,25 @@
+<wxs src="../../utils/timeHelper.wxs" module="timeHelper" />
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+  <view class="page__bd">
+    <view class="addCommentBox">
+      <view class="addCommentForm">
+        <view class="weui-cells__title" style="margin-left:10px;font-size:16px;">你正在发送私信给 {{name}}</view>
+        <form bindsubmit="doFormSubmit" bindreset="formReset">
+          <view class="weui-cells weui-cells_form">
+            <view class="weui-cell">
+              <view class="weui-cell__bd">
+                <textarea catchtap="nothing" name="content" class="weui-textarea" placeholder="请输入私信内容..." rows="2"
+                  value=""></textarea>
+              </view>
+            </view>
+          </view>
+          <view class="demos-content-padded" style="padding:0px 10px;">
+            <button form-type="submit" class="weui-btn weui-btn_primary" type="primary">
+              立即发送
+            </button>
+          </view>
+        </form>
+      </view>
+    </view>
+  </view>
+</view>

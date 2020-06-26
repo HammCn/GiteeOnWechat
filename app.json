@@ -3,6 +3,7 @@
     "pages/index/index",
     "pages/about/index",
     "pages/activity/events",
+    "pages/activity/send",
     "pages/activity/notifications",
     "pages/activity/mails",
     "pages/user/login",

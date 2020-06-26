@@ -9,25 +9,29 @@
 			<view style="margin:0px 10%;">
 				<view class="weui-flex" style="background-color:transparent;">
 					<view class="weui-flex__item">
-						<navigator class="placeholder" url="../user/followers?login={{userInfo.login}}" hover-class="weui-grid_active">
+						<navigator class="placeholder" url="../user/followers?login={{userInfo.login}}"
+							hover-class="weui-grid_active">
 							<view class="top_value">{{userInfo.followers}}</view>
 							<view class="top_key">粉丝</view>
 						</navigator>
 					</view>
 					<view class="weui-flex__item">
-						<navigator class="placeholder" url="../user/following?login={{userInfo.login}}" hover-class="weui-grid_active">
+						<navigator class="placeholder" url="../user/following?login={{userInfo.login}}"
+							hover-class="weui-grid_active">
 							<view class="top_value">{{userInfo.following}}</view>
 							<view class="top_key">关注</view>
 						</navigator>
 					</view>
 					<view class="weui-flex__item">
-						<navigator class="placeholder" url="../repos/others?login={{userInfo.login}}&type=star" hover-class="weui-grid_active">
+						<navigator class="placeholder" url="../repos/others?login={{userInfo.login}}&type=star"
+							hover-class="weui-grid_active">
 							<view class="top_value">{{userInfo.stared}}</view>
 							<view class="top_key">Star</view>
 						</navigator>
 					</view>
 					<view class="weui-flex__item">
-						<navigator class="placeholder" url="../repos/others?login={{userInfo.login}}&type=watch" hover-class="weui-grid_active">
+						<navigator class="placeholder" url="../repos/others?login={{userInfo.login}}&type=watch"
+							hover-class="weui-grid_active">
 							<view class="top_value">{{userInfo.watched}}</view>
 							<view class="top_key">Watch</view>
 						</navigator>
@@ -45,7 +49,8 @@
 			</view>
 		</view>
 		<view class="weui-cells">
-			<navigator class="weui-cell weui-cell_access" hover-class="app_hover" url="../activity/events?login={{userInfo.login}}">
+			<navigator class="weui-cell weui-cell_access" hover-class="app_hover"
+				url="../activity/events?login={{userInfo.login}}">
 				<view class="weui-cell__hd">
 					<i class="item iconfont icon-comment"></i></view>
 				<view class="weui-cell__bd">Ta最近的动态</view>
@@ -53,7 +58,8 @@
 			</navigator>
 		</view>
 		<view class="weui-cells">
-			<navigator class="weui-cell weui-cell_access" hover-class="app_hover" url="../repos/others?login={{userInfo.login}}&type=public">
+			<navigator class="weui-cell weui-cell_access" hover-class="app_hover"
+				url="../repos/others?login={{userInfo.login}}&type=public">
 				<view class="weui-cell__hd">
 					<i class="item iconfont icon-rili33"></i></view>
 				<view class="weui-cell__bd">
@@ -61,7 +67,8 @@
 				</view>
 				<view class="weui-cell__ft"></view>
 			</navigator>
-			<navigator class="weui-cell weui-cell_access" hover-class="app_hover" url="../repos/others?login={{userInfo.login}}&type=star">
+			<navigator class="weui-cell weui-cell_access" hover-class="app_hover"
+				url="../repos/others?login={{userInfo.login}}&type=star">
 				<view class="weui-cell__hd">
 					<i class="item iconfont icon-shoucang2"></i></view>
 				<view class="weui-cell__bd">
@@ -69,11 +76,23 @@
 				</view>
 				<view class="weui-cell__ft"></view>
 			</navigator>
-			<navigator class="weui-cell weui-cell_access" hover-class="app_hover" url="../repos/others?login={{userInfo.login}}&type=watch">
+			<navigator class="weui-cell weui-cell_access" hover-class="app_hover"
+				url="../repos/others?login={{userInfo.login}}&type=watch">
 				<view class="weui-cell__hd">
 					<i class="item iconfont icon-eye"></i></view>
 				<view class="weui-cell__bd">
 					Ta的Watch仓库
+				</view>
+				<view class="weui-cell__ft"></view>
+			</navigator>
+		</view>
+		<view class="weui-cells">
+			<navigator class="weui-cell weui-cell_access" hover-class="app_hover"
+				url="../activity/send?login={{userInfo.login}}&name={{userInfo.name}}">
+				<view class="weui-cell__hd">
+					<i class="item iconfont icon-mail"></i></view>
+				<view class="weui-cell__bd">
+					给Ta发送私信
 				</view>
 				<view class="weui-cell__ft"></view>
 			</navigator>
