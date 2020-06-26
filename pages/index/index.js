@@ -190,8 +190,8 @@ Page({
     }
     if (that.data.isLogin) {
       return {
-        title: "我在码云上发现一个叫" + that.data.userInfo.name + "的大佬...",
-        path: '/pages/user/detail?login=' + that.data.userInfo.login,
+        title: "我在码云上发现一个叫" + app.userInfo.name + "的大佬...",
+        path: '/pages/user/detail?login=' + app.userInfo.login,
         imageUrl: '/res/image/share.jpg',
       }
     }
