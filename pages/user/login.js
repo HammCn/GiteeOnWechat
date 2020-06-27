@@ -8,7 +8,8 @@ Page({
     product: app.product,
     user_name: "",
     personal_token: "",
-    tokenFormShow: true
+    tokenFormShow: true,
+    remember_password: true
   },
   /**
    * 生命周期函数--监听页面加载
@@ -65,7 +66,7 @@ Page({
     });
     var user_name = postData.username;
     wx.setStorageSync('user_name', user_name);
-    if (postData.remember_password) {
+    if (postData.remember_password.length > 0) {
       wx.setStorageSync('user_password', postData.password);
     } else {
       wx.setStorageSync('user_password', '');

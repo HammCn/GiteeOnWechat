@@ -17,14 +17,15 @@
 						<view class="weui-label">密码</view>
 					</view>
 					<view class="weui-cell__bd">
-						<input class="weui-input" placeholder="你的登录密码" password="true" value="" name="password"  value="{{user_password}}"/>
+						<input class="weui-input" placeholder="你的登录密码" password="true" value="" name="password" value="{{user_password}}" />
 					</view>
 				</view>
 			</view>
 			<view style="margin-top:10px;margin-left:20px;">
-				<checkbox checked="true" color="#383838" name="remember_password" />本地记住密码
+				<checkbox-group name="remember_password">
+					<checkbox checked="{{remember_password}}" color="#383838" value="{{remember_password}}" />本地记住密码
+				</checkbox-group>
 			</view>
-
 			<view class="weui-btn-area">
 				<button form-type="submit" class="weui-btn" type="primary">登录码云</button>
 				<view style="text-align:center;padding:10px 0px;margin-top:20px;" bindtap="loginWithToken">使用码云私人令牌授权</view>
