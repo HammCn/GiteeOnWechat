@@ -126,7 +126,6 @@ Page({
     });
   },
   showMenu: function (e) {
-    console.log(e);
     var that = this;
     if (that.data.isMaster) {
       //管理员 弹出选择器

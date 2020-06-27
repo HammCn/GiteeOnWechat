@@ -79,7 +79,6 @@ Page({
         that.isGetingData = false;
         wx.hideLoading();
         wx.stopPullDownRefresh();
-        console.log(result)
         if (result.data.hasOwnProperty("message")) {
           wx.showModal({
             title: '获取失败',

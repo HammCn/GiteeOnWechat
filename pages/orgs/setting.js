@@ -91,8 +91,6 @@ Page({
   },
   getOrgInfo() {
     var that = this;
-    console.log(that.data);
-
     wx.showLoading({
       title: '获取信息中',
     })

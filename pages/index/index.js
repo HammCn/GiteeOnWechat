@@ -185,7 +185,6 @@ Page({
   onShareAppMessage: function (res) {
     var that = this;
     if (res.from === 'button') {
-      console.log(res.target)
     }
     if (that.data.isLogin) {
       return {

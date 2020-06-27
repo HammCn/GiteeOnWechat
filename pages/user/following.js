@@ -120,7 +120,6 @@ Page({
     });
   },
   showMenu: function (e) {
-    console.log(e);
     var that = this;
     if (that.data.login) {
       wx.navigateTo({

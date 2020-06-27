@@ -42,6 +42,9 @@ Page({
       });
     }
   },
+  onPullDownRefresh: function () {
+    this.getOrgInfo();
+  },
   onShow: function () {
     this.getOrgInfo();
   },
@@ -156,14 +159,14 @@ Page({
       }
     });
   },
-  onShareAppMessage: function (res) {
-    var that = this;
-    if (res.from === 'button') {
-      // 来自页面内转发按钮
-    }
-    return {
-      title: "我在码云上发现一个叫" + that.data.orgInfo.name + "的组织...",
-      path: '/pages/orgs/index?path=' + that.data.path
-    }
-  }
+  // onShareAppMessage: function (res) {
+  //   var that = this;
+  //   if (res.from === 'button') {
+  //     // 来自页面内转发按钮
+  //   }
+  //   return {
+  //     title: "我在码云上发现一个叫" + that.data.orgInfo.name + "的组织...",
+  //     path: '/pages/orgs/index?path=' + that.data.path
+  //   }
+  // }
 })

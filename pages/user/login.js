@@ -40,7 +40,6 @@ Page({
     });
     app.getUserInfo(function (result) {
       wx.hideLoading();
-      console.log(app.userInfo);
       if (result) {
         wx.setStorageSync('personal_token', e.detail.value.personal_token);
         wx.navigateBack();

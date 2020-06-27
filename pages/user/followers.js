@@ -120,7 +120,6 @@ Page({
     });
   },
   showMenu: function (e) {
-    console.log(e);
     var that = this;
     wx.navigateTo({
       url: '../user/detail?login=' + e.mark.login,

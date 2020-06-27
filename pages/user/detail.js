@@ -158,7 +158,6 @@ Page({
     var that = this;
     if (res.from === 'button') {
       // 来自页面内转发按钮
-      console.log(res.target)
     }
     return {
       title: "我在码云上发现一个叫" + that.data.userInfo.name + "的大佬...",

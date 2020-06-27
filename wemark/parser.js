@@ -46,7 +46,6 @@ function parse(md, options){
 				}
 			}
 		}else{
-			// console.log(inlineToken);
 			inlineToken.children && inlineToken.children.forEach(function(token, index){
 				if(['text', 'code'].indexOf(token.type) > -1){
 					ret.push({
@@ -179,11 +178,6 @@ function parse(md, options){
 					}
 				});
 			}
-			// flatten nested tokens in html
-			// if (blockToken.params === 'html') {
-				// content = flattenTokens(content)
-			// }
-			// console.log(content);
 
 			return {
 				type: 'code',

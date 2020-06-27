@@ -34,7 +34,6 @@ Component({
 					link: this.data.link,
 					highlight: this.data.highlight
 				});
-				// console.log('parsedData:', parsedData);
 				if(this.data.type === 'wemark'){
 					this.setData({
 						parsedData
@@ -43,8 +42,6 @@ Component({
 					// var inTable = false;
 					var richTextNodes = getRichTextNodes(parsedData);
 
-					// console.log('richTextNodes:', richTextNodes);
-
 					this.setData({
 						richTextNodes
 					});
@@ -52,11 +49,9 @@ Component({
 					/* // 分批更新
 					var update = {};
 					var batchLength = 1000;
-					console.log(batchLength);
 					for(var i=0; i<richTextNodes.length; i++){
 						update['richTextNodes.' + i] = richTextNodes[i];
 						if(i%batchLength === batchLength - 1){
-							console.log(update);
 							this.setData(update);
 							update = {};
 						}

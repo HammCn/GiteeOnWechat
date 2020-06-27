@@ -89,8 +89,6 @@ Page({
     } else {
       menuList = ['进入仓库'];
     }
-    // console.log(e.mark.type);
-    // console.log(e.mark.payload);
     switch (e.mark.type) {
       case 'PushEvent':
         menuList.push('查看提交');

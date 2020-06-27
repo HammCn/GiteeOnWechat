@@ -55,7 +55,6 @@ Page({
           var enterprises = [];
           var orgs = [];
           for (var index in result.data) {
-            console.log(result.data[index]);
             switch (result.data[index].type) {
               case 'group':
                 orgs.push(result.data[index]);
@@ -78,7 +77,6 @@ Page({
     var that = this;
     if (res.from === 'button') {
       // 来自页面内转发按钮
-      console.log(res.target)
     }
     return {
       title: "我在码云上发现一个叫" + that.data.userInfo.name + "的大佬...",
