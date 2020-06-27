@@ -8,7 +8,7 @@ Page({
     product: app.product,
     user_name: "",
     personal_token: "",
-    tokenFormShow: true,
+    tokenFormShow: true
   },
   /**
    * 生命周期函数--监听页面加载
@@ -16,10 +16,12 @@ Page({
   onLoad: function () {
     app.loadFont();
     var user_name = wx.getStorageSync('user_name');
+    var user_password = wx.getStorageSync('user_password');
     var personal_token = wx.getStorageSync('personal_token');
     this.setData({
       user_name: user_name,
-      personal_token: personal_token
+      personal_token: personal_token,
+      user_password: user_password
     });
   },
   //切换到私人令牌登录
@@ -56,12 +58,18 @@ Page({
    * 点击登录 开始登录
    */
   formSubmit: function (e) {
+    var that = this;
     var postData = e.detail.value;
     wx.showLoading({
       title: '登录中',
     });
     var user_name = postData.username;
     wx.setStorageSync('user_name', user_name);
+    if (postData.remember_password) {
+      wx.setStorageSync('user_password', postData.password);
+    } else {
+      wx.setStorageSync('user_password', '');
+    }
     postData.grant_type = 'password';
     postData.client_id = app.config.client_id;
     postData.client_secret = app.config.client_secret;
