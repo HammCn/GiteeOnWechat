@@ -19,7 +19,8 @@ App({
   loadFont() {
     wx.loadFontFace({
       family: 'Roboto',
-      source: 'url(https://static.hamm.cn/font/Roboto.ttf)',
+      // source: 'url(https://static.hamm.cn/font/Roboto.ttf)',
+      source: 'url(https://static.hamm.cn/font/Gotham-Book.woff2)',
     });
   },
   onLaunch: function () {},
