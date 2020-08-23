@@ -322,7 +322,7 @@ Page({
         if (result.data.hasOwnProperty("content")) {
           var readmeMarkdown = base64Helper.baseDecode(result.data.content);
           //TODO 码云图片不允许盗链 先搭个图片代理站用着
-          readmeMarkdown = readmeMarkdown.replace(/images.gitee.com/g, 'gitee.hamm.cn');
+          readmeMarkdown = readmeMarkdown.replace(/images.gitee.com/g, 'gitee_image.hamm.cn');
           that.setData({
             readme: readmeMarkdown ? readmeMarkdown : "### No Readme File!"
           });
