@@ -24,3 +24,11 @@
 .isActive {
   color: orangered;
 }
+.project_counts .iconfont {
+  vertical-align: middle;
+}
+
+.project_counts .iconfont::before {
+  font-size:16px;
+  vertical-align: middle;
+}

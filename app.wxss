@@ -12,6 +12,9 @@ page {
 view i span font h1 h2 h3 h4 h5 h6 p .iconfont {
   font-family: 'Roboto';
 }
+.iconfont {
+  font-family: "iconfont" 'Roboto'!important;
+}
 
 .weui-media-box__title {
   display: block;
