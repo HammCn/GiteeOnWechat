@@ -50,3 +50,9 @@
 ### 无图无真相
 
 ![GiteeOnWechat](https://images.gitee.com/uploads/images/2020/0626/012914_b70cd425_145025.jpeg "GiteeOnWechat.jpg")
+
+
+### 关注我的公众号
+<p align="center">
+<img src="https://images.gitee.com/uploads/images/2020/1214/223247_1b322b09_145025.jpeg" width="400px"/>
+</p>
