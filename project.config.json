@@ -22,17 +22,19 @@
     "uploadWithSourceMap": true,
     "compileHotReLoad": false,
     "useMultiFrameRuntime": false,
-    "useApiHook": false,
+    "useApiHook": true,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
       "outputPath": ""
     },
+    "enableEngineNative": false,
     "useIsolateContext": true,
     "useCompilerModule": true,
     "userConfirmedUseCompilerModuleSwitch": false,
     "packNpmManually": false,
-    "packNpmRelationList": []
+    "packNpmRelationList": [],
+    "minifyWXSS": true
   },
   "compileType": "miniprogram",
   "libVersion": "2.8.3",
@@ -46,11 +48,9 @@
   "simulatorPluginLibVersion": {},
   "condition": {
     "search": {
-      "current": -1,
       "list": []
     },
     "conversation": {
-      "current": -1,
       "list": []
     },
     "game": {
@@ -58,7 +58,6 @@
       "list": []
     },
     "miniprogram": {
-      "current": -1,
       "list": []
     }
   }

@@ -1,3 +1,4 @@
+<wxs src="../../utils/timeHelper.wxs" module="timeHelper" />
 <view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
   <view class="page__bd">
     <view class="searchbox">
